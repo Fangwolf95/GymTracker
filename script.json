@@ -1,9 +1,9 @@
 var countdown;
 var activeProg = null;
+let currentSessionSets = {}; // Traccia le serie fatte durante l'allenamento attivo
 
 window.onload = function() {
     if(!localStorage.getItem("gymMaxes")) localStorage.setItem("gymMaxes", "{}");
-    if(!localStorage.getItem("gymHistory")) localStorage.setItem("gymHistory", "[]");
     if(!localStorage.getItem("gymProgs")) localStorage.setItem("gymProgs", "{}");
     if(!localStorage.getItem("gymSessionLogs")) localStorage.setItem("gymSessionLogs", "[]");
     refreshDropdowns();
@@ -70,8 +70,6 @@ function exportSingleProg() {
     if(!progs[p]) return alert("Programma non trovato!");
     const encoded = btoa(JSON.stringify({ appName: "GymCoachPro", progName: p, content: progs[p] }));
     document.getElementById("share-box").value = encoded;
-    document.getElementById("share-box").select();
-    document.execCommand('copy');
     alert("Codice '" + p + "' copiato!");
 }
 
@@ -97,42 +95,72 @@ function loadWorkoutDisplay() {
     const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
     const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
     area.innerHTML = "";
+    currentSessionSets = {}; // Reset contatori serie
+
     exercises.forEach((ex, idx) => {
         const curMax = maxes[ex.name.toLowerCase().trim()] || 0;
         const target = ex.perc > 0 ? Math.round((curMax * ex.perc) / 100) : 0;
-        const cardHtml = `<div class="exercise-card" id="card-${idx}"><div class="ex-header"><strong>${ex.name.toUpperCase()}</strong><span class="ex-target">${target>0?target+'kg':'--'}</span></div><div class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}%</div>${ex.note?`<div class="ex-note">📝 ${ex.note}</div>`:''}<div class="row" style="margin-top:10px;"><input type="number" id="w_${idx}" placeholder="Kg"><button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx})">OK</button></div></div>`;
-        if (ex.linked && area.lastElementChild) {
-            if (!area.lastElementChild.classList.contains("superset-container")) {
-                const prev = area.lastElementChild;
-                const wrap = document.createElement('div');
-                wrap.className = 'superset-container';
-                wrap.innerHTML = `<span class="superset-label">SUPERSERIE 🔗</span>`;
-                prev.parentNode.insertBefore(wrap, prev);
-                wrap.appendChild(prev);
-                wrap.innerHTML += cardHtml;
-            } else { area.lastElementChild.innerHTML += cardHtml; }
-        } else { area.innerHTML += cardHtml; }
+        const sets = parseInt(ex.sets) || 1;
+        const cardHtml = `
+            <div class="exercise-card" id="card-${idx}">
+                <div class="ex-header"><strong>${ex.name.toUpperCase()}</strong><span class="ex-target">${target>0?target+'kg':'--'}</span></div>
+                <div class="ex-info"><span id="set-count-${idx}">Serie 1 di ${sets}</span> — ${ex.reps} reps @ ${ex.perc}%</div>
+                ${ex.note?`<div class="ex-note">📝 ${ex.note}</div>`:''}
+                <div class="row" style="margin-top:10px;">
+                    <input type="number" id="w_${idx}" placeholder="Kg">
+                    <button class="btn-ok" id="btn-${idx}" onclick="confirmSet(${idx}, ${sets}, '${ex.name}', ${ex.perc})">SERIE OK</button>
+                </div>
+            </div>`;
+        
+        if (ex.linked && area.lastElementChild && area.lastElementChild.className === "superset-container") {
+            area.lastElementChild.innerHTML += cardHtml;
+        } else if (ex.linked) {
+            const wrap = document.createElement('div');
+            wrap.className = 'superset-container';
+            wrap.innerHTML = `<span class="superset-label">SUPERSERIE 🔗</span>${cardHtml}`;
+            area.appendChild(wrap);
+        } else {
+            area.innerHTML += cardHtml;
+        }
     });
     document.getElementById("timer-area").style.display = "block";
     document.getElementById("save-session-btn").style.display = "block";
 }
 
-function confirmSet(name, perc, idx) {
-    const weight = parseFloat(document.getElementById(`w_${idx}`).value);
-    if(weight && perc > 0) {
-        let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
-        let calculated = Math.round((weight / perc) * 100);
-        if(calculated > (maxes[name.toLowerCase().trim()] || 0)) {
-            if(confirm("Nuovo Record! Aggiorno massimale?")) {
-                maxes[name.toLowerCase().trim()] = calculated;
-                localStorage.setItem("gymMaxes", JSON.stringify(maxes));
+function confirmSet(idx, totalSets, name, perc) {
+    if (!currentSessionSets[idx]) currentSessionSets[idx] = 1;
+
+    // Controllo Record solo alla prima serie inserita
+    if (currentSessionSets[idx] === 1) {
+        const weight = parseFloat(document.getElementById(`w_${idx}`).value);
+        if(weight && perc > 0) {
+            let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+            let calculated = Math.round((weight / perc) * 100);
+            if(calculated > (maxes[name.toLowerCase().trim()] || 0)) {
+                if(confirm("Nuovo Record stimato: " + calculated + "kg. Aggiorno?")) {
+                    maxes[name.toLowerCase().trim()] = calculated;
+                    localStorage.setItem("gymMaxes", JSON.stringify(maxes));
+                }
             }
         }
     }
+
     startTimer(90);
-    const card = document.getElementById(`card-${idx}`);
-    card.style.borderLeftColor = "var(--accent)";
-    card.style.opacity = "0.6";
+
+    if (currentSessionSets[idx] < totalSets) {
+        currentSessionSets[idx]++;
+        document.getElementById(`set-count-${idx}`).innerText = `Serie ${currentSessionSets[idx]} di ${totalSets}`;
+        const btn = document.getElementById(`btn-${idx}`);
+        btn.style.background = "var(--accent)";
+        setTimeout(() => btn.style.background = "var(--main)", 300);
+    } else {
+        document.getElementById(`set-count-${idx}`).innerText = `COMPLETATO ✅`;
+        const card = document.getElementById(`card-${idx}`);
+        card.style.borderLeftColor = "var(--accent)";
+        card.style.opacity = "0.5";
+        const next = document.getElementById(`card-${idx+1}`);
+        if(next) next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 function finishWorkout() {
@@ -195,7 +223,7 @@ function clearLogs() {
     }
 }
 function clearAll() {
-    if(confirm("Cancellare TUTTO (comprese le schede)?")) { localStorage.clear(); location.reload(); }
+    if(confirm("Cancellare TUTTO?")) { localStorage.clear(); location.reload(); }
 }
 function updateExSuggestions() {
     const maxes = JSON.parse(localStorage.getItem("gymMaxes"));

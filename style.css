@@ -10,14 +10,14 @@ input, select, textarea { width: 100%; padding: 12px; margin-bottom: 10px; borde
 .row { display: flex; gap: 8px; align-items: center; }
 .btn-add { background: var(--main); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
 .btn-special { background: var(--danger); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; cursor: pointer; }
-.btn-ok { background: var(--main); color: #fff; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; height: 45px; cursor: pointer; }
+.btn-ok { background: var(--main); color: #fff; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; height: 45px; cursor: pointer; transition: background 0.2s; }
 .exercise-card { background: #252525; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 5px solid var(--main); }
 .ex-header { display: flex; justify-content: space-between; font-size: 1.1rem; }
 .ex-target { color: var(--main); font-weight: bold; }
 .ex-info { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
 .superset-container { border: 2px solid var(--danger); border-radius: 15px; padding: 12px; margin-bottom: 15px; background: #2a1a1a; }
 .superset-label { color: var(--danger); font-size: 0.7rem; font-weight: bold; display: block; text-align: center; margin-bottom: 8px; }
-.timer-card { background: #111; padding: 15px; border-radius: 15px; text-align: center; margin-top: 20px; border: 1px solid var(--main); }
+.timer-card { background: #111; padding: 15px; border-radius: 15px; text-align: center; margin-top: 20px; border: 1px solid var(--main); position: sticky; bottom: 5px; z-index: 100; }
 #display-timer { font-size: 3.5rem; color: var(--main); font-weight: bold; }
 .timer-buttons { display: flex; gap: 8px; }
 .btn-timer { flex: 1; background: #333; color: #fff; border: none; padding: 12px; border-radius: 8px; cursor: pointer; }
