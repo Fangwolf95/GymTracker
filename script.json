@@ -17,7 +17,7 @@ function switchMode(m) {
     refreshDropdowns();
 }
 
-// --- EDITOR & SHARE ---
+// --- SETUP & IMPORT/EXPORT ---
 function initEditor() {
     const name = document.getElementById("progName").value.trim();
     if(!name) return alert("Inserisci nome programma");
@@ -65,13 +65,14 @@ function removeEx(idx) {
 }
 
 function exportSingleProg() {
-    const p = activeProg || document.getElementById("progName").value.trim();
+    const p = document.getElementById("progName").value.trim() || activeProg;
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    if(!progs[p]) return alert("Seleziona un programma!");
+    if(!progs[p]) return alert("Programma non trovato!");
     const encoded = btoa(JSON.stringify({ appName: "GymCoachPro", progName: p, content: progs[p] }));
     document.getElementById("share-box").value = encoded;
-    navigator.clipboard.writeText(encoded);
-    alert("Codice copiato!");
+    document.getElementById("share-box").select();
+    document.execCommand('copy');
+    alert("Codice '" + p + "' copiato!");
 }
 
 function importProg() {
@@ -125,9 +126,6 @@ function confirmSet(name, perc, idx) {
             if(confirm("Nuovo Record! Aggiorno massimale?")) {
                 maxes[name.toLowerCase().trim()] = calculated;
                 localStorage.setItem("gymMaxes", JSON.stringify(maxes));
-                let h = JSON.parse(localStorage.getItem("gymHistory"));
-                h.push({ date: new Date().toLocaleDateString('it-IT'), exercise: name, max: calculated });
-                localStorage.setItem("gymHistory", JSON.stringify(h));
             }
         }
     }
@@ -135,18 +133,16 @@ function confirmSet(name, perc, idx) {
     const card = document.getElementById(`card-${idx}`);
     card.style.borderLeftColor = "var(--accent)";
     card.style.opacity = "0.6";
-    const next = document.getElementById(`card-${idx+1}`);
-    if(next) next.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function finishWorkout() {
     const p = document.getElementById("selectProg").value;
     const d = document.getElementById("selectDay").value;
     const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
-    let results = [];
-    exercises.forEach((ex, idx) => results.push(ex.name + ": " + (document.getElementById(`w_${idx}`).value || "--") + "kg"));
+    let res = [];
+    exercises.forEach((ex, idx) => res.push(ex.name + ": " + (document.getElementById(`w_${idx}`).value || "--") + "kg"));
     let logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
-    logs.push({ date: new Date().toLocaleDateString('it-IT'), day: d, prog: p, details: results.join(", ") });
+    logs.push({ date: new Date().toLocaleDateString('it-IT'), day: d, details: res.join(", ") });
     localStorage.setItem("gymSessionLogs", JSON.stringify(logs));
     alert("Sessione salvata!");
     switchMode('stats');
@@ -159,10 +155,9 @@ function startTimer(s) {
     countdown = setInterval(() => {
         t--;
         document.getElementById("display-timer").innerText = Math.floor(t/60)+":"+(t%60<10?"0"+t%60:t%60);
-        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Tempo Scaduto!"); }
+        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Recupero terminato!"); }
     }, 1000);
 }
-
 function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
 
 function renderStats() {
@@ -171,16 +166,9 @@ function renderStats() {
     const container = document.getElementById("stats-container");
     let html = "<h4>Massimali:</h4><div class='mini-list'>";
     Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
-    html += "</div><h4>Diario Recente:</h4>";
-    logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.date}</strong> - ${l.day}<br><small>${l.details}</small></div>`);
+    html += "</div><h4>Diario:</h4>";
+    logs.slice(-5).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.date}</strong> - ${l.day}<br><small>${l.details}</small></div>`);
     container.innerHTML = html;
-}
-
-function updateExSuggestions() {
-    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
-    const list = document.getElementById("ex-list");
-    list.innerHTML = "";
-    Object.keys(maxes).forEach(ex => list.innerHTML += `<option value="${ex}">`);
 }
 
 function refreshDropdowns() {
@@ -201,20 +189,17 @@ function updateDaySelect() {
     for(let d in days) sel.innerHTML += `<option value="${d}">${d}</option>`;
 }
 
-// Cancella solo la cronologia degli allenamenti e i massimali, ma TIENE i programmi
 function clearLogs() {
-    if(confirm("Vuoi cancellare solo il diario e i massimali? Le tue schede rimarranno salvate.")) {
-        localStorage.removeItem("gymMaxes");
-        localStorage.removeItem("gymHistory");
-        localStorage.removeItem("gymSessionLogs");
-        location.reload();
+    if(confirm("Svuotare solo diario e massimali?")) {
+        localStorage.removeItem("gymMaxes"); localStorage.removeItem("gymSessionLogs"); location.reload();
     }
 }
-
-// Cancella tutto il database
 function clearAll() {
-    if(confirm("ATTENZIONE: Questo cancellerà TUTTO, incluse le tue schede. Sei sicuro?")) {
-        localStorage.clear();
-        location.reload();
-    }
+    if(confirm("Cancellare TUTTO (comprese le schede)?")) { localStorage.clear(); location.reload(); }
+}
+function updateExSuggestions() {
+    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+    const list = document.getElementById("ex-list");
+    list.innerHTML = "";
+    Object.keys(maxes).forEach(ex => list.innerHTML += `<option value="${ex}">`);
 }
