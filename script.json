@@ -1,0 +1,220 @@
+var countdown;
+var activeProg = null;
+
+window.onload = function() {
+    if(!localStorage.getItem("gymMaxes")) localStorage.setItem("gymMaxes", "{}");
+    if(!localStorage.getItem("gymHistory")) localStorage.setItem("gymHistory", "[]");
+    if(!localStorage.getItem("gymProgs")) localStorage.setItem("gymProgs", "{}");
+    if(!localStorage.getItem("gymSessionLogs")) localStorage.setItem("gymSessionLogs", "[]");
+    refreshDropdowns();
+    renderStats();
+    updateExSuggestions();
+};
+
+function switchMode(m) {
+    ['setup','training','stats'].forEach(s => document.getElementById(s+'-section').style.display = (m===s?'block':'none'));
+    if(m === 'stats') renderStats();
+    refreshDropdowns();
+}
+
+// --- EDITOR & SHARE ---
+function initEditor() {
+    const name = document.getElementById("progName").value.trim();
+    if(!name) return alert("Inserisci nome programma");
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[name]) progs[name] = {};
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    activeProg = name;
+    document.getElementById("editor-controls").style.display = "block";
+    refreshEditorTable();
+}
+
+function addEx(isLinked) {
+    const day = document.getElementById("dayName").value.trim();
+    const name = document.getElementById("exName").value.trim();
+    if(!day || !name) return alert("Manca Giorno o Nome!");
+    const ex = { name, sets: document.getElementById("exSets").value, reps: document.getElementById("exReps").value, perc: parseInt(document.getElementById("exPerc").value) || 0, note: document.getElementById("exNote").value, linked: isLinked };
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[activeProg][day]) progs[activeProg][day] = [];
+    progs[activeProg][day].push(ex);
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    document.getElementById("exName").value = "";
+    document.getElementById("exNote").value = "";
+    refreshEditorTable();
+    updateExSuggestions();
+}
+
+function refreshEditorTable() {
+    const day = document.getElementById("dayName").value.trim();
+    const container = document.getElementById("preview-table");
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!day || !progs[activeProg] || !progs[activeProg][day]) { container.innerHTML = "<p>Nessun esercizio aggiunto.</p>"; return; }
+    let html = "<table style='width:100%; font-size:13px;'>";
+    progs[activeProg][day].forEach((ex, idx) => {
+        html += `<tr style='border-bottom:1px solid #333'><td style='padding:8px;'>${ex.linked?'🔗':''} <b>${ex.name}</b></td><td>${ex.sets}x${ex.reps}</td><td><button onclick="removeEx(${idx})" style='color:red; background:none; border:none;'>✖</button></td></tr>`;
+    });
+    container.innerHTML = html + "</table>";
+}
+
+function removeEx(idx) {
+    const day = document.getElementById("dayName").value.trim();
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    progs[activeProg][day].splice(idx, 1);
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    refreshEditorTable();
+}
+
+function exportSingleProg() {
+    const p = activeProg || document.getElementById("progName").value.trim();
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[p]) return alert("Seleziona un programma!");
+    const encoded = btoa(JSON.stringify({ appName: "GymCoachPro", progName: p, content: progs[p] }));
+    document.getElementById("share-box").value = encoded;
+    navigator.clipboard.writeText(encoded);
+    alert("Codice copiato!");
+}
+
+function importProg() {
+    const code = document.getElementById("share-box").value.trim();
+    try {
+        const decoded = JSON.parse(atob(code));
+        if(decoded.appName !== "GymCoachPro") throw new Error();
+        let progs = JSON.parse(localStorage.getItem("gymProgs"));
+        progs[decoded.progName] = decoded.content;
+        localStorage.setItem("gymProgs", JSON.stringify(progs));
+        alert("Importato: " + decoded.progName);
+        location.reload();
+    } catch(e) { alert("Codice errato!"); }
+}
+
+// --- TRAINING ---
+function loadWorkoutDisplay() {
+    const p = document.getElementById("selectProg").value;
+    const d = document.getElementById("selectDay").value;
+    const area = document.getElementById("workout-display-area");
+    if(!p || !d) { area.innerHTML = ""; return; }
+    const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
+    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+    area.innerHTML = "";
+    exercises.forEach((ex, idx) => {
+        const curMax = maxes[ex.name.toLowerCase().trim()] || 0;
+        const target = ex.perc > 0 ? Math.round((curMax * ex.perc) / 100) : 0;
+        const cardHtml = `<div class="exercise-card" id="card-${idx}"><div class="ex-header"><strong>${ex.name.toUpperCase()}</strong><span class="ex-target">${target>0?target+'kg':'--'}</span></div><div class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}%</div>${ex.note?`<div class="ex-note">📝 ${ex.note}</div>`:''}<div class="row" style="margin-top:10px;"><input type="number" id="w_${idx}" placeholder="Kg"><button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx})">OK</button></div></div>`;
+        if (ex.linked && area.lastElementChild) {
+            if (!area.lastElementChild.classList.contains("superset-container")) {
+                const prev = area.lastElementChild;
+                const wrap = document.createElement('div');
+                wrap.className = 'superset-container';
+                wrap.innerHTML = `<span class="superset-label">SUPERSERIE 🔗</span>`;
+                prev.parentNode.insertBefore(wrap, prev);
+                wrap.appendChild(prev);
+                wrap.innerHTML += cardHtml;
+            } else { area.lastElementChild.innerHTML += cardHtml; }
+        } else { area.innerHTML += cardHtml; }
+    });
+    document.getElementById("timer-area").style.display = "block";
+    document.getElementById("save-session-btn").style.display = "block";
+}
+
+function confirmSet(name, perc, idx) {
+    const weight = parseFloat(document.getElementById(`w_${idx}`).value);
+    if(weight && perc > 0) {
+        let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+        let calculated = Math.round((weight / perc) * 100);
+        if(calculated > (maxes[name.toLowerCase().trim()] || 0)) {
+            if(confirm("Nuovo Record! Aggiorno massimale?")) {
+                maxes[name.toLowerCase().trim()] = calculated;
+                localStorage.setItem("gymMaxes", JSON.stringify(maxes));
+                let h = JSON.parse(localStorage.getItem("gymHistory"));
+                h.push({ date: new Date().toLocaleDateString('it-IT'), exercise: name, max: calculated });
+                localStorage.setItem("gymHistory", JSON.stringify(h));
+            }
+        }
+    }
+    startTimer(90);
+    const card = document.getElementById(`card-${idx}`);
+    card.style.borderLeftColor = "var(--accent)";
+    card.style.opacity = "0.6";
+    const next = document.getElementById(`card-${idx+1}`);
+    if(next) next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function finishWorkout() {
+    const p = document.getElementById("selectProg").value;
+    const d = document.getElementById("selectDay").value;
+    const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
+    let results = [];
+    exercises.forEach((ex, idx) => results.push(ex.name + ": " + (document.getElementById(`w_${idx}`).value || "--") + "kg"));
+    let logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
+    logs.push({ date: new Date().toLocaleDateString('it-IT'), day: d, prog: p, details: results.join(", ") });
+    localStorage.setItem("gymSessionLogs", JSON.stringify(logs));
+    alert("Sessione salvata!");
+    switchMode('stats');
+}
+
+// --- UTILS ---
+function startTimer(s) {
+    clearInterval(countdown);
+    let t = s;
+    countdown = setInterval(() => {
+        t--;
+        document.getElementById("display-timer").innerText = Math.floor(t/60)+":"+(t%60<10?"0"+t%60:t%60);
+        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Tempo Scaduto!"); }
+    }, 1000);
+}
+
+function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
+
+function renderStats() {
+    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+    const logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
+    const container = document.getElementById("stats-container");
+    let html = "<h4>Massimali:</h4><div class='mini-list'>";
+    Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
+    html += "</div><h4>Diario Recente:</h4>";
+    logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.date}</strong> - ${l.day}<br><small>${l.details}</small></div>`);
+    container.innerHTML = html;
+}
+
+function updateExSuggestions() {
+    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
+    const list = document.getElementById("ex-list");
+    list.innerHTML = "";
+    Object.keys(maxes).forEach(ex => list.innerHTML += `<option value="${ex}">`);
+}
+
+function refreshDropdowns() {
+    const s = JSON.parse(localStorage.getItem("gymProgs"));
+    const sel = document.getElementById("selectProg");
+    const curr = sel.value;
+    sel.innerHTML = '<option value="">Programma...</option>';
+    for(let p in s) sel.innerHTML += `<option value="${p}">${p}</option>`;
+    sel.value = curr;
+}
+
+function updateDaySelect() {
+    const p = document.getElementById("selectProg").value;
+    const sel = document.getElementById("selectDay");
+    sel.innerHTML = '<option value="">Giorno...</option>';
+    if(!p) return;
+    const days = JSON.parse(localStorage.getItem("gymProgs"))[p];
+    for(let d in days) sel.innerHTML += `<option value="${d}">${d}</option>`;
+}
+
+// Cancella solo la cronologia degli allenamenti e i massimali, ma TIENE i programmi
+function clearLogs() {
+    if(confirm("Vuoi cancellare solo il diario e i massimali? Le tue schede rimarranno salvate.")) {
+        localStorage.removeItem("gymMaxes");
+        localStorage.removeItem("gymHistory");
+        localStorage.removeItem("gymSessionLogs");
+        location.reload();
+    }
+}
+
+// Cancella tutto il database
+function clearAll() {
+    if(confirm("ATTENZIONE: Questo cancellerà TUTTO, incluse le tue schede. Sei sicuro?")) {
+        localStorage.clear();
+        location.reload();
+    }
+}

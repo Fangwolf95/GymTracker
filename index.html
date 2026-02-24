@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gym Coach Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ Gym Coach Pro</h1>
+
+        <div class="nav-menu">
+            <button onclick="switchMode('training')">Allenamento</button>
+            <button onclick="switchMode('setup')">Programma</button>
+            <button onclick="switchMode('stats')">Stats</button>
+        </div>
+
+        <div id="setup-section" class="mode-section" style="display:none;">
+            <div class="card-editor">
+                <input type="text" id="progName" placeholder="Nome Programma (es. Forza 2026)">
+                <button class="btn-add" onclick="initEditor()">Apri / Crea Programma</button>
+            </div>
+
+            <div id="editor-controls" style="display:none; margin-top:15px;">
+                <hr>
+                <input type="text" id="dayName" placeholder="Giorno (es. Giorno A)" oninput="refreshEditorTable()">
+                
+                <div class="input-grid">
+                    <input type="text" id="exName" placeholder="Esercizio" list="ex-list">
+                    <datalist id="ex-list"></datalist>
+                    <input type="number" id="exPerc" placeholder="%">
+                    <input type="number" id="exSets" placeholder="Set">
+                    <input type="text" id="exReps" placeholder="Reps">
+                </div>
+                <input type="text" id="exNote" placeholder="Note (Superserie, fermi...)">
+                
+                <div class="row">
+                    <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
+                    <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
+                </div>
+
+                <div id="editor-preview">
+                    <h5>Anteprima Giornata:</h5>
+                    <div id="preview-table"></div>
+                </div>
+
+                <div class="card-editor share-area">
+                    <h4>📤 Condividi / Importa</h4>
+                    <textarea id="share-box" placeholder="Incolla qui il codice scheda..."></textarea>
+                    <div class="row">
+                        <button class="btn-secondary" onclick="exportSingleProg()">Copia Codice</button>
+                        <button class="btn-add" onclick="importProg()">Importa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="training-section" class="mode-section">
+            <div class="row">
+                <select id="selectProg" onchange="updateDaySelect()"></select>
+                <select id="selectDay" onchange="loadWorkoutDisplay()"></select>
+            </div>
+            
+            <div id="workout-display-area"></div>
+
+            <button id="save-session-btn" class="btn-save-workout" style="display:none;" onclick="finishWorkout()">💾 Termina e Salva Sessione</button>
+
+            <div id="timer-area" class="timer-card" style="display:none;">
+                <h2 id="display-timer">00:00</h2>
+                <div class="timer-buttons">
+                    <button class="btn-timer" onclick="startTimer(90)">90s</button>
+                    <button class="btn-timer" onclick="startTimer(150)">150s</button>
+                    <button class="btn-stop" onclick="stopTimer()">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="stats-section" class="mode-section" style="display:none;">
+            <h3>📊 I tuoi Progressi</h3>
+            <div id="stats-container"></div>
+            <hr>
+            
+            <div style="margin-top: 20px;">
+                <button class="btn-secondary" onclick="clearLogs()">Svuota solo Diario e Record</button>
+                <button class="btn-secondary" style="color:#ff4444; margin-top:10px; border-color:#ff4444;" onclick="clearAll()">Reset Totale (Elimina anche le Schede)</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+    
+    <script src="script.json"></script>
+</body>
+</html>
