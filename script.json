@@ -1,5 +1,6 @@
 var countdown;
 var activeProg = null;
+var currentRest = 90;
 
 window.onload = function() {
     if(!localStorage.getItem("gymMaxes")) localStorage.setItem("gymMaxes", "{}");
@@ -8,7 +9,6 @@ window.onload = function() {
     if(!localStorage.getItem("gymDrafts")) localStorage.setItem("gymDrafts", "{}");
     refreshDropdowns();
     renderStats();
-    updateExSuggestions();
 };
 
 function switchMode(m) {
@@ -17,95 +17,139 @@ function switchMode(m) {
     refreshDropdowns();
 }
 
-// --- AUTO-SAVE DRAFTS ---
-function saveDraft(idx) {
-    const p = document.getElementById("selectProg").value;
-    const d = document.getElementById("selectDay").value;
-    const val = document.getElementById(`w_${idx}`).value;
-    let drafts = JSON.parse(localStorage.getItem("gymDrafts"));
-    const key = `${p}_${d}`;
-    if (!drafts[key]) drafts[key] = {};
-    drafts[key][idx] = val;
-    localStorage.setItem("gymDrafts", JSON.stringify(drafts));
+// --- SYNC EDITOR ---
+function refreshDropdowns() {
+    const s = JSON.parse(localStorage.getItem("gymProgs"));
+    const selTraining = document.getElementById("selectProg");
+    const selEdit = document.getElementById("editProgSelect");
+    
+    let opts = '<option value="">-- Seleziona Programma --</option>';
+    for(let p in s) opts += `<option value="${p}">${p}</option>`;
+    
+    selTraining.innerHTML = opts;
+    selEdit.innerHTML = opts;
 }
 
-// --- SETUP & IMPORT/EXPORT ---
-function initEditor() {
-    const name = document.getElementById("progName").value.trim();
-    if(!name) return alert("Inserisci nome programma");
-    let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    if(!progs[name]) progs[name] = {};
-    localStorage.setItem("gymProgs", JSON.stringify(progs));
-    activeProg = name;
-    document.getElementById("editor-controls").style.display = "block";
-    refreshEditorTable();
-}
+function syncEditorProg() {
+    const selected = document.getElementById("editProgSelect").value;
+    const controls = document.getElementById("editor-controls");
+    const newArea = document.getElementById("new-prog-area");
+    
+    if(!selected) {
+        activeProg = null;
+        controls.style.display = "none";
+        newArea.style.display = "block";
+        document.getElementById("progName").value = "";
+        document.getElementById("progWeeks").value = "";
+        document.getElementById("dayName").value = "";
+        document.getElementById("preview-table").innerHTML = "";
+        return;
+    }
 
-function addEx(isLinked) {
-    const day = document.getElementById("dayName").value.trim();
-    const name = document.getElementById("exName").value.trim();
-    if(!day || !name) return alert("Manca Giorno o Nome!");
-    const ex = { name, sets: document.getElementById("exSets").value, reps: document.getElementById("exReps").value, perc: parseInt(document.getElementById("exPerc").value) || 0, note: document.getElementById("exNote").value, linked: isLinked };
-    let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    if(!progs[activeProg][day]) progs[activeProg][day] = [];
-    progs[activeProg][day].push(ex);
-    localStorage.setItem("gymProgs", JSON.stringify(progs));
-    document.getElementById("exName").value = "";
-    document.getElementById("exNote").value = "";
+    const progs = JSON.parse(localStorage.getItem("gymProgs"));
+    activeProg = selected;
+    newArea.style.display = "none";
+    controls.style.display = "block";
+    document.getElementById("editing-title").innerText = "Editando: " + selected;
+    
+    const daySel = document.getElementById("editDaySelect");
+    let dayOpts = '<option value="">-- Seleziona Giorno --</option>';
+    for(let d in progs[selected]) {
+        if(d !== "_duration") dayOpts += `<option value="${d}">${d}</option>`;
+    }
+    daySel.innerHTML = dayOpts;
     refreshEditorTable();
 }
 
 function refreshEditorTable() {
-    const day = document.getElementById("dayName").value.trim();
+    const selDay = document.getElementById("editDaySelect").value;
+    const inputDay = document.getElementById("dayName").value.trim();
+    const day = selDay || inputDay;
     const container = document.getElementById("preview-table");
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    if(!day || !progs[activeProg] || !progs[activeProg][day]) { container.innerHTML = "<p>Nessun esercizio aggiunto.</p>"; return; }
-    let html = "<table style='width:100%; font-size:13px;'>";
+    
+    if(!day || !progs[activeProg] || !progs[activeProg][day]) {
+        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio salvato.</p>";
+        return;
+    }
+
+    let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
     progs[activeProg][day].forEach((ex, idx) => {
-        html += `<tr style='border-bottom:1px solid #333'><td style='padding:8px;'>${ex.linked?'🔗':''} <b>${ex.name}</b></td><td>${ex.sets}x${ex.reps}</td><td><button onclick="removeEx(${idx})" style='color:red; background:none; border:none;'>✖</button></td></tr>`;
+        html += `<tr style='border-bottom:1px solid #222'>
+            <td style='padding:10px;'>${ex.linked?'🔗':''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s</small></td>
+            <td style='text-align:right;'><button onclick="removeEx('${day}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem;'>✖</button></td>
+        </tr>`;
     });
     container.innerHTML = html + "</table>";
 }
 
-function removeEx(idx) {
-    const day = document.getElementById("dayName").value.trim();
+function removeEx(day, idx) {
+    if(!confirm("Eliminare?")) return;
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     progs[activeProg][day].splice(idx, 1);
     localStorage.setItem("gymProgs", JSON.stringify(progs));
     refreshEditorTable();
 }
 
-function exportSingleProg() {
-    const p = document.getElementById("progName").value.trim() || activeProg;
-    let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    if(!progs[p]) return alert("Programma non trovato!");
-    const encoded = btoa(JSON.stringify({ appName: "GymCoachPro", progName: p, content: progs[p] }));
-    document.getElementById("share-box").value = encoded;
-    document.getElementById("share-box").select();
-    document.execCommand('copy');
-    alert("Codice '" + p + "' copiato!");
+function clearExInputs() {
+    ['exName','exPerc','exSets','exReps','exRest','exNote'].forEach(id => document.getElementById(id).value = "");
 }
 
-function importProg() {
-    const code = document.getElementById("share-box").value.trim();
-    try {
-        const decoded = JSON.parse(atob(code));
-        if(decoded.appName !== "GymCoachPro") throw new Error();
-        let progs = JSON.parse(localStorage.getItem("gymProgs"));
-        progs[decoded.progName] = decoded.content;
-        localStorage.setItem("gymProgs", JSON.stringify(progs));
-        alert("Importato: " + decoded.progName);
-        location.reload();
-    } catch(e) { alert("Codice errato!"); }
+// --- BULK IMPORT ---
+function processBulkImport() {
+    const text = document.getElementById("bulk-import-area").value.trim();
+    const progName = document.getElementById("progName").value.trim() || activeProg;
+    if(!progName || !text) return alert("Nome programma e testo necessari!");
+
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[progName]) progs[progName] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
+    
+    let currentDay = "";
+    text.split("\n").forEach(line => {
+        line = line.trim(); if(!line) return;
+        if(line.startsWith("#")) {
+            currentDay = line.replace("#", "").trim();
+            progs[progName][currentDay] = [];
+        } else if(currentDay) {
+            let linked = line.startsWith("*");
+            if(linked) line = line.replace("*", "").trim();
+            const p = line.split(";");
+            if(p.length >= 4) {
+                progs[progName][currentDay].push({
+                    name: p[0].trim(), perc: parseInt(p[1]) || 0,
+                    sets: p[2].trim(), reps: p[3].trim(),
+                    rest: parseInt(p[4]) || 90, note: p[5] ? p[5].trim() : "",
+                    linked: linked
+                });
+            }
+        }
+    });
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    alert("Importato!"); location.reload();
 }
 
 // --- TRAINING ---
-function loadWorkoutDisplay() {
+function updateDaySelect() {
     const p = document.getElementById("selectProg").value;
-    const d = document.getElementById("selectDay").value;
-    const area = document.getElementById("workout-display-area");
-    if(!p || !d) { area.innerHTML = ""; return; }
+    const sel = document.getElementById("selectDay");
+    sel.innerHTML = '<option value="">Giorno...</option>';
+    if(!p) return;
     
+    const logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
+    const progs = JSON.parse(localStorage.getItem("gymProgs"));
+    const progDays = Object.keys(progs[p]).filter(k => k !== "_duration");
+    const count = logs.filter(l => progDays.includes(l.day)).length;
+    const week = Math.ceil((count + 1) / (progDays.length || 3));
+    if (week === 4) alert("⚠️ SETTIMANA 4: Scarico!");
+    if (week > (progs[p]._duration || 8)) alert("🏁 FINE PROGRAMMA!");
+
+    for(let d in progs[p]) if(d !== "_duration") sel.innerHTML += `<option value="${d}">${d}</option>`;
+}
+
+function loadWorkoutDisplay() {
+    const p = document.getElementById("selectProg").value, d = document.getElementById("selectDay").value;
+    const area = document.getElementById("workout-display-area");
+    if(!p || !d) return;
     const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
     const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
     const drafts = JSON.parse(localStorage.getItem("gymDrafts"))[`${p}_${d}`] || {};
@@ -113,129 +157,125 @@ function loadWorkoutDisplay() {
 
     area.innerHTML = "";
     exercises.forEach((ex, idx) => {
-        const curMax = maxes[ex.name.toLowerCase().trim()] || 0;
-        const target = ex.perc > 0 ? Math.round((curMax * ex.perc) / 100) : 0;
-        const savedVal = drafts[idx] || "";
-
-        // IDEA 2: Suggerimento ultimo peso usato
-        let lastWeight = "--";
+        const target = ex.perc > 0 ? Math.round(((maxes[ex.name.toLowerCase().trim()] || 0) * ex.perc) / 100) : 0;
+        let last = "--";
         for (let i = logs.length - 1; i >= 0; i--) {
             const entry = logs[i].details.split(", ").find(s => s.startsWith(ex.name + ":"));
-            if (entry) {
-                lastWeight = entry.split(": ")[1];
-                break;
-            }
+            if (entry) { last = entry.split(": ")[1]; break; }
         }
-
-        const cardHtml = `
-            <div class="exercise-card" id="card-${idx}">
+        const cardHtml = `<div class="exercise-card" id="card-${idx}">
                 <div class="ex-header"><strong>${ex.name.toUpperCase()}</strong><span class="ex-target">${target>0?target+'kg':'--'}</span></div>
-                <div class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}%</div>
-                <div class="ex-last">Ultima volta: ${lastWeight}</div>
-                ${ex.note?`<div class="ex-note">📝 ${ex.note}</div>`:''}
+                <div class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</div>
+                <div class="ex-last">Ultima volta: ${last}</div>
                 <div class="row" style="margin-top:10px;">
-                    <input type="number" id="w_${idx}" placeholder="Kg" value="${savedVal}" oninput="saveDraft(${idx})">
-                    <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx})">OK</button>
+                    <input type="number" id="w_${idx}" placeholder="Kg" value="${drafts[idx] || ''}" oninput="saveDraft(${idx})">
+                    <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx}, ${ex.rest})">OK</button>
                 </div>
             </div>`;
-
         if (ex.linked && area.lastElementChild) {
             if (!area.lastElementChild.classList.contains("superset-container")) {
                 const prev = area.lastElementChild;
-                const wrap = document.createElement('div');
-                wrap.className = 'superset-container';
+                const wrap = document.createElement('div'); wrap.className = 'superset-container';
                 wrap.innerHTML = `<span class="superset-label">SUPERSERIE 🔗</span>`;
-                prev.parentNode.insertBefore(wrap, prev);
-                wrap.appendChild(prev);
-                wrap.innerHTML += cardHtml;
-            } else { area.lastElementChild.innerHTML += cardHtml; }
-        } else { area.innerHTML += cardHtml; }
+                prev.parentNode.insertBefore(wrap, prev); wrap.appendChild(prev); wrap.innerHTML += cardHtml;
+            } else area.lastElementChild.innerHTML += cardHtml;
+        } else area.innerHTML += cardHtml;
     });
     document.getElementById("timer-area").style.display = "block";
     document.getElementById("save-session-btn").style.display = "block";
 }
 
-function confirmSet(name, perc, idx) {
-    const weight = parseFloat(document.getElementById(`w_${idx}`).value);
-    if(weight && perc > 0) {
+function confirmSet(name, perc, idx, rest) {
+    const w = parseFloat(document.getElementById(`w_${idx}`).value);
+    if(w && perc > 0) {
         let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
-        let calculated = Math.round((weight / perc) * 100);
-        if(calculated > (maxes[name.toLowerCase().trim()] || 0)) {
-            if(confirm("Nuovo Record! Aggiorno massimale?")) {
-                maxes[name.toLowerCase().trim()] = calculated;
-                localStorage.setItem("gymMaxes", JSON.stringify(maxes));
-            }
+        let calc = Math.round((w / perc) * 100);
+        if(calc > (maxes[name.toLowerCase().trim()] || 0)) {
+            if(confirm("Nuovo Record! Aggiorno?")) { maxes[name.toLowerCase().trim()] = calc; localStorage.setItem("gymMaxes", JSON.stringify(maxes)); }
         }
     }
-    startTimer(90);
-    const card = document.getElementById(`card-${idx}`);
-    card.style.borderLeftColor = "var(--accent)";
-    card.style.opacity = "0.6";
+    currentRest = rest;
+    document.getElementById("btn-auto-timer").innerText = "Recupero ("+rest+"s)";
+    startTimer(rest);
+    document.getElementById(`card-${idx}`).style.opacity = "0.5";
 }
 
 function finishWorkout() {
-    const p = document.getElementById("selectProg").value;
-    const d = document.getElementById("selectDay").value;
+    const p = document.getElementById("selectProg").value, d = document.getElementById("selectDay").value;
     const exercises = JSON.parse(localStorage.getItem("gymProgs"))[p][d];
-    let res = [];
-    exercises.forEach((ex, idx) => res.push(ex.name + ": " + (document.getElementById(`w_${idx}`).value || "--") + "kg"));
+    let res = [], vol = 0;
+    exercises.forEach((ex, idx) => {
+        const w = parseFloat(document.getElementById(`w_${idx}`).value) || 0;
+        res.push(ex.name + ": " + w + "kg");
+        vol += (w * (parseInt(ex.sets) || 0) * (parseInt(ex.reps) || 0));
+    });
     let logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
-    logs.push({ date: new Date().toLocaleDateString('it-IT'), day: d, details: res.join(", ") });
+    logs.push({ date: new Date().toISOString(), dateStr: new Date().toLocaleDateString('it-IT'), day: d, details: res.join(", "), volume: vol });
     localStorage.setItem("gymSessionLogs", JSON.stringify(logs));
-
-    let drafts = JSON.parse(localStorage.getItem("gymDrafts"));
-    delete drafts[`${p}_${d}`];
+    let drafts = JSON.parse(localStorage.getItem("gymDrafts")); delete drafts[`${p}_${d}`];
     localStorage.setItem("gymDrafts", JSON.stringify(drafts));
-
-    alert("Sessione salvata!");
-    switchMode('stats');
+    alert("Salvato! Vol: " + vol + "kg"); switchMode('stats');
 }
-
-function startTimer(s) {
-    clearInterval(countdown);
-    let t = s;
-    countdown = setInterval(() => {
-        t--;
-        document.getElementById("display-timer").innerText = Math.floor(t/60)+":"+(t%60<10?"0"+t%60:t%60);
-        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Tempo Scaduto!"); }
-    }, 1000);
-}
-function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
 
 function renderStats() {
-    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
-    const logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
+    const maxes = JSON.parse(localStorage.getItem("gymMaxes")), logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
     const container = document.getElementById("stats-container");
-    let html = "<h4>Massimali:</h4><div class='mini-list'>";
+    const oneWeekAgo = new Date(); oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const weeklyVol = logs.reduce((acc, l) => new Date(l.date) > oneWeekAgo ? acc + (l.volume || 0) : acc, 0);
+    let html = `<div class="mini-list" style="border-left:5px solid var(--main); padding-left:15px;">
+                <small style="color:#888">VOLUME ULTIMI 7gg</small><div style="font-size:1.4rem; font-weight:bold; color:var(--accent)">${weeklyVol} kg</div></div>
+                <h4>Record:</h4><div class="mini-list">`;
     Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
-    html += "</div><h4>Diario Recente:</h4>";
-    logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.date}</strong> - ${l.day}<br><small>${l.details}</small></div>`);
+    html += "</div><h4>Diario:</h4>";
+    logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.dateStr}</strong> - ${l.day}<br><small>Vol: ${l.volume}kg | ${l.details}</small></div>`);
     container.innerHTML = html;
 }
 
-function refreshDropdowns() {
-    const s = JSON.parse(localStorage.getItem("gymProgs"));
-    const sel = document.getElementById("selectProg");
-    const curr = sel.value;
-    sel.innerHTML = '<option value="">Programma...</option>';
-    for(let p in s) sel.innerHTML += `<option value="${p}">${p}</option>`;
-    sel.value = curr;
+function initEditor() {
+    const name = document.getElementById("progName").value.trim();
+    if(!name) return alert("Inserisci un nome!");
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[name]) progs[name] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    refreshDropdowns();
+    document.getElementById("editProgSelect").value = name;
+    syncEditorProg();
 }
 
-function updateDaySelect() {
-    const p = document.getElementById("selectProg").value;
-    const sel = document.getElementById("selectDay");
-    sel.innerHTML = '<option value="">Giorno...</option>';
-    if(!p) return;
-    const days = JSON.parse(localStorage.getItem("gymProgs"))[p];
-    for(let d in days) sel.innerHTML += `<option value="${d}">${d}</option>`;
+function addEx(isLinked) {
+    const selDay = document.getElementById("editDaySelect").value;
+    const inputDay = document.getElementById("dayName").value.trim();
+    const day = selDay || inputDay;
+    const name = document.getElementById("exName").value.trim();
+    if(!day || !name) return alert("Dati mancanti!");
+    let progs = JSON.parse(localStorage.getItem("gymProgs"));
+    if(!progs[activeProg][day]) progs[activeProg][day] = [];
+    progs[activeProg][day].push({ 
+        name, sets: document.getElementById("exSets").value, 
+        reps: document.getElementById("exReps").value, 
+        perc: parseInt(document.getElementById("exPerc").value) || 0, 
+        rest: parseInt(document.getElementById("exRest").value) || 90, 
+        note: document.getElementById("exNote").value, linked: isLinked 
+    });
+    localStorage.setItem("gymProgs", JSON.stringify(progs));
+    clearExInputs();
+    if(!selDay) syncEditorProg(); else refreshEditorTable();
 }
 
-function clearLogs() { if(confirm("Svuotare diario e record?")) { localStorage.removeItem("gymMaxes"); localStorage.removeItem("gymSessionLogs"); localStorage.removeItem("gymDrafts"); location.reload(); } }
-function clearAll() { if(confirm("Cancellare TUTTO?")) { localStorage.clear(); location.reload(); } }
-function updateExSuggestions() {
-    const maxes = JSON.parse(localStorage.getItem("gymMaxes"));
-    const list = document.getElementById("ex-list");
-    list.innerHTML = "";
-    Object.keys(maxes).forEach(ex => list.innerHTML += `<option value="${ex}">`);
+function startTimer(s) {
+    clearInterval(countdown); let t = s;
+    countdown = setInterval(() => {
+        t--; document.getElementById("display-timer").innerText = Math.floor(t/60)+":"+(t%60<10?"0"+t%60:t%60);
+        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Tempo scaduto!"); }
+    }, 1000);
 }
+function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
+function saveDraft(idx) {
+    const p = document.getElementById("selectProg").value, d = document.getElementById("selectDay").value;
+    let drafts = JSON.parse(localStorage.getItem("gymDrafts"));
+    if (!drafts[`${p}_${d}`]) drafts[`${p}_${d}`] = {};
+    drafts[`${p}_${d}`][idx] = document.getElementById(`w_${idx}`).value;
+    localStorage.setItem("gymDrafts", JSON.stringify(drafts));
+}
+function clearLogs() { if(confirm("Svuotare?")) { localStorage.removeItem("gymMaxes"); localStorage.removeItem("gymSessionLogs"); location.reload(); } }
+function clearAll() { if(confirm("Cancellare tutto?")) { localStorage.clear(); location.reload(); } }

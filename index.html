@@ -17,39 +17,59 @@
         </div>
 
         <div id="setup-section" class="mode-section" style="display:none;">
-            <div class="card-editor">
-                <input type="text" id="progName" placeholder="Nome Programma (es. Forza 2026)">
-                <button class="btn-add" onclick="initEditor()">Apri / Crea Programma</button>
+            <div class="card-editor" style="border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 15px;">
+                <label><small>Gestisci programma esistente:</small></label>
+                <select id="editProgSelect" onchange="syncEditorProg()" style="border-color: var(--main); margin-top:5px;">
+                    <option value="">-- Seleziona Programma --</option>
+                </select>
             </div>
 
-            <div class="card-editor share-area" style="margin-top:20px; border: 1px dashed var(--main); padding: 10px; border-radius: 10px;">
-                <h4 style="margin-top:0;">📤 Importa / Esporta Codice</h4>
-                <textarea id="share-box" placeholder="Incolla qui il codice ricevuto per importare, o scrivi il nome sopra e premi 'Copia'"></textarea>
-                <div class="row">
-                    <button class="btn-secondary" onclick="exportSingleProg()">Copia Mia Scheda</button>
-                    <button class="btn-add" onclick="importProg()">Importa Codice</button>
-                </div>
+            <div id="new-prog-area" class="card-editor">
+                <h4 style="margin:0 0 10px 0; color:var(--accent);">🆕 Crea Nuovo Programma</h4>
+                <input type="text" id="progName" placeholder="Nome (es. Idro Pump 2)">
+                <input type="number" id="progWeeks" placeholder="Durata (settimane)">
+                <button class="btn-add" onclick="initEditor()">Crea e Apri</button>
             </div>
 
             <div id="editor-controls" style="display:none; margin-top:15px;">
-                <hr>
-                <input type="text" id="dayName" placeholder="Giorno (es. Giorno A)" oninput="refreshEditorTable()">
-                <div class="input-grid">
-                    <input type="text" id="exName" placeholder="Esercizio" list="ex-list">
-                    <datalist id="ex-list"></datalist>
-                    <input type="number" id="exPerc" placeholder="%">
-                    <input type="number" id="exSets" placeholder="Set">
-                    <input type="text" id="exReps" placeholder="Reps">
+                <div style="background: #111; padding: 15px; border-radius: 15px; border: 1px solid var(--main);">
+                    <h4 id="editing-title" style="margin-top:0; color:var(--main);">Editando: -</h4>
+                    <label><small>Giorno:</small></label>
+                    <div class="row">
+                        <select id="editDaySelect" onchange="refreshEditorTable()" style="flex:1"></select>
+                        <input type="text" id="dayName" placeholder="O scrivi nuovo" style="flex:1">
+                    </div>
                 </div>
-                <input type="text" id="exNote" placeholder="Note">
-                <div class="row">
-                    <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
-                    <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
-                </div>
-                <div id="editor-preview">
-                    <h5>Anteprima Giornata:</h5>
+
+                <div id="editor-preview" style="margin-top:20px;">
+                    <h5 style="margin-bottom:10px;">Esercizi in questa giornata:</h5>
                     <div id="preview-table"></div>
                 </div>
+
+                <div class="card-editor" style="background:#222; margin-top:20px;">
+                    <h5 style="margin-top:0;">Aggiungi Esercizio:</h5>
+                    <div class="input-grid">
+                        <input type="text" id="exName" placeholder="Esercizio">
+                        <input type="number" id="exPerc" placeholder="%">
+                        <input type="number" id="exSets" placeholder="Set">
+                        <input type="text" id="exReps" placeholder="Reps">
+                    </div>
+                    <div class="row">
+                        <input type="number" id="exRest" placeholder="Recup. (sec)" style="flex:1">
+                        <input type="text" id="exNote" placeholder="Note" style="flex:2">
+                    </div>
+                    <div class="row">
+                        <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
+                        <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-editor" style="margin-top:40px; border: 1px dashed #555; opacity: 0.8;">
+                <h4 style="margin:0 0 5px 0;">⚡ Bulk Import</h4>
+                <p style="font-size:0.65rem; color:#888;">Carica intere schede via testo (Giorno; %; Set; Reps; Rec; Note)</p>
+                <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Panca; 80; 4; 6; 150; Note..."></textarea>
+                <button class="btn-secondary" onclick="processBulkImport()" style="font-size:0.8rem;">Esegui Importazione</button>
             </div>
         </div>
 
@@ -63,8 +83,8 @@
             <div id="timer-area" class="timer-card" style="display:none;">
                 <h2 id="display-timer">00:00</h2>
                 <div class="timer-buttons">
-                    <button class="btn-timer" onclick="startTimer(90)">90s</button>
-                    <button class="btn-timer" onclick="startTimer(150)">150s</button>
+                    <button id="btn-auto-timer" class="btn-timer" style="background:var(--main); color:white" onclick="startTimer(currentRest)">Recupero</button>
+                    <button class="btn-timer" onclick="startTimer(60)">+60s</button>
                     <button class="btn-stop" onclick="stopTimer()">Reset</button>
                 </div>
             </div>
@@ -74,10 +94,8 @@
             <h3>📊 I tuoi Progressi</h3>
             <div id="stats-container"></div>
             <hr>
-            <div style="margin-top: 20px;">
-                <button class="btn-secondary" onclick="clearLogs()">Svuota solo Diario e Record</button>
-                <button class="btn-secondary" style="color:#ff4444; margin-top:10px; border-color:#ff4444;" onclick="clearAll()">Reset Totale (Elimina anche le Schede)</button>
-            </div>
+            <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
+            <button class="btn-secondary" style="color:var(--danger); margin-top:10px;" onclick="clearAll()">Reset Totale</button>
         </div>
     </div>
     <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
