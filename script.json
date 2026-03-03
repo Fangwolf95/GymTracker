@@ -17,15 +17,12 @@ function switchMode(m) {
     refreshDropdowns();
 }
 
-// --- SYNC EDITOR ---
 function refreshDropdowns() {
     const s = JSON.parse(localStorage.getItem("gymProgs"));
     const selTraining = document.getElementById("selectProg");
     const selEdit = document.getElementById("editProgSelect");
-    
     let opts = '<option value="">-- Seleziona Programma --</option>';
     for(let p in s) opts += `<option value="${p}">${p}</option>`;
-    
     selTraining.innerHTML = opts;
     selEdit.innerHTML = opts;
 }
@@ -34,29 +31,18 @@ function syncEditorProg() {
     const selected = document.getElementById("editProgSelect").value;
     const controls = document.getElementById("editor-controls");
     const newArea = document.getElementById("new-prog-area");
-    
     if(!selected) {
-        activeProg = null;
-        controls.style.display = "none";
-        newArea.style.display = "block";
-        document.getElementById("progName").value = "";
-        document.getElementById("progWeeks").value = "";
-        document.getElementById("dayName").value = "";
-        document.getElementById("preview-table").innerHTML = "";
+        activeProg = null; controls.style.display = "none"; newArea.style.display = "block";
         return;
     }
-
     const progs = JSON.parse(localStorage.getItem("gymProgs"));
     activeProg = selected;
     newArea.style.display = "none";
     controls.style.display = "block";
     document.getElementById("editing-title").innerText = "Editando: " + selected;
-    
     const daySel = document.getElementById("editDaySelect");
     let dayOpts = '<option value="">-- Seleziona Giorno --</option>';
-    for(let d in progs[selected]) {
-        if(d !== "_duration") dayOpts += `<option value="${d}">${d}</option>`;
-    }
+    for(let d in progs[selected]) if(d !== "_duration") dayOpts += `<option value="${d}">${d}</option>`;
     daySel.innerHTML = dayOpts;
     refreshEditorTable();
 }
@@ -67,12 +53,9 @@ function refreshEditorTable() {
     const day = selDay || inputDay;
     const container = document.getElementById("preview-table");
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
-    
     if(!day || !progs[activeProg] || !progs[activeProg][day]) {
-        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio salvato.</p>";
-        return;
+        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio salvato.</p>"; return;
     }
-
     let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
     progs[activeProg][day].forEach((ex, idx) => {
         html += `<tr style='border-bottom:1px solid #222'>
@@ -95,54 +78,38 @@ function clearExInputs() {
     ['exName','exPerc','exSets','exReps','exRest','exNote'].forEach(id => document.getElementById(id).value = "");
 }
 
-// --- BULK IMPORT ---
 function processBulkImport() {
     const text = document.getElementById("bulk-import-area").value.trim();
     const progName = document.getElementById("progName").value.trim() || activeProg;
     if(!progName || !text) return alert("Nome programma e testo necessari!");
-
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[progName]) progs[progName] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
-    
     let currentDay = "";
     text.split("\n").forEach(line => {
         line = line.trim(); if(!line) return;
         if(line.startsWith("#")) {
-            currentDay = line.replace("#", "").trim();
-            progs[progName][currentDay] = [];
+            currentDay = line.replace("#", "").trim(); progs[progName][currentDay] = [];
         } else if(currentDay) {
-            let linked = line.startsWith("*");
-            if(linked) line = line.replace("*", "").trim();
+            let linked = line.startsWith("*"); if(linked) line = line.replace("*", "").trim();
             const p = line.split(";");
             if(p.length >= 4) {
                 progs[progName][currentDay].push({
                     name: p[0].trim(), perc: parseInt(p[1]) || 0,
                     sets: p[2].trim(), reps: p[3].trim(),
-                    rest: parseInt(p[4]) || 90, note: p[5] ? p[5].trim() : "",
-                    linked: linked
+                    rest: parseInt(p[4]) || 90, note: p[5] ? p[5].trim() : "", linked: linked
                 });
             }
         }
     });
-    localStorage.setItem("gymProgs", JSON.stringify(progs));
-    alert("Importato!"); location.reload();
+    localStorage.setItem("gymProgs", JSON.stringify(progs)); alert("Importato!"); location.reload();
 }
 
-// --- TRAINING ---
 function updateDaySelect() {
     const p = document.getElementById("selectProg").value;
     const sel = document.getElementById("selectDay");
     sel.innerHTML = '<option value="">Giorno...</option>';
     if(!p) return;
-    
-    const logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
     const progs = JSON.parse(localStorage.getItem("gymProgs"));
-    const progDays = Object.keys(progs[p]).filter(k => k !== "_duration");
-    const count = logs.filter(l => progDays.includes(l.day)).length;
-    const week = Math.ceil((count + 1) / (progDays.length || 3));
-    if (week === 4) alert("⚠️ SETTIMANA 4: Scarico!");
-    if (week > (progs[p]._duration || 8)) alert("🏁 FINE PROGRAMMA!");
-
     for(let d in progs[p]) if(d !== "_duration") sel.innerHTML += `<option value="${d}">${d}</option>`;
 }
 
@@ -186,18 +153,27 @@ function loadWorkoutDisplay() {
 }
 
 function confirmSet(name, perc, idx, rest) {
-    const w = parseFloat(document.getElementById(`w_${idx}`).value);
+    const val = document.getElementById(`w_${idx}`).value;
+    const w = parseFloat(val);
+    
+    // Feedback visivo flash verde sulla card
+    const card = document.getElementById(`card-${idx}`);
+    card.style.borderColor = "var(--accent)";
+    setTimeout(() => card.style.borderColor = "var(--main)", 500);
+
     if(w && perc > 0) {
         let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
         let calc = Math.round((w / perc) * 100);
         if(calc > (maxes[name.toLowerCase().trim()] || 0)) {
-            if(confirm("Nuovo Record! Aggiorno?")) { maxes[name.toLowerCase().trim()] = calc; localStorage.setItem("gymMaxes", JSON.stringify(maxes)); }
+            if(confirm("Nuovo Record Stimato ("+calc+"kg)! Aggiorno il massimale?")) { 
+                maxes[name.toLowerCase().trim()] = calc; 
+                localStorage.setItem("gymMaxes", JSON.stringify(maxes)); 
+            }
         }
     }
     currentRest = rest;
     document.getElementById("btn-auto-timer").innerText = "Recupero ("+rest+"s)";
     startTimer(rest);
-    document.getElementById(`card-${idx}`).style.opacity = "0.5";
 }
 
 function finishWorkout() {
@@ -214,7 +190,7 @@ function finishWorkout() {
     localStorage.setItem("gymSessionLogs", JSON.stringify(logs));
     let drafts = JSON.parse(localStorage.getItem("gymDrafts")); delete drafts[`${p}_${d}`];
     localStorage.setItem("gymDrafts", JSON.stringify(drafts));
-    alert("Salvato! Vol: " + vol + "kg"); switchMode('stats');
+    alert("Salvato! Volume Totale: " + vol + "kg"); switchMode('stats');
 }
 
 function renderStats() {
@@ -224,9 +200,9 @@ function renderStats() {
     const weeklyVol = logs.reduce((acc, l) => new Date(l.date) > oneWeekAgo ? acc + (l.volume || 0) : acc, 0);
     let html = `<div class="mini-list" style="border-left:5px solid var(--main); padding-left:15px;">
                 <small style="color:#888">VOLUME ULTIMI 7gg</small><div style="font-size:1.4rem; font-weight:bold; color:var(--accent)">${weeklyVol} kg</div></div>
-                <h4>Record:</h4><div class="mini-list">`;
+                <h4>Record (Massimali):</h4><div class="mini-list">`;
     Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
-    html += "</div><h4>Diario:</h4>";
+    html += "</div><h4>Ultimi Allenamenti:</h4>";
     logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.dateStr}</strong> - ${l.day}<br><small>Vol: ${l.volume}kg | ${l.details}</small></div>`);
     container.innerHTML = html;
 }
@@ -237,9 +213,7 @@ function initEditor() {
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[name]) progs[name] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
     localStorage.setItem("gymProgs", JSON.stringify(progs));
-    refreshDropdowns();
-    document.getElementById("editProgSelect").value = name;
-    syncEditorProg();
+    refreshDropdowns(); document.getElementById("editProgSelect").value = name; syncEditorProg();
 }
 
 function addEx(isLinked) {
@@ -251,14 +225,12 @@ function addEx(isLinked) {
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[activeProg][day]) progs[activeProg][day] = [];
     progs[activeProg][day].push({ 
-        name, sets: document.getElementById("exSets").value, 
-        reps: document.getElementById("exReps").value, 
+        name, sets: document.getElementById("exSets").value, reps: document.getElementById("exReps").value, 
         perc: parseInt(document.getElementById("exPerc").value) || 0, 
         rest: parseInt(document.getElementById("exRest").value) || 90, 
         note: document.getElementById("exNote").value, linked: isLinked 
     });
-    localStorage.setItem("gymProgs", JSON.stringify(progs));
-    clearExInputs();
+    localStorage.setItem("gymProgs", JSON.stringify(progs)); clearExInputs();
     if(!selDay) syncEditorProg(); else refreshEditorTable();
 }
 
@@ -266,10 +238,11 @@ function startTimer(s) {
     clearInterval(countdown); let t = s;
     countdown = setInterval(() => {
         t--; document.getElementById("display-timer").innerText = Math.floor(t/60)+":"+(t%60<10?"0"+t%60:t%60);
-        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); alert("Tempo scaduto!"); }
+        if(t<=0) { clearInterval(countdown); document.getElementById("beep-sound").play(); stopTimer(); alert("Tempo scaduto!"); }
     }, 1000);
 }
 function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
+
 function saveDraft(idx) {
     const p = document.getElementById("selectProg").value, d = document.getElementById("selectDay").value;
     let drafts = JSON.parse(localStorage.getItem("gymDrafts"));
