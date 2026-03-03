@@ -1,6 +1,7 @@
 var countdown;
 var activeProg = null;
 var currentRest = 90;
+var sessionCounters = {}; // Traccia le serie effettuate nel workout attuale
 
 window.onload = function() {
     if(!localStorage.getItem("gymMaxes")) localStorage.setItem("gymMaxes", "{}");
@@ -81,7 +82,7 @@ function clearExInputs() {
 function processBulkImport() {
     const text = document.getElementById("bulk-import-area").value.trim();
     const progName = document.getElementById("progName").value.trim() || activeProg;
-    if(!progName || !text) return alert("Nome programma e testo necessari!");
+    if(!progName || !text) return alert("Inserisci Nome Programma!");
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[progName]) progs[progName] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
     let currentDay = "";
@@ -101,7 +102,7 @@ function processBulkImport() {
             }
         }
     });
-    localStorage.setItem("gymProgs", JSON.stringify(progs)); alert("Importato!"); location.reload();
+    localStorage.setItem("gymProgs", JSON.stringify(progs)); location.reload();
 }
 
 function updateDaySelect() {
@@ -123,22 +124,33 @@ function loadWorkoutDisplay() {
     const logs = JSON.parse(localStorage.getItem("gymSessionLogs"));
 
     area.innerHTML = "";
+    sessionCounters = {}; // Reset contatori serie
+
     exercises.forEach((ex, idx) => {
+        sessionCounters[idx] = 0;
         const target = ex.perc > 0 ? Math.round(((maxes[ex.name.toLowerCase().trim()] || 0) * ex.perc) / 100) : 0;
         let last = "--";
         for (let i = logs.length - 1; i >= 0; i--) {
             const entry = logs[i].details.split(", ").find(s => s.startsWith(ex.name + ":"));
             if (entry) { last = entry.split(": ")[1]; break; }
         }
+
         const cardHtml = `<div class="exercise-card" id="card-${idx}">
-                <div class="ex-header"><strong>${ex.name.toUpperCase()}</strong><span class="ex-target">${target>0?target+'kg':'--'}</span></div>
-                <div class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</div>
+                <div class="ex-header">
+                    <strong>${ex.name.toUpperCase()}</strong>
+                    <span id="sets-count-${idx}" style="color:var(--main); font-weight:bold; font-size:0.9rem;">Serie: 0 / ${ex.sets}</span>
+                </div>
+                <div class="ex-header" style="margin-top:5px;">
+                    <span class="ex-info">${ex.sets}x${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</span>
+                    <span class="ex-target">${target>0?target+'kg':'--'}</span>
+                </div>
                 <div class="ex-last">Ultima volta: ${last}</div>
                 <div class="row" style="margin-top:10px;">
                     <input type="number" id="w_${idx}" placeholder="Kg" value="${drafts[idx] || ''}" oninput="saveDraft(${idx})">
-                    <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx}, ${ex.rest})">OK</button>
+                    <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx}, ${ex.rest}, ${ex.sets})">OK</button>
                 </div>
             </div>`;
+
         if (ex.linked && area.lastElementChild) {
             if (!area.lastElementChild.classList.contains("superset-container")) {
                 const prev = area.lastElementChild;
@@ -152,20 +164,37 @@ function loadWorkoutDisplay() {
     document.getElementById("save-session-btn").style.display = "block";
 }
 
-function confirmSet(name, perc, idx, rest) {
+function confirmSet(name, perc, idx, rest, totalSets) {
     const val = document.getElementById(`w_${idx}`).value;
     const w = parseFloat(val);
     
-    // Feedback visivo flash verde sulla card
+    // Incrementa serie
+    sessionCounters[idx]++;
+    document.getElementById(`sets-count-${idx}`).innerText = `Serie: ${sessionCounters[idx]} / ${totalSets}`;
+
     const card = document.getElementById(`card-${idx}`);
     card.style.borderColor = "var(--accent)";
-    setTimeout(() => card.style.borderColor = "var(--main)", 500);
+
+    // Se l'esercizio è finito
+    if (sessionCounters[idx] >= totalSets) {
+        card.style.opacity = "0.5";
+        card.style.borderColor = "#555";
+        // Scroll automatico
+        const nextCard = document.getElementById(`card-${idx + 1}`);
+        if (nextCard) {
+            setTimeout(() => {
+                nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 600);
+        }
+    } else {
+        setTimeout(() => card.style.borderColor = "var(--main)", 500);
+    }
 
     if(w && perc > 0) {
         let maxes = JSON.parse(localStorage.getItem("gymMaxes"));
         let calc = Math.round((w / perc) * 100);
         if(calc > (maxes[name.toLowerCase().trim()] || 0)) {
-            if(confirm("Nuovo Record Stimato ("+calc+"kg)! Aggiorno il massimale?")) { 
+            if(confirm("Nuovo Record Stimato ("+calc+"kg)! Aggiorno?")) { 
                 maxes[name.toLowerCase().trim()] = calc; 
                 localStorage.setItem("gymMaxes", JSON.stringify(maxes)); 
             }
@@ -190,7 +219,7 @@ function finishWorkout() {
     localStorage.setItem("gymSessionLogs", JSON.stringify(logs));
     let drafts = JSON.parse(localStorage.getItem("gymDrafts")); delete drafts[`${p}_${d}`];
     localStorage.setItem("gymDrafts", JSON.stringify(drafts));
-    alert("Salvato! Volume Totale: " + vol + "kg"); switchMode('stats');
+    alert("Salvato! Vol: " + vol + "kg"); switchMode('stats');
 }
 
 function renderStats() {
@@ -200,16 +229,16 @@ function renderStats() {
     const weeklyVol = logs.reduce((acc, l) => new Date(l.date) > oneWeekAgo ? acc + (l.volume || 0) : acc, 0);
     let html = `<div class="mini-list" style="border-left:5px solid var(--main); padding-left:15px;">
                 <small style="color:#888">VOLUME ULTIMI 7gg</small><div style="font-size:1.4rem; font-weight:bold; color:var(--accent)">${weeklyVol} kg</div></div>
-                <h4>Record (Massimali):</h4><div class="mini-list">`;
+                <h4>Record:</h4><div class="mini-list">`;
     Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
-    html += "</div><h4>Ultimi Allenamenti:</h4>";
+    html += "</div><h4>Diario:</h4>";
     logs.slice(-8).reverse().forEach(l => html += `<div class='stat-item'><strong>${l.dateStr}</strong> - ${l.day}<br><small>Vol: ${l.volume}kg | ${l.details}</small></div>`);
     container.innerHTML = html;
 }
 
 function initEditor() {
     const name = document.getElementById("progName").value.trim();
-    if(!name) return alert("Inserisci un nome!");
+    if(!name) return alert("Nome!");
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[name]) progs[name] = { _duration: parseInt(document.getElementById("progWeeks").value) || 8 };
     localStorage.setItem("gymProgs", JSON.stringify(progs));
@@ -221,7 +250,7 @@ function addEx(isLinked) {
     const inputDay = document.getElementById("dayName").value.trim();
     const day = selDay || inputDay;
     const name = document.getElementById("exName").value.trim();
-    if(!day || !name) return alert("Dati mancanti!");
+    if(!day || !name) return alert("Mancano dati!");
     let progs = JSON.parse(localStorage.getItem("gymProgs"));
     if(!progs[activeProg][day]) progs[activeProg][day] = [];
     progs[activeProg][day].push({ 
@@ -242,7 +271,6 @@ function startTimer(s) {
     }, 1000);
 }
 function stopTimer() { clearInterval(countdown); document.getElementById("display-timer").innerText = "00:00"; }
-
 function saveDraft(idx) {
     const p = document.getElementById("selectProg").value, d = document.getElementById("selectDay").value;
     let drafts = JSON.parse(localStorage.getItem("gymDrafts"));

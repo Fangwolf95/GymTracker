@@ -1,5 +1,5 @@
 :root { --main: #00adb5; --bg: #121212; --card: #1e1e1e; --text: #eee; --accent: #44ff44; --danger: #ff4444; }
-body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 10px; display: flex; justify-content: center; }
+body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 10px; display: flex; justify-content: center; overflow-x: hidden; }
 .container { width: 100%; max-width: 500px; }
 h1 { color: var(--main); text-align: center; font-size: 1.4rem; }
 .nav-menu { display: flex; gap: 5px; margin-bottom: 15px; }
@@ -10,15 +10,15 @@ input, select, textarea { width: 100%; padding: 12px; margin-bottom: 10px; borde
 .row { display: flex; gap: 8px; align-items: center; margin-bottom: 5px; }
 .btn-add { background: var(--main); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
 .btn-special { background: var(--danger); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: bold; flex: 1; cursor: pointer; }
-.btn-ok { background: var(--main); color: #fff; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; height: 45px; cursor: pointer; }
-.exercise-card { background: #252525; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 5px solid var(--main); }
-.ex-header { display: flex; justify-content: space-between; font-size: 1.1rem; }
+.btn-ok { background: var(--main); color: #fff; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; height: 45px; cursor: pointer; transition: 0.3s; }
+.exercise-card { background: #252525; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 5px solid var(--main); transition: all 0.4s; }
+.ex-header { display: flex; justify-content: space-between; align-items: center; }
 .ex-target { color: var(--main); font-weight: bold; }
-.ex-info { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
+.ex-info { font-size: 0.85rem; color: #aaa; }
 .ex-last { font-size: 0.75rem; color: #888; margin: 5px 0; font-style: italic; }
 .superset-container { border: 2px solid var(--danger); border-radius: 15px; padding: 12px; margin-bottom: 15px; background: #2a1a1a; }
 .superset-label { color: var(--danger); font-size: 0.7rem; font-weight: bold; display: block; text-align: center; margin-bottom: 8px; }
-.timer-card { background: #111; padding: 15px; border-radius: 15px; text-align: center; margin-top: 20px; border: 1px solid var(--main); position: sticky; bottom: 10px; z-index: 100; }
+.timer-card { background: #111; padding: 15px; border-radius: 15px; text-align: center; margin-top: 20px; border: 1px solid var(--main); position: sticky; bottom: 10px; z-index: 100; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); }
 #display-timer { font-size: 3.5rem; color: var(--main); font-weight: bold; margin: 5px 0; }
 .timer-buttons { display: flex; gap: 8px; }
 .btn-timer { flex: 1; background: #333; color: #fff; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
