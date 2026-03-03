@@ -40,10 +40,12 @@
                         <input type="text" id="dayName" placeholder="O scrivi nuovo" style="flex:1">
                     </div>
                 </div>
+
                 <div id="editor-preview" style="margin-top:20px;">
-                    <h5 style="margin-bottom:10px;">Esercizi in questa giornata:</h5>
+                    <h5 style="margin-bottom:10px;">Esercizi salvati:</h5>
                     <div id="preview-table"></div>
                 </div>
+
                 <div class="card-editor" style="background:#222; margin-top:20px;">
                     <h5 style="margin-top:0;">Aggiungi Esercizio:</h5>
                     <div class="input-grid">
@@ -65,8 +67,8 @@
 
             <div class="card-editor" style="margin-top:40px; border: 1px dashed #555; opacity: 0.8;">
                 <h4 style="margin:0 0 5px 0;">⚡ Bulk Import</h4>
-                <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Panca; 80; 4; 6; 150; Note..."></textarea>
-                <button class="btn-secondary" onclick="processBulkImport()" style="font-size:0.8rem;">Esegui Importazione</button>
+                <textarea id="bulk-import-area" placeholder="# Giorno A..."></textarea>
+                <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
             </div>
         </div>
 
@@ -77,6 +79,7 @@
             </div>
             <div id="workout-display-area"></div>
             <button id="save-session-btn" class="btn-save-workout" style="display:none;" onclick="finishWorkout()">💾 Termina e Salva Sessione</button>
+            
             <div id="timer-area" class="timer-card" style="display:none;">
                 <h2 id="display-timer">00:00</h2>
                 <div class="timer-buttons">
@@ -88,7 +91,7 @@
         </div>
 
         <div id="stats-section" class="mode-section" style="display:none;">
-            <h3>📊 I tuoi Progressi</h3>
+            <h3>📊 Statistiche</h3>
             <div id="stats-container"></div>
             <hr>
             <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
