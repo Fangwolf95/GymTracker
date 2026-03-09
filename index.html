@@ -8,14 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>🏋️ Gym Coach Pro</h1>
+        <h1 style="position:relative;">🏋️ Gym Coach Pro
+            <button id="theme-btn" class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        </h1>
 
         <div class="nav-menu">
-            <button onclick="switchMode('training')">Allenamento</button>
-            <button onclick="switchMode('setup')">Programma</button>
-            <button onclick="switchMode('stats')">Stats</button>
+            <button onclick="switchMode('training')" id="nav-training" class="nav-active">Allenamento</button>
+            <button onclick="switchMode('setup')" id="nav-setup">Programma</button>
+            <button onclick="switchMode('stats')" id="nav-stats">Stats</button>
         </div>
 
+        <!-- ===== SETUP SECTION ===== -->
         <div id="setup-section" class="mode-section" style="display:none;">
             <div class="card-editor" style="border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 15px;">
                 <label><small>Gestisci programma esistente:</small></label>
@@ -63,15 +66,35 @@
                         <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
                     </div>
                 </div>
+
+                <!-- Riordino esercizi -->
+                <div class="card-editor" style="background:#1a1a1a; margin-top:15px;">
+                    <h5 style="margin-top:0; color:#aaa;">↕️ Riordina Esercizi</h5>
+                    <p style="font-size:0.8rem; color:#666; margin:0 0 8px 0;">Trascina per cambiare l'ordine</p>
+                    <div id="reorder-list"></div>
+                    <button class="btn-secondary" style="margin-top:10px;" onclick="saveReorder()">💾 Salva Ordine</button>
+                </div>
             </div>
 
             <div class="card-editor" style="margin-top:40px; border: 1px dashed #555; opacity: 0.8;">
                 <h4 style="margin:0 0 5px 0;">⚡ Bulk Import</h4>
-                <textarea id="bulk-import-area" placeholder="# Giorno A..."></textarea>
+                <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Squat;80;4;6;120;note&#10;*Leg Press;0;3;12;90;superserie"></textarea>
                 <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
+            </div>
+
+            <!-- Export / Import -->
+            <div class="card-editor" style="margin-top:20px; border:1px solid #333;">
+                <h4 style="margin:0 0 10px 0;">💾 Backup Dati</h4>
+                <div class="row">
+                    <button class="btn-add" onclick="exportData()" style="flex:1;">⬇️ Esporta JSON</button>
+                    <button class="btn-secondary" onclick="document.getElementById('importFile').click()" style="flex:1;">⬆️ Importa JSON</button>
+                </div>
+                <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+                <small style="color:#666; display:block; margin-top:5px;">Esporta per backup o trasferimento su altro dispositivo.</small>
             </div>
         </div>
 
+        <!-- ===== TRAINING SECTION ===== -->
         <div id="training-section" class="mode-section">
             <div class="row">
                 <select id="selectProg" onchange="updateDaySelect()"></select>
@@ -79,8 +102,10 @@
             </div>
             <div id="workout-display-area"></div>
             <button id="save-session-btn" class="btn-save-workout" style="display:none;" onclick="finishWorkout()">💾 Termina e Salva Sessione</button>
-            
+            <button id="abandon-session-btn" class="btn-abandon" style="display:none;" onclick="abandonSession()">✕ Abbandona sessione</button>
+
             <div id="timer-area" class="timer-card" style="display:none;">
+                <div id="session-clock" class="session-clock" style="display:none;"></div>
                 <h2 id="display-timer">00:00</h2>
                 <div class="timer-buttons">
                     <button id="btn-auto-timer" class="btn-timer" style="background:var(--main); color:white" onclick="startTimer(currentRest)">Recupero</button>
@@ -90,14 +115,52 @@
             </div>
         </div>
 
+        <!-- ===== STATS SECTION ===== -->
         <div id="stats-section" class="mode-section" style="display:none;">
             <h3>📊 Statistiche</h3>
+
+            <!-- Grafico progressione -->
+            <div class="card-editor" style="margin-bottom:20px;">
+                <h5 style="margin:0 0 10px 0; color:var(--main);">📈 Progressione Esercizio</h5>
+                <select id="statsExSelect" onchange="renderProgressChart()">
+                    <option value="">-- Seleziona Esercizio --</option>
+                </select>
+                <canvas id="progressChart" width="460" height="210" style="display:none; width:100%; margin-top:12px; border-radius:10px;"></canvas>
+                <div id="chartLegend" class="chart-legend"></div>
+                <div id="progressChartEmpty" style="display:none; color:#666; font-size:0.85rem; text-align:center; padding:20px 0;">Nessun dato per questo esercizio</div>
+            </div>
+
             <div id="stats-container"></div>
             <hr>
             <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
             <button class="btn-secondary" style="color:var(--danger); margin-top:10px;" onclick="clearAll()">Reset Totale</button>
         </div>
     </div>
+
+    <!-- Modale commento esercizio -->
+    <div id="comment-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <h4 id="comment-modal-title" style="color:var(--main); margin-top:0;"></h4>
+            <textarea id="comment-modal-input" placeholder="Es: salito bene, prossima volta prova 90kg..." style="height:100px; resize:none;"></textarea>
+            <div class="row" style="margin-top:10px;">
+                <button class="btn-add" onclick="saveComment()" style="flex:1;">💾 Salva</button>
+                <button class="btn-secondary" onclick="closeCommentModal()" style="flex:1;">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale nota post-sessione -->
+    <div id="session-note-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-box" style="border-color:var(--accent);">
+            <h4 style="color:var(--accent); margin-top:0;">📝 Nota Sessione (opzionale)</h4>
+            <textarea id="session-note-input" placeholder="Es: gambe stanche, sonno scarso, ottima energia..." style="height:90px; resize:none;"></textarea>
+            <div class="row" style="margin-top:10px;">
+                <button class="btn-save-workout" onclick="confirmFinishWorkout()" style="flex:1; margin:0; padding:12px; font-size:0.9rem;">✅ Salva Sessione</button>
+                <button class="btn-secondary" onclick="confirmFinishWorkout(true)" style="flex:1;">Salta</button>
+            </div>
+        </div>
+    </div>
+
     <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
     <script src="script.js"></script>
 </body>
