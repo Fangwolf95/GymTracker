@@ -66,11 +66,13 @@ function saveSessionState() {
     const d = document.getElementById('selectDay').value;
     if (!p || !d) return;
     const exercises = JSON.parse(localStorage.getItem('gymProgs'))[p][d];
-    let state = { counters: {}, weights: {} };
+    let state = { counters: {}, weights: {}, reps: {} };
     exercises.forEach((ex, idx) => {
         state.counters[idx] = sessionCounters[idx] || 0;
-        const el = document.getElementById(`w_${idx}`);
-        state.weights[idx] = el ? el.value : '';
+        const elW = document.getElementById(`w_${idx}`);
+        const elR = document.getElementById(`r_${idx}`);
+        state.weights[idx] = elW ? elW.value : '';
+        state.reps[idx] = elR ? elR.value : (ex.reps || '');
     });
     state.startTime = sessionStartTime ? sessionStartTime.toISOString() : new Date().toISOString();
     localStorage.setItem(sessionKey(), JSON.stringify(state));
@@ -306,6 +308,7 @@ function showWorkoutPreview(p, d) {
         </div>
         ${lastNoteHtml}
         <div class="preview-ex-list">${exListHtml}</div>
+        ${isDeloadSession(logs, p, d) ? '<div class="deload-preview-banner">&#9888;&#65039; <strong>Prossima: Settimana di Deload</strong> &mdash; i pesi saranno ridotti del 15% automaticamente</div>' : ''}
         <button class="btn-start-workout" onclick="startWorkout(false)">
             <span class="btn-start-icon">▶</span> Inizia Allenamento
         </button>
@@ -316,6 +319,16 @@ function showWorkoutPreview(p, d) {
     document.getElementById('save-session-btn').style.display = 'none';
 }
 
+// Conta sessioni registrate per una giornata specifica
+function countDaySessions(logs, prog, day) {
+    return logs.filter(l => l.prog === prog && l.day === day).length;
+}
+// Deload ogni 4a sessione (dopo 3 normali): sessione 4, 8, 12...
+function isDeloadSession(logs, prog, day) {
+    const count = countDaySessions(logs, prog, day);
+    return count > 0 && count % 4 === 3;
+}
+
 function startWorkout(isRestore) {
     const p = document.getElementById('selectProg').value, d = document.getElementById('selectDay').value;
     const area = document.getElementById('workout-display-area');
@@ -324,47 +337,74 @@ function startWorkout(isRestore) {
     const logs = JSON.parse(localStorage.getItem('gymSessionLogs'));
     const comments = JSON.parse(localStorage.getItem('gymComments'));
     const savedState = isRestore ? loadSessionState() : null;
+    const deload = !isRestore && isDeloadSession(logs, p, d);
 
     area.innerHTML = '';
     sessionCounters = {};
+
+    // Banner deload in cima
+    if (deload) {
+        const deloadBanner = document.createElement('div');
+        deloadBanner.className = 'deload-banner';
+        deloadBanner.innerHTML = '⚠️ <strong>Settimana di Deload</strong><br><small>Hai completato 3 sessioni — oggi il corpo recupera. I pesi sono ridotti del 15% automaticamente. Mantieni la tecnica, non forzare.</small>';
+        area.appendChild(deloadBanner);
+    }
 
     exercises.forEach((ex, idx) => {
         sessionCounters[idx] = savedState ? (savedState.counters[idx] || 0) : 0;
 
         const target = ex.perc > 0 ? Math.round(((maxes[ex.name.toLowerCase().trim()] || 0) * ex.perc) / 100) : 0;
 
-        // Ultima volta
-        let last = '--';
+        // Ultima volta: parsa "80kg × 10 reps" o "80kg"
+        let lastDisplay = '--';
+        let lastKgRaw = 0;
         for (let i = logs.length - 1; i >= 0; i--) {
             const entry = logs[i].details.split(', ').find(s => s.startsWith(ex.name + ':'));
-            if (entry) { last = entry.split(': ')[1]; break; }
+            if (entry) {
+                lastDisplay = entry.split(': ')[1];
+                const m = lastDisplay.match(/^([\d.]+)kg/);
+                if (m) lastKgRaw = parseFloat(m[1]);
+                break;
+            }
         }
 
-        // Peso ripristinato
+        // Deload: -15% sull'ultimo peso usato (o target se non c'è storico)
+        let deloadTarget = 0;
+        if (deload) {
+            const base = lastKgRaw > 0 ? lastKgRaw : target;
+            if (base > 0) deloadTarget = Math.round((base * 0.85) * 2) / 2;
+        }
+
+        // Peso e reps ripristinati
         let restoredWeight = '';
+        let restoredReps = ex.reps;
         if (savedState && savedState.weights[idx] !== undefined) {
             restoredWeight = savedState.weights[idx];
+            restoredReps = savedState.reps ? (savedState.reps[idx] || ex.reps) : ex.reps;
+        } else if (deload && deloadTarget > 0) {
+            restoredWeight = deloadTarget;
         } else {
             const drafts = JSON.parse(localStorage.getItem('gymDrafts'))[`${p}_${d}`] || {};
             restoredWeight = drafts[idx] || '';
         }
 
-        // Suggerimento progressione automatica (2+ sessioni, +2.5% arrotondato a 0.5kg)
+        // Suggerimento progressione (solo in sessioni normali)
         let suggestion = '';
-        const exHistory = [];
-        for (let i = 0; i < logs.length; i++) {
-            const entry = logs[i].details.split(', ').find(s => s.startsWith(ex.name + ':'));
-            if (entry) {
-                const kg = parseFloat(entry.split(': ')[1]);
-                if (!isNaN(kg) && kg > 0) exHistory.push(kg);
+        if (!deload) {
+            const exHistory = [];
+            for (let i = 0; i < logs.length; i++) {
+                const entry = logs[i].details.split(', ').find(s => s.startsWith(ex.name + ':'));
+                if (entry) {
+                    const m = entry.split(': ')[1].match(/^([\d.]+)kg/);
+                    if (m) exHistory.push(parseFloat(m[1]));
+                }
             }
-        }
-        if (exHistory.length >= 2) {
-            const lastKg = exHistory[exHistory.length - 1];
-            const raw = lastKg * 1.025;
-            const suggested = Math.round(raw * 2) / 2;
-            const diff = (suggested - lastKg).toFixed(1);
-            suggestion = `<div class="ex-suggestion">💡 Prova ${suggested}kg questa volta (+${diff}kg)</div>`;
+            if (exHistory.length >= 2) {
+                const lastKg = exHistory[exHistory.length - 1];
+                const suggested = Math.round((lastKg * 1.025) * 2) / 2;
+                const diff = (suggested - lastKg).toFixed(1);
+                suggestion = `<div class="ex-suggestion">💡 Prova ${suggested}kg questa volta (+${diff}kg)</div>`;
+            }
         }
 
         // Commento persistente
@@ -377,19 +417,24 @@ function startWorkout(isRestore) {
         const totalSets = parseInt(ex.sets) || 0;
         const isDone = serieFatte >= totalSets && totalSets > 0;
 
-        const cardHtml = `<div class="exercise-card" id="card-${idx}" style="${isDone ? 'opacity:0.5; border-color:#555;' : ''}">
+        const targetDisplay = deload && deloadTarget > 0
+            ? `<span class="ex-target deload-target">${deloadTarget}kg <small>(-15%)</small></span>`
+            : `<span class="ex-target">${target > 0 ? target + 'kg' : '--'}</span>`;
+
+        const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}" id="card-${idx}" style="${isDone ? 'opacity:0.5; border-color:#555;' : ''}">
             <div class="ex-header">
                 <strong>${ex.name.toUpperCase()}</strong>
                 <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
             </div>
             <div class="ex-header" style="margin-top:5px;">
                 <span class="ex-info">${ex.sets}×${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</span>
-                <span class="ex-target">${target > 0 ? target + 'kg' : '--'}</span>
+                ${targetDisplay}
             </div>
-            <div class="ex-last">Ultima: ${last}</div>
+            <div class="ex-last">Ultima: ${lastDisplay}</div>
             ${suggestion}
             <div class="row" style="margin-top:10px;">
-                <input type="number" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})">
+                <input type="number" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})" style="flex:2">
+                <input type="number" id="r_${idx}" placeholder="Reps" value="${restoredReps}" oninput="saveDraft(${idx})" style="flex:1; min-width:60px;">
                 <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx}, ${ex.rest}, ${ex.sets})">OK</button>
             </div>
             <button class="${commentClass}" id="comment-btn-${idx}" onclick="openCommentModal('${commentKey}', ${idx})">${commentLabel}</button>
@@ -417,10 +462,7 @@ function startWorkout(isRestore) {
     document.getElementById('save-session-btn').style.display = 'block';
     document.getElementById('abandon-session-btn').style.display = 'block';
 
-    // Wake Lock
     requestWakeLock();
-
-    // Cronometro sessione
     const savedStart = savedState ? savedState.startTime : null;
     sessionStartTime = savedStart ? new Date(savedStart) : new Date();
     saveSessionState();
@@ -481,8 +523,12 @@ function confirmFinishWorkout(skip) {
     let res = [], vol = 0;
     exercises.forEach((ex, idx) => {
         const w = parseFloat(document.getElementById(`w_${idx}`).value) || 0;
-        res.push(ex.name + ': ' + w + 'kg');
-        vol += (w * (parseInt(ex.sets) || 0) * (parseInt(ex.reps) || 0));
+        const rEl = document.getElementById(`r_${idx}`);
+        const rDone = rEl ? (parseInt(rEl.value) || parseInt(ex.reps) || 0) : (parseInt(ex.reps) || 0);
+        const rPlanned = parseInt(ex.reps) || 0;
+        const repsLabel = rDone !== rPlanned ? `${w}kg × ${rDone} reps` : `${w}kg`;
+        res.push(ex.name + ': ' + repsLabel);
+        vol += (w * (parseInt(ex.sets) || 0) * rDone);
     });
 
     let logs = JSON.parse(localStorage.getItem('gymSessionLogs'));
