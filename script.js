@@ -448,6 +448,18 @@ function startWorkout(isRestore) {
                 prev.parentNode.insertBefore(wrap, prev); wrap.appendChild(prev); wrap.innerHTML += cardHtml;
             } else area.lastElementChild.innerHTML += cardHtml;
         } else area.innerHTML += cardHtml;
+
+        // Se la card è già completata (ripristino sessione), disabilita subito input e bottone
+        if (isDone) {
+            setTimeout(() => {
+                const wInput = document.getElementById(`w_${idx}`);
+                const rInput = document.getElementById(`r_${idx}`);
+                const okBtn = document.querySelector(`#card-${idx} .btn-ok`);
+                if (wInput) wInput.disabled = true;
+                if (rInput) rInput.disabled = true;
+                if (okBtn) { okBtn.disabled = true; okBtn.style.opacity = '0.3'; }
+            }, 0);
+        }
     });
 
     if (isRestore) {
@@ -470,6 +482,9 @@ function startWorkout(isRestore) {
 }
 
 function confirmSet(name, perc, idx, rest, totalSets) {
+    // Blocca se le serie sono già completate
+    if (sessionCounters[idx] >= totalSets) return;
+
     const val = document.getElementById(`w_${idx}`).value;
     const w = parseFloat(val);
 
@@ -482,6 +497,13 @@ function confirmSet(name, perc, idx, rest, totalSets) {
     if (sessionCounters[idx] >= totalSets) {
         card.style.opacity = '0.5';
         card.style.borderColor = '#555';
+        // Disabilita input e bottone OK
+        const wInput = document.getElementById(`w_${idx}`);
+        const rInput = document.getElementById(`r_${idx}`);
+        const okBtn = card.querySelector('.btn-ok');
+        if (wInput) wInput.disabled = true;
+        if (rInput) rInput.disabled = true;
+        if (okBtn) { okBtn.disabled = true; okBtn.style.opacity = '0.3'; }
         const nextCard = document.getElementById(`card-${idx + 1}`);
         if (nextCard) setTimeout(() => nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }), 600);
     } else {
