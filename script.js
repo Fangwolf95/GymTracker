@@ -116,8 +116,11 @@ function refreshEditorTable() {
     let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
     progs[activeProg][day].forEach((ex, idx) => {
         html += `<tr style='border-bottom:1px solid var(--border)'>
-            <td style='padding:10px;'>${ex.linked ? '🔗' : ''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s</small></td>
-            <td style='text-align:right;'><button onclick="removeEx('${day}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer;'>✖</button></td>
+            <td style='padding:10px;'>${ex.linked ? '🔗' : ''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s${ex.note ? ' · ' + ex.note : ''}</small></td>
+            <td style='text-align:right; white-space:nowrap;'>
+                <button onclick="openEditModal('${day}', ${idx})" style='background:none; border:none; color:var(--main); font-size:1.1rem; cursor:pointer; padding:4px 6px;'>✏️</button>
+                <button onclick="removeEx('${day}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer; padding:4px 6px;'>✖</button>
+            </td>
         </tr>`;
     });
     container.innerHTML = html + '</table>';
@@ -158,6 +161,49 @@ function renderReorderList(day) {
 
 function saveReorder() {
     alert('Ordine già salvato automaticamente durante il trascinamento!');
+}
+
+// ===== EDIT EXERCISE MODAL =====
+var editDay = null;
+var editIdx = null;
+
+function openEditModal(day, idx) {
+    const progs = JSON.parse(localStorage.getItem('gymProgs'));
+    const ex = progs[activeProg][day][idx];
+    editDay = day;
+    editIdx = idx;
+    document.getElementById('edit-ex-name').value = ex.name || '';
+    document.getElementById('edit-ex-perc').value = ex.perc || 0;
+    document.getElementById('edit-ex-sets').value = ex.sets || '';
+    document.getElementById('edit-ex-reps').value = ex.reps || '';
+    document.getElementById('edit-ex-rest').value = ex.rest || 90;
+    document.getElementById('edit-ex-note').value = ex.note || '';
+    document.getElementById('edit-ex-linked').checked = ex.linked || false;
+    document.getElementById('edit-modal').style.display = 'flex';
+}
+
+function saveEditModal() {
+    const name = document.getElementById('edit-ex-name').value.trim();
+    if (!name) return alert('Il nome è obbligatorio');
+    let progs = JSON.parse(localStorage.getItem('gymProgs'));
+    progs[activeProg][editDay][editIdx] = {
+        name,
+        perc: parseInt(document.getElementById('edit-ex-perc').value) || 0,
+        sets: document.getElementById('edit-ex-sets').value.trim(),
+        reps: document.getElementById('edit-ex-reps').value.trim(),
+        rest: parseInt(document.getElementById('edit-ex-rest').value) || 90,
+        note: document.getElementById('edit-ex-note').value.trim(),
+        linked: document.getElementById('edit-ex-linked').checked
+    };
+    localStorage.setItem('gymProgs', JSON.stringify(progs));
+    closeEditModal();
+    refreshEditorTable();
+}
+
+function closeEditModal() {
+    document.getElementById('edit-modal').style.display = 'none';
+    editDay = null;
+    editIdx = null;
 }
 
 function removeEx(day, idx) {

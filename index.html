@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gym Coach Pro</title>
+    <title>AZ GymTracker</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00adb5">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="GymCoach">
+    <meta name="apple-mobile-web-app-title" content="AZ Gym">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 style="position:relative;">🏋️ Gym Coach Pro
+        <h1 style="position:relative;">🏋️ AZ GymTracker
             <button id="theme-btn" class="theme-toggle" onclick="toggleTheme()">☀️</button>
         </h1>
 
@@ -140,6 +140,29 @@
             <hr>
             <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
             <button class="btn-secondary" style="color:var(--danger); margin-top:10px;" onclick="clearAll()">Reset Totale</button>
+        </div>
+    </div>
+
+    <!-- Modale modifica esercizio -->
+    <div id="edit-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-box" style="border-color:#aaa;">
+            <h4 style="color:var(--text); margin-top:0;">✏️ Modifica Esercizio</h4>
+            <input type="text" id="edit-ex-name" placeholder="Nome esercizio">
+            <div class="input-grid">
+                <input type="number" id="edit-ex-perc" placeholder="%">
+                <input type="number" id="edit-ex-sets" placeholder="Serie">
+                <input type="text" id="edit-ex-reps" placeholder="Reps">
+                <input type="number" id="edit-ex-rest" placeholder="Rec. (s)">
+            </div>
+            <input type="text" id="edit-ex-note" placeholder="Note">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px; cursor:pointer;">
+                <input type="checkbox" id="edit-ex-linked" style="width:auto; margin:0;">
+                🔗 Superserie (collegato al precedente)
+            </label>
+            <div class="row">
+                <button class="btn-add" onclick="saveEditModal()" style="flex:1;">💾 Salva</button>
+                <button class="btn-secondary" onclick="closeEditModal()" style="flex:1;">Annulla</button>
+            </div>
         </div>
     </div>
 
