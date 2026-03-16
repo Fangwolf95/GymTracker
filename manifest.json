@@ -1,6 +1,6 @@
 {
-  "name": "Gym Coach Pro",
-  "short_name": "GymCoach",
+  "name": "AZ GymTracker",
+  "short_name": "AZ Gym",
   "description": "Il tuo allenatore personale in palestra",
   "start_url": "./index.html",
   "display": "standalone",
