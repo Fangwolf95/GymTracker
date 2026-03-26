@@ -603,3 +603,51 @@ body.light-mode .deload-banner {
     font-size: 0.7rem;
     opacity: 0.8;
 }
+
+/* ===== 🎛️ SUB TAB MENU (ARCHIVIO / CREA / IMPORT) UNIFORMATO ===== */
+.sub-tab-menu {
+    /* Usa var(--card2) o var(--input-bg) per lo sfondo del contenitore, 
+       così nel tema chiaro sarà chiaro e nel tema scuro sarà scuro. */
+    background: var(--card2); 
+    border: 1px solid var(--border);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+/* Bottone base della sotto-navigazione */
+.sub-tab-btn {
+    background: transparent;
+    /* Usa var(--text-secondary) per fare in modo che sia grigio scuro nel tema chiaro
+       e grigio chiaro nel tema scuro. */
+    color: var(--text-secondary); 
+    border: none;
+    padding: 10px 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Hover: nel tema chiaro lo facciamo diventare un po' più scuro */
+.sub-tab-btn:hover {
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Hover specifico per il Dark Mode */
+body:not(.light-mode) .sub-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Quando la scheda è attiva (illumina del tuo colore principale #00adb5) */
+.sub-tab-btn.active {
+    background: var(--main) !important;
+    color: #fff !important; /* Testo bianco sull'azzurro */
+    box-shadow: 0 2px 8px rgba(0, 173, 181, 0.3);
+}

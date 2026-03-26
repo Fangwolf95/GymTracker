@@ -1,0 +1,2402 @@
+[
+  {
+    "name": "Panca piana bilanciere",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Bench-Press.gif",
+    "description": "Sdraiati sulla panca piana, afferra il bilanciere con una presa leggermente più ampia delle spalle. Abbassalo controllando il peso fino a sfiorare lo sterno e spingi verso l'alto estendendo le braccia.",
+    "biomechanics": "Esercizio multiarticolare fondamentale. Genera un'altissima tensione meccanica globale sul grande pettorale, deltoide anteriore e tricipiti.",
+    "tips": "Mantieni i piedi ben piantati a terra (leg drive) e le scapole addotte (vicine tra loro) per creare una base solida e proteggere le spalle."
+  },
+  {
+    "name": "Panca piana manubri",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Bench-Press.gif",
+    "description": "Sdraiato su panca piana con un manubrio per mano. Abbassa i pesi lateralmente al torace flettendo i gomiti e spingi verso l'alto facendoli convergere leggermente senza farli toccare.",
+    "biomechanics": "Rispetto al bilanciere permette un Range of Motion (ROM) maggiore nel punto di allungamento profondo e asseconda la naturale convergenza delle fibre del petto.",
+    "tips": "Non far toccare i manubri nella parte alta della spinta; fermati un secondo prima per mantenere la tensione costante sul muscolo."
+  },
+  {
+    "name": "Panca inclinata bilanciere",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Barbell-Bench-Press.gif",
+    "description": "Su una panca inclinata tra i 30° e i 45°, stacca il bilanciere e abbassalo controllando la traiettoria verso la parte alta del torace (sotto le clavicole), poi rispingi.",
+    "biomechanics": "Sposta il focus sul fascio clavicolare del grande pettorale (petto alto). Richiede un buon controllo per non scaricare la tensione sul deltoide anteriore.",
+    "tips": "Un'inclinazione oltre i 45° trasforma l'esercizio in un lavoro per le spalle. Mantieni la panca inclinata a 30° per il massimo isolamento del petto alto."
+  },
+  {
+    "name": "Panca inclinata manubri",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Dumbbell-Press.gif",
+    "description": "Su panca inclinata a 30°, abbassa i manubri verso la parte superiore del petto ruotando leggermente i gomiti verso l'interno, poi spingi verso l'alto.",
+    "biomechanics": "Esercizio d'élite per l'ipertrofia del petto alto. La libertà dei manubri consente di trovare la traiettoria articolare più sicura per la spalla.",
+    "tips": "Tieni il petto alto e 'fiero'. Se curvi la schiena in avanti durante la spinta, il petto alto smette di lavorare a favore dei deltoidi."
+  },
+  {
+    "name": "Panca declinata bilanciere",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Decline-Barbell-Bench-Press.gif",
+    "description": "Sdraiato su panca declinata, abbassa il bilanciere verso la parte inferiore dello sterno (linea sotto-mammaria) e rispingi verso l'alto.",
+    "biomechanics": "Focus sul fascio sterno-costale (petto basso). Riduce lo stress sulla spalla e accorcia il ROM complessivo, permettendo carichi elevati.",
+    "tips": "Dato l'afflusso di sangue alla testa invertita e la difficoltà di stacco, usa sempre i fermi di sicurezza (rack) o uno spotter."
+  },
+  {
+    "name": "Panca declinata manubri",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Decline-Dumbbell-Bench-Press.gif",
+    "description": "Su panca declinata, abbassa i manubri lateralmente al petto inferiore e rispingili verso l'alto estendendo le braccia.",
+    "biomechanics": "Eccellente stimolo per il petto inferiore con maggiore libertà articolare. Lo stiramento eccentrico in basso è profondo e ipertrofico.",
+    "tips": "Scendi portando i manubri vicino alla linea delle ascelle per sentire lo stiramento delle fibre muscolari basse."
+  },
+  {
+    "name": "Panca presa stretta",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Close-Grip-Bench-Press.gif",
+    "description": "Sdraiato su panca piana, afferra il bilanciere con una presa alla larghezza delle spalle (o poco meno). Scendi tenendo i gomiti vicini al busto e rispingi.",
+    "biomechanics": "La flessione del gomito domina il movimento, spostando il carico ipertrofico primario sui tricipiti e secondario sulla porzione interna del petto.",
+    "tips": "Non stringere troppo le mani (mai meno della larghezza delle spalle) per evitare lesioni ai polsi e stress eccessivo ai gomiti."
+  },
+  {
+    "name": "Panca presa larga",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Wide-Grip-Bench-Press.gif",
+    "description": "Su panca piana, impugna il bilanciere molto più largo delle spalle. Scendi verso il petto riducendo l'escursione articolare globale.",
+    "biomechanics": "Riduce il raggio di movimento globale ma allunga fortemente il pettorale nel punto più basso. Riduce l'utilizzo dei tricipiti.",
+    "tips": "Usa questa variante solo se hai spalle in perfetta salute articolare. Se avverti fitte anteriori alla spalla, stringi la presa."
+  },
+  {
+    "name": "Panca con fermo al petto",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Bench-Press.gif",
+    "description": "Panca piana tradizionale, ma quando il bilanciere tocca il petto ci si ferma immobile per 1 o 2 secondi prima di rispingere in modo esplosivo.",
+    "biomechanics": "Annulla il riflesso elastico muscolare (il rimbalzo) costringendo le fibre a reclutarsi da zero dal punto morto in allungamento.",
+    "tips": "Durante il fermo non fare sprofondare il bilanciere nello sterno. Deve solo sfiorare la maglietta mantenendo la tensione attiva."
+  },
+  {
+    "name": "Panca tempo lento",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Bench-Press.gif",
+    "description": "Panca piana dove l'esecuzione segue ritmi forzati (es: 4 secondi di discesa, 2 di fermo, 1 di salita).",
+    "biomechanics": "Aumenta vertiginosamente il Tempo Sotto Tensione (TUT), stimolando l'ipertrofia tramite forte stress metabolico e microlesioni cellulari.",
+    "tips": "Abbassa il carico abituale di circa il 20-30%. Se mantieni il carico normale non riuscirai a completare le ripetizioni richieste."
+  },
+  {
+    "name": "Panca con elastici",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Bench-Press.gif",
+    "description": "Bilanciere legato a terra tramite resistenze elastiche. La resistenza aumenta man mano che spingi il bilanciere verso l'alto.",
+    "biomechanics": "Profilo di resistenza accomodante: asseconda la forza naturale umana (siamo più forti in chiusura che in basso al petto). Allena la chiusura dei tricipiti.",
+    "tips": "Frena la discesa. L'elastico vorrà farti scendere velocemente; controllalo per non subire strappi articolari."
+  },
+  {
+    "name": "Panca con catene",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Bench-Press.gif",
+    "description": "Bilanciere con pesanti catene appese ai lati. Scendendo, le maglie si poggiano a terra alleggerendo il carico; salendo, si staccano appesantendolo.",
+    "biomechanics": "Esercizio a resistenza variabile che sovraccarica la fase finale di spinta e migliora la stabilità complessiva del bilanciere.",
+    "tips": "Assicurati che a bilanciere poggiato al petto ci siano ancora alcune maglie a terra, così la catena non oscillerà pericolosamente."
+  },
+  {
+    "name": "Floor press bilanciere",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/03/Barbell-Floor-Press.gif",
+    "description": "Sdraiato a terra (senza panca). Stacca il bilanciere dai supporti, scendi finché i gomiti toccano delicatamente il pavimento, fermati e rispingi.",
+    "biomechanics": "ROM limitato dal pavimento. Elimina lo stress alla spalla in massimo allungamento. Lavoro immenso per i tricipiti e la forza iniziale.",
+    "tips": "Fai poggiare i gomiti a terra per 1 secondo, non farli rimbalzare sul pavimento per inerzia."
+  },
+  {
+    "name": "Floor press manubri",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Dumbbell-Floor-Press.gif",
+    "description": "Sdraiato a terra con due manubri. Abbassa i gomiti fino a toccare il pavimento, fai una breve pausa e spingi verso l'alto.",
+    "biomechanics": "Isola i muscoli di spinta (petto medio e tricipiti) senza stressare la capsula anteriore della spalla.",
+    "tips": "Piega le ginocchia e tieni i piedi a terra per poggiare bene la zona lombare al pavimento e non inarcare la schiena."
+  },
+  {
+    "name": "Chest press macchina",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Chest-Press.gif",
+    "description": "Seduto al macchinario isotonico di spinta, afferra le maniglie e spingi in avanti estendendo i gomiti.",
+    "biomechanics": "Zero necessità di stabilizzare il peso (traiettoria vincolata). Perfetto per raggiungere il cedimento muscolare puro senza limiti di coordinazione.",
+    "tips": "Regola il sedile in modo che l'altezza delle maniglie si trovi sul centro del petto, mai sopra l'altezza delle spalle."
+  },
+  {
+    "name": "Chest press convergente",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hammer-Incline-Chest-Press.gif",
+    "description": "Spinta su macchinario dove le maniglie si avvicinano tra di loro man mano che estendi le braccia.",
+    "biomechanics": "Asseconda la biomeccanica del gran pettorale: avvicina l'omero allo sterno per il massimo accorciamento e attivazione interna.",
+    "tips": "Spingi indietro le scapole contro lo schienale per tutto il tempo del movimento per massimizzare il lavoro muscolare del petto."
+  },
+  {
+    "name": "Chest press unilaterale",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Chest-Press.gif",
+    "description": "Seduto lateralmente o normalmente sul macchinario chest press, esegui la spinta usando un braccio solo per volta.",
+    "biomechanics": "Consente di concentrarsi totalmente sul collegamento mente-muscolo di un solo pettorale alla volta e corregge le asimmetrie di forza.",
+    "tips": "Usa l'altra mano libera per stabilizzare il busto afferrando il sedile o la struttura del macchinario."
+  },
+  {
+    "name": "Croci manubri piana",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Fly.gif",
+    "description": "Sdraiato su panca piana, allarga le braccia lateralmente flettendo leggermente il gomito, poi richiudile portandole sopra il petto.",
+    "biomechanics": "Esercizio monoarticolare (coinvolge solo la spalla, non il gomito). Massima tensione di allungamento in basso sul gran pettorale.",
+    "tips": "Non far toccare i manubri in alto (perdi tensione sul petto) e non trasformarle in spinte piegando troppo i gomiti."
+  },
+  {
+    "name": "Croci manubri inclinata",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Dumbbell-Fly.gif",
+    "description": "Su panca inclinata a 30°, apri i manubri lateralmente con gomiti semi-flessi e chiudili sopra la parte alta dello sterno.",
+    "biomechanics": "Combina l'allungamento orizzontale del petto con la flessione della spalla per colpire il petto alto.",
+    "tips": "Controlla la discesa. L'allungamento in panca inclinata è aggressivo sulle spalle, scendi quanto la tua mobilità lo consente senza forzare."
+  },
+  {
+    "name": "Croci con fermo in allungamento",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Fly.gif",
+    "description": "Sia ai cavi che coi manubri, apri le braccia e resta fermo in massima apertura per 2-3 secondi prima di chiudere.",
+    "biomechanics": "Sfrutta l'ipertrofia mediata dallo stiramento (Stretch-Induced Hypertrophy). Stimola i meccano-recettori cellulari.",
+    "tips": "Non rimbalzare per risalire. Esci dalla pausa statica in basso spingendo dolcemente per non strappare il tendine pettorale."
+  },
+  {
+    "name": "Croci ai cavi basso→alto",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Low-Cable-Crossover.gif",
+    "description": "Tirando le maniglie da carrucole basse, porta le braccia dal basso verso l'alto e l'avanti facendole convergere vicino al viso.",
+    "biomechanics": "Isola il fascio clavicolare (petto alto). La tensione dei cavi permette uno stimolo anche nel punto di massima contrazione finale.",
+    "tips": "Non dondolare il corpo all'indietro per aiutarti con l'inerzia. Piedi sfalsati per la massima stabilità."
+  },
+  {
+    "name": "Croci ai cavi alto→basso",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Crossover.gif",
+    "description": "Tirando le maniglie da carrucole alte, porta le braccia dall'alto verso il basso e l'avanti incrociando le mani davanti all'ombelico.",
+    "biomechanics": "Focus sul fascio inferiore e addominale del petto (petto basso). Stimolo eccellente di chiusura.",
+    "tips": "Immagina di abbracciare un grosso cilindro. I gomiti rimangono rigidi e leggermente flessi."
+  },
+  {
+    "name": "Croci ai cavi orizzontali",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Crossover.gif",
+    "description": "Posiziona le carrucole all'altezza delle spalle. Chiudi le maniglie davanti allo sterno viaggiando su un piano orizzontale.",
+    "biomechanics": "Isolamento del petto centrale. Tensione uniforme lungo tutto il raggio di movimento articolare.",
+    "tips": "Mentre chiudi le mani contrai attivamente i pettorali spingendo il petto in fuori."
+  },
+  {
+    "name": "Croci ai cavi unilaterali",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Low-Cable-Crossover.gif",
+    "description": "Esegui le croci ai cavi azionando una sola maniglia alla volta, ruotando leggermente il busto verso il cavo.",
+    "biomechanics": "Supera la linea mediana del corpo portando l'omero oltre lo sterno. Produce il massimo accorciamento possibile del petto.",
+    "tips": "Afferra la struttura del macchinario per non farti trascinare via dalla forza di trazione del cavo."
+  },
+  {
+    "name": "Pec deck",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pec-Fly.gif",
+    "description": "Seduto al macchinario, poggia la schiena, afferra le maniglie e chiudi le leve davanti al petto.",
+    "biomechanics": "Totale isolamento dei pettorali, rimuovendo il lavoro dei tricipiti. Ottimo per accumulo di stress metabolico.",
+    "tips": "Non farti rubare il lavoro dalle spalle anteriori ruotandole in avanti alla fine della chiusura."
+  },
+  {
+    "name": "Dips petto",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Dips.gif",
+    "description": "Sospeso alle parallele, inclina il busto in avanti di 30° gradi. Allarga leggermente i gomiti in discesa e spingi verso l'alto.",
+    "biomechanics": "Il re degli esercizi calistenici di spinta per il petto basso ed esterno. Forte stiramento strutturale.",
+    "tips": "Se il busto rimane perfettamente dritto, lavorano solo i tricipiti. Piegati in avanti per caricare il petto."
+  },
+  {
+    "name": "Dips zavorrate",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Dips.gif",
+    "description": "Esecuzione dei dips al petto utilizzando una cintura da sovraccarico con dischi o un giubbotto zavorrato.",
+    "biomechanics": "Aumenta drasticamente il sovraccarico progressivo meccanico sulle fibre inferiori del torace.",
+    "tips": "Fai un riscaldamento impeccabile a corpo libero prima di agganciare i chili alla cintura."
+  },
+  {
+    "name": "Push-up classici",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Push-up.gif",
+    "description": "Piegamenti a terra proni con mani larghezza spalle. Abbassa il petto sfiorando il pavimento e rispingi.",
+    "biomechanics": "Costruzione di base della forza di spinta del torace a corpo libero. Coinvolge il core per la stabilizzazione.",
+    "tips": "Non aprire i gomiti a 90° (forma a T), tienili a 45° verso il basso (forma a freccia) per salvare la cuffia dei rotatori."
+  },
+  {
+    "name": "Push-up inclinati",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Push-Up.gif",
+    "description": "Piegamenti a terra con le mani poggiate su una superficie rialzata (panca, box) e piedi a terra.",
+    "biomechanics": "Riduce la percentuale del peso corporeo sollevato e sposta il lavoro sulla parte bassa del petto.",
+    "tips": "Ottimo per i principianti o come esercizio di svuotamento (stripping meccanico) a fine allenamento."
+  },
+  {
+    "name": "Push-up declinati",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Decline-Push-Up.gif",
+    "description": "Piegamenti a terra tenendo i piedi sollevati su un box o panca e le mani poggiate a terra.",
+    "biomechanics": "Aumenta la percentuale di peso sollevato e carica l'ipertrofia sul fascio clavicolare (petto alto).",
+    "tips": "Non far cedere il bacino verso il basso inarcando la schiena; strizza glutei e addome."
+  },
+  {
+    "name": "Push-up pliometrici",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Clap-Push-up.gif",
+    "description": "Scendi a terra e spingi verso l'alto con tale forza da staccare le mani dal pavimento (opzionale: battito di mani).",
+    "biomechanics": "Allena la potenza pura esplosiva, reclutando velocemente le fibre bianche veloci (Tipo II).",
+    "tips": "Assorbi l'impatto flettendo dolcemente i gomiti quando le mani toccano terra."
+  },
+  {
+    "name": "Push-up archer",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/02/Archer-Push-up.gif",
+    "description": "Mani molto larghe. Scendi verso una singola mano lasciando l'altro braccio teso, alternando i lati.",
+    "biomechanics": "Simula un lavoro unilaterale scaricando quasi tutto il peso corporeo su un pettorale per volta.",
+    "tips": "Il braccio teso serve solo da supporto laterale; tutto il lavoro di spinta deve farlo il braccio flesso."
+  },
+  {
+    "name": "Push-up su anelli",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Ring-Push-Up.gif",
+    "description": "Piegamenti tenendo gli anelli ginnici. Consente di far convergere le mani in salita avvicinandole.",
+    "biomechanics": "L'instabilità dell'anello obbliga i muscoli stabilizzatori della spalla a un lavoro monumentale.",
+    "tips": "Stringi i palmi tra loro alla fine della spinta in alto per contrarre il petto ai massimi livelli."
+  },
+  {
+    "name": "Push-up pseudo planche",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/planche-push-ups.gif",
+    "description": "Piegamenti a terra portando le mani molto in basso (verso i fianchi/vita) e sbilanciando le spalle in avanti.",
+    "biomechanics": "Molto pesante per deltoidi anteriori, bicipiti e petto alto. Base del calisthenics.",
+    "tips": "Esegui una leggera gobba dorsale (protrazione scapolare attiva) per non caricare la colonna."
+  },
+  {
+    "name": "Svend press",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/06/Svend-Press.gif",
+    "description": "In piedi o seduto, stringi un disco orizzontalmente tra i palmi delle mani davanti al petto ed estendi le braccia.",
+    "biomechanics": "Lavoro isometrico. Comprimendo i palmi tra loro si genera un blocco muscolare e un pump formidabile nel petto interno.",
+    "tips": "Spremi forte i palmi, non 'agganciare' il disco infilando le dita nel foro centrale."
+  },
+  {
+    "name": "Pullover manubrio",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Pullover.gif",
+    "description": "Sdraiato perpendicolare alla panca, porta un manubrio afferrato a due mani dietro la testa allungando il torace.",
+    "biomechanics": "Esercizio ibrido che stira i fasci inferiori del petto e attiva il gran dorsale e dentato.",
+    "tips": "Abbassa dolcemente il bacino mentre il manubrio scende dietro la testa per aumentare la tensione."
+  },
+  {
+    "name": "Pullover bilanciere",
+    "group": "Petto",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Pullover.gif",
+    "description": "Sdraiato su panca, porta il bilanciere con le braccia quasi tese dietro la testa stirando il torace, e riportalo sopra il petto.",
+    "biomechanics": "Traiettoria vincolata della sbarra che isola l'estensione del braccio, stretchando pettorali e dorsali.",
+    "tips": "Non piegare ed estendere i gomiti durante l'arco di movimento, altrimenti diventa un French press per tricipiti."
+  },
+  {
+    "name": "Trazioni presa prona",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pull-up.gif",
+    "description": "Appeso alla sbarra con i palmi rivolti in avanti (larghezza superiore alle spalle). Tira il corpo verso l'alto portando il petto alla sbarra, poi scendi controllando il peso.",
+    "biomechanics": "Esercizio fondamentale multiarticolare a corpo libero. Forte attivazione del gran dorsale (fasci esterni), grande rotondo e bicipite brachiale.",
+    "tips": "Inizia il movimento deprimendo le scapole (abbassando le spalle) prima di piegare le braccia. Non dondolare con le gambe."
+  },
+  {
+    "name": "Trazioni presa supina",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Chin-ups.gif",
+    "description": "Appeso alla sbarra con i palmi rivolti verso di te (larghezza spalle). Tira il corpo verso l'alto portando il mento oltre la sbarra.",
+    "biomechanics": "Rispetto alla presa prona, questa variante mette il bicipite brachiale in una posizione meccanica di forte vantaggio, permettendo di sollevare più carico.",
+    "tips": "Ottima variante se cerchi il massimo accorciamento del bicipite e delle fibre inferiori del gran dorsale."
+  },
+  {
+    "name": "Trazioni presa neutra",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Parallel-Grip-Pull-up.gif",
+    "description": "Trazioni eseguite afferrando due maniglie parallele (palmi che si guardano). Tira il petto verso le maniglie.",
+    "biomechanics": "Posizione articolare più sicura e naturale per la spalla. Distribuisce lo sforzo equamente tra gran dorsale, bicipiti e brachioradiale.",
+    "tips": "Variante eccellente se soffri di fastidi o dolori alle spalle o ai gomiti con le prese classiche."
+  },
+  {
+    "name": "Trazioni zavorrate",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pull-up.gif",
+    "description": "Esecuzione delle trazioni alla sbarra (prona, supina o neutra) utilizzando una cintura con catena per dischi o un giubbotto zavorrato.",
+    "biomechanics": "Aumenta drasticamente la tensione meccanica applicata alle fibre della schiena, fondamentale per superare i plateau di forza a corpo libero.",
+    "tips": "Assicurati di saper gestire perfettamente almeno 10-12 ripetizioni pulite a corpo libero prima di iniziare ad aggiungere peso."
+  },
+  {
+    "name": "Trazioni con fermo",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pull-up.gif",
+    "description": "Esegui la trazione e fermati immobile per 1-2 secondi quando il mento/petto è sopra la sbarra, prima di scendere.",
+    "biomechanics": "Elimina l'inerzia e costringe i muscoli della parte alta della schiena (trapezi medi, romboidi) a una contrazione isometrica brutale nel punto più difficile.",
+    "tips": "Usa la pausa per concentrarti sul 'toccare' la sbarra con lo sterno, spingendo i gomiti verso le tasche posteriori dei pantaloni."
+  },
+  {
+    "name": "Trazioni lente",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pull-up.gif",
+    "description": "Trazioni eseguite con un tempo controllato, specialmente rallentando la fase di discesa eccentrica (es. 4-5 secondi per scendere).",
+    "biomechanics": "Massimizza il Tempo Sotto Tensione (TUT). La fase eccentrica lenta crea microlesioni ipertrofiche molto profonde nel gran dorsale.",
+    "tips": "Non mollare la tensione a metà discesa. Mantieni il controllo totale fino a quando le braccia non sono completamente distese."
+  },
+  {
+    "name": "Trazioni archer",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/03/Archer-Pull-up.gif",
+    "description": "Tirando il corpo verso l'alto, sposta il busto verso una singola mano lasciando l'altro braccio teso lateralmente sulla sbarra.",
+    "biomechanics": "Variante calistenica avanzata unilaterale. Sovraccarica quasi tutto il peso corporeo su un solo lato del dorsale per volta.",
+    "tips": "Il braccio che rimane dritto funge solo da perno e assistenza. Tira attivamente solo con il braccio che si flette."
+  },
+  {
+    "name": "Muscle-up",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/muscle-up.gif",
+    "description": "Dalla sospensione alla sbarra, esegui una trazione esplosiva seguita da una rapida transizione del busto sopra la sbarra, completando con una spinta verso l'alto (dip).",
+    "biomechanics": "Combina una potente tirata balistica (dorso/bicipiti) con una spinta pressante (petto/tricipiti). Richiede altissimi livelli di coordinazione e forza esplosiva.",
+    "tips": "Non è una trazione lenta. Richiede l'attivazione simultanea del core e un movimento a 'C' per scavalcare la sbarra senza sbatterci il petto."
+  },
+  {
+    "name": "Lat machine avanti",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lat-Pulldown.gif",
+    "description": "Seduto al macchinario, afferra la sbarra larga. Tira la sbarra verso la parte alta del petto inclinando leggermente il busto all'indietro.",
+    "biomechanics": "Isolamento eccellente della larghezza della schiena. Consente di lavorare sul piano frontale minimizzando i compensi del corpo.",
+    "tips": "Non tirare la sbarra dietro il collo per evitare pericolose compressioni articolari della spalla. Arriva sempre alla clavicola/sterno."
+  },
+  {
+    "name": "Lat machine presa stretta",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Close-Grip-Lat-Pulldown.gif",
+    "description": "Usa la maniglia a triangolo (presa neutra stretta). Tira la maniglia verso lo sterno basso portando i gomiti aderenti ai fianchi.",
+    "biomechanics": "Porta il gomito a viaggiare sul piano sagittale. Questo allunga e stimola potentemente le fibre inferiori e interne del gran dorsale.",
+    "tips": "Tira portando la maniglia verso la pancia e non verso il mento. Sentirai lavorare molto di più il dorsale basso."
+  },
+  {
+    "name": "Lat machine presa larga",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lat-Pulldown.gif",
+    "description": "Seduto, impugna la sbarra molto larga alle estremità. Tira verso il petto alto mantenendo i gomiti aperti lateralmente.",
+    "biomechanics": "Coinvolge attivamente i muscoli dell'alta schiena (gran rotondo, infraspinato e deltoide posteriore) a discapito di un ROM leggermente ridotto del dorsale.",
+    "tips": "Tieni il petto alto. Se chiudi le spalle in avanti mentre tiri, disattivi la schiena e sovraccarichi i bicipiti."
+  },
+  {
+    "name": "Lat machine inversa",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Underhand-Lat-Pulldown.gif",
+    "description": "Afferra la sbarra dritta con presa supina (palmi verso di te), larghezza spalle. Tira la sbarra verso la parte inferiore del petto.",
+    "biomechanics": "Simile alle trazioni supine, sfrutta la forza del bicipite brachiale per macinare volume pesante sul dorsale basso.",
+    "tips": "Cerca di non tirare solo di braccia. Immagina che le tue mani siano ganci e tira con i gomiti."
+  },
+  {
+    "name": "Lat machine unilaterale",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/One-Arm-Pulldown.gif",
+    "description": "Usa una maniglia singola al cavo alto della Lat machine. Tira la maniglia verso il fianco flettendo lateralmente il busto.",
+    "biomechanics": "Permette un allineamento perfetto tra il cavo e le fibre del dorsale di quel lato. Consente un accorciamento totale senza asimmetrie.",
+    "tips": "Mentre tiri, ruota leggermente il busto verso il lato che lavora per strizzare al massimo il dorsale."
+  },
+  {
+    "name": "Lat machine con fermo",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lat-Pulldown.gif",
+    "description": "Tira la sbarra della Lat machine fino allo sterno e fermati immobile per 2 secondi prima di rilasciarla verso l'alto.",
+    "biomechanics": "Annulla il rimbalzo e costringe a generare forza isometrica pura, eccellente per sviluppare la connessione mente-muscolo.",
+    "tips": "Abbassa leggermente il carico abituale per poter sostenere la pausa senza perdere la postura del petto."
+  },
+  {
+    "name": "Pulldown ai cavi",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pulldown.gif",
+    "description": "In piedi o in ginocchio davanti al cavo alto. Tira la sbarra o la corda verso le cosce mantenendo le braccia tese.",
+    "biomechanics": "Esercizio monoarticolare che isola il gran dorsale escludendo completamente i bicipiti (che spesso cedono prima della schiena).",
+    "tips": "Non flettere i gomiti durante il tragitto, altrimenti si trasforma in un pushdown per i tricipiti."
+  },
+  {
+    "name": "Straight arm pulldown",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Straight-Arm-Pulldown.gif",
+    "description": "Variante del Pulldown dove ci si inclina in avanti di circa 30-45 gradi col busto, spingendo la sbarra verso il basso e l'indietro ad ampie braccia tese.",
+    "biomechanics": "Massimizza il ROM di allungamento del dorsale quando la sbarra è in alto.",
+    "tips": "Mantieni il petto 'aperto' e spingilo in fuori quando la sbarra tocca le cosce per contrarre i dorsali bassi."
+  },
+  {
+    "name": "Rematore bilanciere",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Row.gif",
+    "description": "Fletti il busto in avanti di circa 45°, schiena dritta. Afferra il bilanciere con presa prona e tiralo verso l'ombelico portando indietro i gomiti.",
+    "biomechanics": "Il re degli esercizi di spessore per la schiena. Lavora gran dorsale, erettori spinali (isometria), trapezi e romboidi.",
+    "tips": "Non raddrizzare il busto verso l'alto mentre tiri per inerzia. Mantieni l'inclinazione fissa."
+  },
+  {
+    "name": "Rematore Pendlay",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Pendlay-Row.gif",
+    "description": "Busto perfettamente parallelo al pavimento. Il bilanciere parte da terra ad ogni ripetizione e viene tirato esplosivamente verso la pancia.",
+    "biomechanics": "Elimina totalmente l'inerzia tra le ripetizioni e sposta la tensione meccanica pura sulla muscolatura dell'alta schiena (trapezi/romboidi).",
+    "tips": "La schiena non deve alzarsi durante la tirata. È un esercizio di potenza, non di rimbalzo lombare."
+  },
+  {
+    "name": "Rematore Yates",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Row.gif",
+    "description": "Rematore eseguito con il busto meno inclinato (circa 60-70° gradi rispetto al suolo) e presa supina. Il bilanciere striscia sulle cosce.",
+    "biomechanics": "Sviluppato dal campione Dorian Yates. Sovraccarica massicciamente il dorsale inferiore e i bicipiti con carichi pesanti.",
+    "tips": "Usa la presa supina solo se i tuoi bicipiti e gomiti tollerano bene la tensione di trazione pesante."
+  },
+  {
+    "name": "Rematore manubrio",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Row.gif",
+    "description": "Poggia un ginocchio e una mano sulla panca. Con l'altra mano tira il manubrio verso l'anca effettuando una traiettoria a semicerchio.",
+    "biomechanics": "Unilaterale. Permette uno stiramento del dorsale eccezionale in basso e una forte contrazione in alto senza stressare la zona lombare.",
+    "tips": "Non tirare il manubrio verso la spalla/ascella (useresti solo il bicipite), portalo verso la tasca dei pantaloni."
+  },
+  {
+    "name": "Rematore manubrio con fermo",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Row.gif",
+    "description": "Esegui il rematore con manubrio fermandoti immobile in massima contrazione (in alto) per 2 secondi ad ogni ripetizione.",
+    "biomechanics": "Isolamento brutale dei romboidi e trapezi medi/bassi tramite contrazione di picco isometrica.",
+    "tips": "Espira profondamente durante il fermo per focalizzare la connessione mente-muscolo."
+  },
+  {
+    "name": "Rematore su panca inclinata",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Dumbbell-Row.gif",
+    "description": "Sdraiati prono sul petto su una panca inclinata a 30-45°. Tira i manubri (o il bilanciere) verso i fianchi.",
+    "biomechanics": "Scarica completamente gli erettori spinali della zona lombare dal dover sorreggere il corpo. Perfetto per chi soffre di mal di schiena.",
+    "tips": "Non staccare lo sterno dalla panca mentre tiri il carico per darti lo slancio."
+  },
+  {
+    "name": "Seal row",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Barbell-Seal-Row.gif",
+    "description": "Sdraiato a pancia in giù su una panca orizzontale (solitamente rialzata da terra). Afferra il bilanciere sottostante e tiralo verso il petto basso.",
+    "biomechanics": "L'esercizio di rematore più puro che esista. Zero compensi muscolari delle gambe o della bassa schiena, isolamento dorsale totale.",
+    "tips": "Tocca dolcemente il fondo della panca col bilanciere per sancire il fine corsa della ripetizione pulita."
+  },
+  {
+    "name": "Rematore T-bar",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/T-Bar-Row.gif",
+    "description": "Usa il bilanciere incastrato a terra (Landmine) o il macchinario apposito. Tira le maniglie verso la pancia col busto inclinato.",
+    "biomechanics": "Fornisce una stabilità maggiore del rematore classico con bilanciere libero. Sviluppa spessore centrale nella schiena.",
+    "tips": "Se il macchinario ha il poggia-petto, usalo senza staccarlo; se è libero, mantieni il baricentro sui talloni."
+  },
+  {
+    "name": "Rematore macchina",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Seduto al macchinario isotonico di tirata orizzontale. Afferra le leve e tirale verso il busto.",
+    "biomechanics": "Tensione costante e traiettoria guidata sicura. Perfetto per stress metabolico e cedimento ad alte ripetizioni.",
+    "tips": "Regola l'altezza del sedile e del cuscinetto toracico in modo da tirare comodamente verso lo stomaco basso."
+  },
+  {
+    "name": "Rematore al cavo basso",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Seduto a terra o alla stazione Pulley, tira la sbarra o la maniglia montata sulla carrucola bassa verso l'addome.",
+    "biomechanics": "Il cavo offre tensione continua anche all'inizio del movimento quando le braccia sono tese in avanti.",
+    "tips": "Lascia che il cavo ti tiri leggermente in avanti allungando le scapole prima di riniziare la tirata."
+  },
+  {
+    "name": "Rematore unilaterale al cavo",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Single-Arm-Cable-Row.gif",
+    "description": "Tirando una singola maniglia al cavo basso. Ruota leggermente la spalla in avanti per allungare e tirala verso l'anca opposta.",
+    "biomechanics": "Il cavo permette di assecondare la linea di trazione ideale delle fibre del dorsale, portando alla massima contrazione di picco.",
+    "tips": "Assicurati di ruotare leggermente il busto nella fase di allungamento per sentire il dorsale stirarsi lateralmente."
+  },
+  {
+    "name": "Pulley basso",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Seduto alla stazione pulley, afferra il triangolo e tiralo verso lo stomaco portando indietro i gomiti vicino al corpo.",
+    "biomechanics": "Ottimo lavoro sinergico di spessore e larghezza. Gli erettori spinali sorreggono il carico isometricamente.",
+    "tips": "Non dondolare esageratamente con la schiena avanti e indietro ad ogni ripetizione. Busto solido."
+  },
+  {
+    "name": "Pulley con fermo",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Esegui il Pulley basso ma quando il triangolo tocca lo stomaco, blocca il peso per 2 secondi strizzando le scapole.",
+    "biomechanics": "Accentua lo stimolo ipertrofico sui trapezi centrali e romboidi grazie alla stasi isometrica.",
+    "tips": "Concentrati sull'unire le scapole al centro della schiena durante la sosta."
+  },
+  {
+    "name": "Pulley unilaterale",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Seduto al pulley, afferra una maniglia singola ed esegui la tirata verso l'anca con un braccio alla volta.",
+    "biomechanics": "Risolve deficit di spinta bilaterale e allunga maggiormente il dorsale di quel lato lasciando viaggiare la spalla avanti.",
+    "tips": "Usa la mano che non lavora poggiandola sulla coscia o sul macchinario per darti stabilità."
+  },
+  {
+    "name": "Face pull",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Face-Pull.gif",
+    "description": "Al cavo alto con la corda. Tira la corda verso il viso (altezza fronte/occhi) aprendo le estremità.",
+    "biomechanics": "Esercizio fondamentale per la salute della postura. Colpisce deltoide posteriore, cuffia dei rotatori e trapezi alti/medi.",
+    "tips": "I gomiti devono essere sempre più alti dei polsi durante la tirata."
+  },
+  {
+    "name": "Face pull con extrarotazione",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Face-Pull.gif",
+    "description": "Al cavo alto con la corda. Tira verso il viso e alla fine ruota i polsi verso l'alto (come se mostrassi i bicipiti allo specchio).",
+    "biomechanics": "Coinvolgimento estremo degli extrarotatori della spalla (infraspinato, piccolo rotondo). Ottimo preventivo per infortuni.",
+    "tips": "Fermati mezzo secondo nella posa finale di rotazione per sentire bruciare la parte posteriore della spalla."
+  },
+  {
+    "name": "Iperestensioni lombari",
+    "group": "Bassa Schiena",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hyperextension.gif",
+    "description": "Sulla panca inclinata a 45°, fletti il busto in avanti e risali estendendo la schiena fino a portarla in linea con le gambe.",
+    "biomechanics": "Isolamento degli erettori spinali della bassa schiena, bicipiti femorali e glutei.",
+    "tips": "Non inarcare eccessivamente la schiena all'indietro nella fase alta del movimento; fermati quando il corpo è dritto."
+  },
+  {
+    "name": "Iperestensioni zavorrate",
+    "group": "Bassa Schiena",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Weighted-Hyperextension.gif",
+    "description": "Esecuzione delle iperestensioni lombari tenendo un disco o manubrio stretto al petto.",
+    "biomechanics": "Sovraccarico ipertrofico progressivo sulla muscolatura spinale della catena cinetica posteriore.",
+    "tips": "Poggia il disco al petto e non lasciarlo penzolare nel vuoto per non alterare il baricentro."
+  },
+  {
+    "name": "Good morning bilanciere",
+    "group": "Bassa Schiena / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Good-Morning.gif",
+    "description": "Bilanciere sulle spalle (come uno squat). Gambe semitese, spingi il sedere all'indietro flettendo il busto fino a parallelo al suolo e risali.",
+    "biomechanics": "Allungamento violentemente ipertrofico dei bicipiti femorali e grande gluteo, stabilizzato dagli erettori spinali lombari.",
+    "tips": "È un esercizio di spinta dell'anca indietro (hip-hinge), non di flessione della colonna. La schiena rimane rigida e dritta."
+  },
+  {
+    "name": "Good morning elastico",
+    "group": "Bassa Schiena / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/02/Banded-Good-Morning.gif",
+    "description": "Calpesta un'estremità dell'elastico e poggia l'altra sulla nuca/collo. Fletti il busto in avanti e risali.",
+    "biomechanics": "Resistenza accomodante che protegge la colonna lombare nel punto più profondo (dove l'elastico perde tensione).",
+    "tips": "Ottimo per riscaldarsi prima di stacchi pesanti o squat."
+  },
+  {
+    "name": "Superman",
+    "group": "Bassa Schiena",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Superman-exercise.gif",
+    "description": "Sdraiato prono a terra. Alza contemporaneamente braccia e gambe dal pavimento stringendo i lombari e glutei.",
+    "biomechanics": "Esercizio a corpo libero posturale eccellente per rinforzare la catena cinetica posteriore senza carichi gravosi.",
+    "tips": "Non trattenere il respiro; espira mentre sali verso l'alto."
+  },
+  {
+    "name": "Australian pull-up",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Inverted-Row.gif",
+    "description": "Sotto un bilanciere al multipower (altezza vita). Corpo teso, piedi a terra, tirati verso la sbarra toccandola col petto.",
+    "biomechanics": "Ponte di passaggio tra il corpo libero e le trazioni vere. Allena lo spessore dell'alta schiena in scarico lombare.",
+    "tips": "Più il bilanciere è basso, più l'esercizio diventa difficile e pesante."
+  },
+  {
+    "name": "Inverted row",
+    "group": "Dorso",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Inverted-Row.gif",
+    "description": "Stesso principio dell'Australian pull-up, ma solitamente eseguito su anelli ginnici o TRX per consentire una rotazione neutra del polso.",
+    "biomechanics": "La libertà dell'anello consente di addurre le scapole all'indietro senza bloccare il gomito.",
+    "tips": "Strizza i glutei per mantenere il corpo in una linea retta come una tavola di legno."
+  },
+  {
+    "name": "Rack pull",
+    "group": "Dorso / Bassa Schiena",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Rack-Pull.gif",
+    "description": "Stacco parziale del bilanciere posizionato all'interno del rack sopra la linea delle ginocchia. Solleva raddrizzando il busto.",
+    "biomechanics": "Elimina la spinta delle gambe dal pavimento per concentrare il carico sulla forza dei trapezi e della bassa schiena in chiusura.",
+    "tips": "Ottimo per caricare pesi pesanti in sicurezza, focalizzandosi sullo spessore totale del tronco."
+  },
+  {
+    "name": "Stacco deficit",
+    "group": "Dorso / Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Deadlift.gif",
+    "description": "Esegui uno stacco da terra salendo sopra un rialzo o un disco di ghisa (aumentando la distanza del bilanciere da terra).",
+    "biomechanics": "Aumenta vertiginosamente il ROM iniziale, costringendo gambe e dorsali a una forza iniziale titanica.",
+    "tips": "Usa questa variante solo se possiedi una mobilità di anche eccezionale. Non curvare la schiena."
+  },
+  {
+    "name": "Stacco con pausa",
+    "group": "Dorso / Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Deadlift.gif",
+    "description": "Esegui lo stacco ma fermati immobile per 2 secondi quando il bilanciere si trova a pochi centimetri dal suolo (altezza stinchi).",
+    "biomechanics": "Distrugge l'inerzia iniziale e insegna al sistema nervoso a mantenere la tensione spinale isometrica corretta.",
+    "tips": "Usa questa variante se noti che i tuoi fianchi partono prima della schiena quando stacchi pesantemente."
+  },
+  {
+    "name": "Stacco snatch grip",
+    "group": "Dorso / Trapezi",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Snatch-Grip-Deadlift.gif",
+    "description": "Esegui lo stacco da terra afferrando il bilanciere con una presa molto larga (tipica del sollevamento olimpico).",
+    "biomechanics": "La presa larga abbassa la postura di partenza, aumentando il ROM articolare. Massiccio lavoro sui trapezi e sull'alta schiena.",
+    "tips": "Considera l'uso delle fascette (straps) per le mani, poiché la presa larga rende difficile sostenere carichi alti col solo pollice."
+  },
+  {
+    "name": "Military press bilanciere",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Military-Press.gif",
+    "description": "In piedi, bilanciere poggiato sulle clavicole. Spingi il peso sopra la testa estendendo le braccia e portando la testa leggermente in avanti per completare l'alzata.",
+    "biomechanics": "Esercizio fondamentale multiarticolare in piedi. Forte accento sul deltoide anteriore, tricipiti e stabilità del core/glutei.",
+    "tips": "Non inarcare eccessivamente la zona lombare per aiutarti. Contrai glutei e addome per creare un blocco unico e stabile."
+  },
+  {
+    "name": "Military press manubri",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Shoulder-Press.gif",
+    "description": "In piedi con un manubrio per mano all'altezza delle spalle. Spingi i manubri sopra la testa facendoli convergere senza farli toccare.",
+    "biomechanics": "Rispetto al bilanciere permette un movimento più fisiologico per l'articolazione della spalla e corregge eventuali asimmetrie di forza.",
+    "tips": "Tieni i gomiti leggermente inclinati in avanti (sul piano scapolare) anziché perfettamente larghi per non stressare la cuffia dei rotatori."
+  },
+  {
+    "name": "Military press seduto",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Barbell-Press.gif",
+    "description": "Seduto su panca con schienale a 85-90°, spingi il bilanciere (o i manubri) sopra la testa partendo dalle clavicole.",
+    "biomechanics": "Elimina il lavoro di stabilizzazione delle gambe e del bacino, permettendo di isolare maggiormente i deltoidi e spingere carichi pesanti.",
+    "tips": "Poggia bene i piedi a terra e spingi la schiena contro lo schienale per scaricare il peso in sicurezza."
+  },
+  {
+    "name": "Strict press",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Push-Press.gif",
+    "description": "Spinta verticale del bilanciere in piedi senza l'utilizzo di alcuna spinta di gambe (ginocchia completamente bloccate).",
+    "biomechanics": "Forza pura di spinta della parte superiore del corpo. Isola i deltoidi anteriori e i tricipiti eliminando ogni tipo di inerzia.",
+    "tips": "I piedi sono vicini e le gambe rigide. Tutto il movimento è generato unicamente dalle braccia e dalle spalle."
+  },
+  {
+    "name": "Push press",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Push-Press.gif",
+    "description": "Fletti leggermente le ginocchia (dip) e spingi esplosivamente con le gambe trasferendo la forza al bilanciere per portarlo sopra la testa.",
+    "biomechanics": "Movimento di potenza (catena cinetica). Permette di sollevare carichi sovramassimali rispetto alla spinta classica strict.",
+    "tips": "Usa la discesa del bilanciere per frenare il peso eccentricamente (ipertrofico) e prepararti alla ripetizione successiva."
+  },
+  {
+    "name": "Push jerk",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/06/Barbell-Push-Jerk.gif",
+    "description": "Spinta olimpica in cui si flettono le ginocchia per dare la spinta e ci si 'tuffa' sotto il bilanciere flettendo nuovamente le ginocchia per riceverlo a braccia tese.",
+    "biomechanics": "Richiede un'altissima coordinazione neuromuscolare, potenza e mobilità articolare. Non punta all'ipertrofia pura ma alla performance.",
+    "tips": "Blocca i gomiti rapidamente prima di raddrizzare le gambe per completare l'alzata in sicurezza."
+  },
+  {
+    "name": "Arnold press",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Arnold-Press.gif",
+    "description": "Seduto con i manubri davanti al viso (palmi rivolti verso di te). Spingi verso l'alto ruotando i polsi all'esterno fino a distendere le braccia (palmi in avanti).",
+    "biomechanics": "Aumenta il tempo sotto tensione del deltoide anteriore e laterale grazie alla rotazione obbligata dell'omero durante la spinta.",
+    "tips": "Esegui la rotazione fluida mentre spingi, senza spezzare l'esercizio in due tempi diversi."
+  },
+  {
+    "name": "Shoulder press macchina",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Shoulder-Press.gif",
+    "description": "Seduto al macchinario isotonico di spinta verticale, afferra le maniglie e spingi verso l'alto.",
+    "biomechanics": "Tensione costante fornita dai leveraggi del macchinario senza dover stabilizzare il peso libero. Eccellente per serie ad alte ripetizioni.",
+    "tips": "Regola il sedile in modo che i gomiti non scendano eccessivamente sotto la linea delle spalle all'inizio della ripetizione."
+  },
+  {
+    "name": "Alzate laterali manubri",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif",
+    "description": "In piedi o seduto, solleva i manubri lateralmente fino all'altezza delle spalle, tenendo una lievissima flessione del gomito, poi scendi controllando.",
+    "biomechanics": "Isolamento del deltoide laterale (larghezza visiva delle spalle). Il carico sui muscoli aumenta man mano che le braccia salgono.",
+    "tips": "Pensa a spingere i manubri 'lontano' dal corpo verso i lati, non semplicemente 'in alto' verso il soffitto."
+  },
+  {
+    "name": "Alzate laterali strict",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif",
+    "description": "Alzate laterali eseguite senza alcun movimento del busto o delle ginocchia. Solitamente fatte da seduti o appoggiando il petto su una panca.",
+    "biomechanics": "Elimina totalmente il cheating inerziale. Costringe le fibre del deltoide laterale a sobbarcarsi il 100% dello sforzo muscolare.",
+    "tips": "Dato l'isolamento puro, usa un carico leggero e concentrati sul bruciore muscolare."
+  },
+  {
+    "name": "Alzate laterali cheating",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif",
+    "description": "Alzate laterali in cui si usa una spinta controllata di gambe/busto per superare lo sticking point iniziale (quando i pesi sono in basso).",
+    "biomechanics": "Permette di usare carichi più pesanti. Se la fase eccentrica (discesa) viene rallentata, genera un grosso stimolo ipertrofico strutturale.",
+    "tips": "Usa lo slancio solo per salire, ma frena e trattieni la discesa del manubrio con la forza delle spalle."
+  },
+  {
+    "name": "Alzate laterali con fermo",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif",
+    "description": "Solleva i manubri lateralmente e blocca la posizione per 1-2 secondi nel punto più alto (parallelo al suolo) prima di scendere.",
+    "biomechanics": "Annulla il rimbalzo e massimizza la contrazione di picco nel punto dove la gravità esercita la leva più sfavorevole per il muscolo.",
+    "tips": "Se non riesci a tenere la sosta senza far crollare le braccia, il peso è troppo alto."
+  },
+  {
+    "name": "Alzate laterali 1.5 reps",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lateral-Raise.gif",
+    "description": "Sali fino in cima, scendi fino a metà, risali in cima e poi scendi fino in fondo. Questa sequenza conta come una singola ripetizione.",
+    "biomechanics": "Raddoppia il tempo sotto tensione nel punto di massima contrazione del deltoide, inducendo forte stress metabolico (bruciore).",
+    "tips": "Mantieni un movimento fluido, non strattonare a metà raggio."
+  },
+  {
+    "name": "Alzate laterali ai cavi",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Lateral-Raise.gif",
+    "description": "Afferra la maniglia di un cavo basso e solleva lateralmente il braccio fino all'altezza della spalla.",
+    "biomechanics": "Il cavo offre tensione continua. A differenza del manubrio (che in basso non pesa nulla), il cavo tira la spalla anche all'inizio del movimento.",
+    "tips": "Posiziona la carrucola all'altezza del tuo ginocchio per avere la tensione migliore nel punto di partenza."
+  },
+  {
+    "name": "Alzate laterali dietro schiena cavo",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Cable-Behind-The-Back-Lateral-Raise.gif",
+    "description": "Dando le spalle alla carrucola, fai passare il cavo dietro la tua schiena e sollevalo lateralmente.",
+    "biomechanics": "Mette il deltoide laterale in uno stato di massimo allungamento iniziale che non è possibile replicare con i manubri.",
+    "tips": "Tieni il corpo inclinato leggermente verso la direzione del cavo per enfatizzare lo stiramento iniziale."
+  },
+  {
+    "name": "Alzate frontali bilanciere",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Front-Raise.gif",
+    "description": "In piedi, solleva il bilanciere davanti a te a braccia semitese fino all'altezza degli occhi.",
+    "biomechanics": "Isolamento del deltoide anteriore (parte frontale della spalla). Gli avambracci lavorano per stabilizzare la presa.",
+    "tips": "Non dondolare indietro col busto per darti lo slancio iniziale."
+  },
+  {
+    "name": "Alzate frontali manubri",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Front-Raise.gif",
+    "description": "In piedi, solleva un manubrio alla volta (o alternati) davanti al viso fino all'altezza degli occhi.",
+    "biomechanics": "Consente una traiettoria più neutra per i polsi e limita il compenso della schiena lombare.",
+    "tips": "Puoi ruotare il palmo verso l'interno (presa a martello) se la presa classica ti dà fastidio all'articolazione."
+  },
+  {
+    "name": "Alzate frontali ai cavi",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/03/Cable-Front-Raise.gif",
+    "description": "Di spalle al cavo basso, afferra la corda o la sbarra passandola tra le gambe e solleva frontalmente.",
+    "biomechanics": "Tensione costante tipica del cavo che stimola le fibre del deltoide anteriore in allungamento iniziale.",
+    "tips": "Fai un passo in avanti rispetto alla carrucola per tendere il cavo già dall'inizio del movimento."
+  },
+  {
+    "name": "Alzate posteriori manubri",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Rear-Lateral-Raise.gif",
+    "description": "Busto inclinato in avanti a 45° (o parallelo a terra). Solleva i manubri verso l'esterno/dietro aprendo le braccia.",
+    "biomechanics": "Isolamento del deltoide posteriore (la parte posteriore della 'palla' della spalla). Lavora anche il trapezio.",
+    "tips": "Pensa a buttare i manubri all'infuori, non tirarli verso l'alto con le braccia come se fosse un rematore."
+  },
+  {
+    "name": "Alzate posteriori su panca inclinata",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Rear-Lateral-Raise.gif",
+    "description": "Sdraiati prono con il petto appoggiato su una panca inclinata a 30-45°. Solleva i manubri lateralmente e all'indietro.",
+    "biomechanics": "Rimuove l'affaticamento della bassa schiena, permettendo di focalizzare l'attenzione sul deltoide posteriore.",
+    "tips": "Non staccare lo sterno dalla panca per aiutarti a darti lo slancio."
+  },
+  {
+    "name": "Reverse fly macchina",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rear-Delt-Machine-Fly.gif",
+    "description": "Seduto con il petto contro il cuscino della macchina fly (pec deck al contrario), spingi le leve all'indietro.",
+    "biomechanics": "Isolamento meccanico perfetto del deltoide posteriore, escludendo carichi inutili sulla colonna lombare.",
+    "tips": "Mantieni le spalle abbassate (depresse). Se alzi le spalle coinvolgerai troppo il trapezio superiore."
+  },
+  {
+    "name": "Reverse fly ai cavi",
+    "group": "Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Rear-Delt-Fly.gif",
+    "description": "In piedi tra due cavi alti, incrocia le mani afferrando il cavo opposto senza maniglie (afferrando la pallina del cavo) e apri le braccia all'indietro.",
+    "biomechanics": "L'incrocio dei cavi offre un profilo di tensione molto uniforme sul deltoide posteriore senza punti morti.",
+    "tips": "Tieni le braccia quasi tese per tutto l'arco del movimento e stringi la schiena alta in chiusura."
+  },
+  {
+    "name": "Tirate al mento bilanciere",
+    "group": "Spalle / Trapezi",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Upright-Row.gif",
+    "description": "In piedi, afferra il bilanciere con presa prona stretta e tiralo verticalmente vicino al corpo fino al mento alzando i gomiti.",
+    "biomechanics": "Lavoro sinergico di deltoide laterale e trapezio superiore. Attenzione allo spazio subacromiale.",
+    "tips": "Se avverti fitte o dolore alle spalle, allarga la presa o sostituisci l'esercizio con i manubri o alzate laterali."
+  },
+  {
+    "name": "Tirate al mento manubri",
+    "group": "Spalle / Trapezi",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Upright-Row.gif",
+    "description": "Tira i manubri verso il mento tenendoli vicini al corpo, guidando il movimento con l'altezza dei gomiti.",
+    "biomechanics": "Rispetto al bilanciere, i manubri consentono una libertà di movimento naturale del polso e della spalla che previene gli impigments.",
+    "tips": "Non salire oltre la linea dello sterno alto/clavicola se senti fastidio alle spalle."
+  },
+  {
+    "name": "Face pull alto",
+    "group": "Spalle / Trapezi",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Face-Pull.gif",
+    "description": "Posiziona la carrucola alta. Tira la corda verso la fronte aprendo le mani e ruotando l'omero all'indietro.",
+    "biomechanics": "Coinvolge deltoide posteriore, trapezi medi e rotatori della cuffia. Esercizio cardine per la salute posturale.",
+    "tips": "I gomiti devono rimanere alti per tutta la durata del movimento di tirata."
+  },
+  {
+    "name": "Cuban press",
+    "group": "Spalle / Cuffia",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/cuban-press.gif",
+    "description": "Esegui una tirata al mento, ruota i manubri verso l'alto (extrarotazione) e spingili sopra la testa.",
+    "biomechanics": "Esercizio complesso posturale. Unisce tirata, rotazione e spinta sollecitando deltoidi e muscoli della cuffia.",
+    "tips": "Esercizio tecnico, usa un carico molto basso. Non è un esercizio di forza pura ma di salute articolare."
+  },
+  {
+    "name": "Handstand push-up",
+    "group": "Spalle / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Handstand-push-up.gif",
+    "description": "Piegamenti in verticale capovolta (libera o poggiata al muro). Abbassa la testa verso il pavimento piegando i gomiti e rispingi.",
+    "biomechanics": "Multiarticolare a corpo libero calistenico avanzato. Carico di spinta altissimo sulle spalle.",
+    "tips": "Se perdi l'equilibrio o la forza cede improvvisamente, impara a scendere di lato per sicurezza."
+  },
+  {
+    "name": "Pike push-up",
+    "group": "Spalle / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Pike-Push-up.gif",
+    "description": "Posizione a 'V' invertita con mani e piedi a terra (bacino in alto). Esegui piegamenti portando la testa in avanti rispetto alle mani.",
+    "biomechanics": "Propedeutico eccellente per l'Handstand push-up. Sposta la spinta orizzontale dei classici push-up sul piano verticale della spalla.",
+    "tips": "La testa deve scendere formando un triangolo immaginario con le mani, non scendere in mezzo ad esse."
+  },
+  {
+    "name": "Curl bilanciere",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Curl.gif",
+    "description": "In piedi, afferra il bilanciere dritto con palmi in avanti (larghezza spalle). Fletti i gomiti portando il bilanciere verso le spalle senza muovere il busto.",
+    "biomechanics": "Esercizio fondamentale per la massa dei bicipiti. Il bilanciere dritto costringe l'avambraccio alla massima supinazione, attivando fortemente il bicipite brachiale.",
+    "tips": "Tieni i gomiti incollati ai fianchi. Non oscillare con la schiena per darti lo slancio iniziale."
+  },
+  {
+    "name": "Curl bilanciere presa stretta",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Curl.gif",
+    "description": "In piedi, afferra il bilanciere con le mani più strette rispetto alla larghezza delle spalle. Esegui la flessione del gomito.",
+    "biomechanics": "La presa stretta sposta leggermente lo stimolo ipertrofico sul capo lungo del bicipite (la porzione esterna che dà il 'picco').",
+    "tips": "Fai attenzione alla tensione sui polsi; se senti fastidio alle articolazioni, allarga la presa o usa un bilanciere EZ."
+  },
+  {
+    "name": "Curl bilanciere presa larga",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Curl.gif",
+    "description": "In piedi, afferra il bilanciere con le mani poste molto più larghe rispetto alle spalle. Esegui la flessione del gomito.",
+    "biomechanics": "La presa larga sposta lo stimolo ipertrofico sul capo breve del bicipite (la porzione interna, che dà spessore frontale).",
+    "tips": "Non allargare i gomiti all'infuori durante la salita; tienili comunque vicini alle costole."
+  },
+  {
+    "name": "Curl manubri alternato",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Alternating-Dumbbell-Curl.gif",
+    "description": "In piedi con i manubri lungo i fianchi. Solleva un manubrio alla volta ruotando il palmo verso l'alto durante la salita (supinazione).",
+    "biomechanics": "L'alternanza permette di concentrarsi sul collegamento mente-muscolo di un braccio alla volta e riduce l'affaticamento sistemico.",
+    "tips": "Inizia la rotazione del polso non appena il manubrio supera la linea della coscia per il massimo reclutamento."
+  },
+  {
+    "name": "Curl manubri simultaneo",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Curl.gif",
+    "description": "In piedi con i manubri lungo i fianchi. Solleva contemporaneamente entrambi i manubri ruotando i palmi verso l'alto (supinazione).",
+    "biomechanics": "Richiede una maggiore attivazione del core per stabilizzare il corpo dal peso sbilanciato in avanti e dimezza il tempo della serie.",
+    "tips": "Se noti che la schiena si inarca all'indietro per aiutarti, significa che il peso è eccessivo."
+  },
+  {
+    "name": "Curl su panca inclinata",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Dumbbell-Curl.gif",
+    "description": "Seduto su panca inclinata a 45-60°. Lascia penzolare le braccia all'indietro e fletti i gomiti portando i manubri verso l'alto.",
+    "biomechanics": "Mette il bicipite in uno stato di pre-stiramento eccezionale (omero dietro il busto). Isola il capo lungo del bicipite e crea forte danno tissutale ipertrofico.",
+    "tips": "Tieni i gomiti fermi puntati verso il pavimento. Non portarli in avanti mentre sollevi il manubrio."
+  },
+  {
+    "name": "Curl concentrato",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Concentration-Curl.gif",
+    "description": "Seduto sul bordo della panca, fletti il busto in avanti e poggia il retro del braccio contro l'interno coscia. Solleva il manubrio.",
+    "biomechanics": "Esercizio di puro isolamento. Il blocco del braccio contro la coscia elimina totalmente l'aiuto della spalla anteriore e l'inerzia.",
+    "tips": "Spremi forte il bicipite nel punto più alto del movimento per massimizzare la contrazione di picco."
+  },
+  {
+    "name": "Curl hammer",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Hammer-Curl.gif",
+    "description": "In piedi, solleva i manubri mantenendo la presa neutra (i palmi si guardano tra loro) per tutta la durata della ripetizione.",
+    "biomechanics": "Sposta lo stimolo dal bicipite brachiale al muscolo brachiale e brachioradiale (avambraccio), donando spessore laterale al braccio.",
+    "tips": "Ottimo per sviluppare la forza della presa e l'estetica dell'avambraccio."
+  },
+  {
+    "name": "Curl hammer alternato",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Alternating-Hammer-Curl.gif",
+    "description": "Alzate a martello (presa neutra) sollevando un braccio alla volta in alternanza fluida.",
+    "biomechanics": "Permette di utilizzare carichi più pesanti controllando meglio l'inerzia del tronco rispetto alla versione simultanea.",
+    "tips": "Non far oscillare il corpo. La discesa deve essere controllata tanto quanto la salita."
+  },
+  {
+    "name": "Curl hammer cross-body",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Dumbbell-Cross-Body-Hammer-Curl.gif",
+    "description": "Curl a martello in cui sollevi il manubrio portandolo diagonalmente verso la spalla opposta (davanti al petto).",
+    "biomechanics": "Isola prepotentemente il muscolo brachioradiale e il capo lungo del bicipite grazie all'adduzione del braccio.",
+    "tips": "Sfiora il petto con il manubrio senza appoggiarlo per mantenere costante la tensione."
+  },
+  {
+    "name": "Curl al cavo basso",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Curl.gif",
+    "description": "In piedi davanti alla carrucola bassa con la sbarra dritta. Fletti i gomiti tirando il cavo verso il petto.",
+    "biomechanics": "Tensione costante tipica del cavo: il bicipite è sotto sforzo sia in allungamento (in basso) che in accorciamento (in alto).",
+    "tips": "Fai un passo indietro dal macchinario per far sì che il cavo sia già teso fin dal punto di partenza."
+  },
+  {
+    "name": "Curl al cavo corda",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rope-Hammer-Curl.gif",
+    "description": "Afferra l'accessorio corda al cavo basso con presa neutra. Esegui la flessione allontanando le estremità della corda in alto.",
+    "biomechanics": "Fonde i benefici della presa a martello (brachiale) con l'accorciamento finale del bicipite se le mani si allontanano in cima.",
+    "tips": "Apri la corda verso l'esterno quando arrivi in alto per strizzare la cima del bicipite."
+  },
+  {
+    "name": "Curl al cavo unilaterale",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Single-Arm-Cable-Curl.gif",
+    "description": "Esegui il curl al cavo basso usando una singola maniglia alla volta, tenendo il corpo stabile.",
+    "biomechanics": "Consente di trovare l'allineamento perfetto tra cavo, spalla e gomito, azzerando le asimmetrie di forza.",
+    "tips": "Poggia la mano libera sul fianco o sul macchinario per non oscillare con la spalla."
+  },
+  {
+    "name": "Curl con barra EZ",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Z-Bar-Curl.gif",
+    "description": "Fletti i gomiti usando il bilanciere sagomato EZ. Le mani si trovano in una posizione di semi-supinazione.",
+    "biomechanics": "Salvaguarda le articolazioni del polso e del gomito, permettendo di caricare pesi alti senza dolori articolari tipici del bilanciere dritto.",
+    "tips": "È la scelta migliore se soffri di epitrocleite (gomito del golfista) o dolori cronici all'avambraccio."
+  },
+  {
+    "name": "Curl spider",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Spider-Curl.gif",
+    "description": "Sdraiati prono (pancia in giù) su panca inclinata a 30-45° gradi. Lascia penzolare le braccia in avanti e fletti i gomiti verso il viso.",
+    "biomechanics": "Esercizio in cui l'omero si trova davanti al corpo. Massimizza la tensione nel punto di accorciamento finale (cima del bicipite).",
+    "tips": "Non dondolare le braccia per inerzia. La salita deve essere lenta e controllata."
+  },
+  {
+    "name": "Curl inverso bilanciere",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Reverse-Barbell-Curl.gif",
+    "description": "Afferra il bilanciere con presa prona (nocche verso l'alto). Fletti i gomiti portando la sbarra verso le spalle.",
+    "biomechanics": "Mette il bicipite in una posizione di svantaggio meccanico obbligando il muscolo brachioradiale (avambraccio) a sobbarcarsi il lavoro.",
+    "tips": "Se il bilanciere dritto fa male ai polsi, esegui la stessa variante prona sul bilanciere sagomato EZ."
+  },
+  {
+    "name": "Curl inverso manubri",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Reverse-Dumbbell-Curl.gif",
+    "description": "Solleva i manubri tenendo la presa prona (palmi verso il basso) per tutta la ripetizione.",
+    "biomechanics": "Variante eccellente per lo spessore dell'avambraccio e per la salute tendinea del gomito esterno.",
+    "tips": "Richiede carichi più leggeri del curl classico, stringi forte i manubri per non perderli."
+  },
+  {
+    "name": "Curl su panca Scott",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Preacher-Curl.gif",
+    "description": "Siediti alla panca Scott (Preacher curl), poggia le ascelle contro il cuscino e fletti il bilanciere verso la fronte.",
+    "biomechanics": "Rimuove completamente la spalla dal movimento. La tensione nel punto di massimo allungamento (in basso) è violentemente ipertrofica.",
+    "tips": "Non estendere mai bruscamente i gomiti a fine discesa per evitare pericolosi strappi tendinei del bicipite distale."
+  },
+  {
+    "name": "Curl Scott manubri",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Preacher-Curl.gif",
+    "description": "Curl eseguito sulla panca Scott utilizzando un manubrio alla volta in isolamento unilaterale.",
+    "biomechanics": "Permette di allineare liberamente la spalla e il gomito, correggendo scompensi di simmetria tra braccio destro e sinistro.",
+    "tips": "Usa la mano libera per stabilizzare il corpo sulla panca durante la risalita del carico."
+  },
+  {
+    "name": "Curl Scott macchina",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lever-Preacher-Curl.gif",
+    "description": "Variante isotonica al macchinario della panca Scott. Poggia le braccia e tira le maniglie.",
+    "biomechanics": "Tensione costante guidata dal macchinario. Risolve il problema del bilanciere libero alla Scott (dove in cima perdi tensione).",
+    "tips": "Seleziona un peso che ti permetta di fare un fermo di mezzo secondo in alto per spremere le fibre."
+  },
+  {
+    "name": "Curl ai cavi sopra testa",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Overhead-Cable-Curl.gif",
+    "description": "In piedi tra due carrucole alte. Afferra le maniglie e fletti i gomiti portandoli verso le orecchie, contraendo il bicipite (posa bodybuilding).",
+    "biomechanics": "Allena il bicipite con l'omero abdotto ed elevato sopra le spalle, inducendo contrazioni di picco potentissime e sfinimento metabolico.",
+    "tips": "Non abbassare i gomiti durante la flessione; mantienili fissi in linea con le orecchie."
+  },
+  {
+    "name": "Bayesian curl",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bayesian-Curl.gif",
+    "description": "Di spalle al cavo basso, fai un passo in avanti lasciando il braccio teso dietro il busto. Fletti il gomito portando la maniglia in avanti.",
+    "biomechanics": "Forse l'esercizio con i cavi che offre il massimo stiramento del bicipite (eccentrica allungata), ottimo per lo stimolo ipertrofico strutturale.",
+    "tips": "Inclina leggermente il busto in avanti per favorire l'allineamento della spalla."
+  },
+  {
+    "name": "Curl 21",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Curl.gif",
+    "description": "Tecnica d'intensità col bilanciere: 7 ripetizioni dal basso fino a metà, 7 da metà fino in cima e 7 a raggio completo.",
+    "biomechanics": "Crea una congestione sanguigna e un ristagno di acido lattico pazzesco (stress metabolico estremo).",
+    "tips": "Dato il volume della serie singola (21 reps), usa un peso molto basso o cederai a metà del protocollo."
+  },
+  {
+    "name": "Curl isometrico",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Curl.gif",
+    "description": "Fletti il gomito e mantieni la posizione statica immobile (solitamente a 90° gradi) contro una resistenza.",
+    "biomechanics": "Rinforza i tendini e migliora la propriocezione neuromuscolare del bicipite senza logoramento articolare dinamico.",
+    "tips": "Cerca di non trattenere il respiro (apnea) durante la tenuta statica del muscolo."
+  },
+  {
+    "name": "Curl con fermo in allungamento",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Incline-Dumbbell-Curl.gif",
+    "description": "Quando il braccio si trova nella massima distensione in basso, fermati per 2 secondi prima di contrarre risalendo.",
+    "biomechanics": "Elimina l'accumulo di energia elastica connettivale, forzando la ripartenza puramente muscolare dal punto più svantaggioso.",
+    "tips": "Ottimo da applicare al curl su panca inclinata per massimizzare la ipertrofia da allungamento."
+  },
+  {
+    "name": "Curl con fermo in contrazione",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Curl.gif",
+    "description": "Nella parte superiore del curl (massima chiusura), blocca il peso per 2 secondi strizzando volontariamente il bicipite.",
+    "biomechanics": "Migliora la connessione mente-muscolo reclutando le unità motorie più restie e svuotando i depositi energetici locali.",
+    "tips": "Concentrati sul sentire il bicipite duro come una roccia durante il fermo."
+  },
+  {
+    "name": "Drag curl",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Dumbbell-Drag-Curl.gif",
+    "description": "Solleva il bilanciere o i manubri facendoli strisciare verticalmente attaccati al busto e portando i gomiti all'indietro.",
+    "biomechanics": "Rimuove totalmente l'attivazione della spalla anteriore, isolando il bicipite (specialmente il picco esterno).",
+    "tips": "Non salire tanto in alto da flettere la spalla. Il raggio di movimento è più corto di un curl classico."
+  },
+  {
+    "name": "Zottman curl",
+    "group": "Bicipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Zottman-Curl.gif",
+    "description": "Sali con un curl classico con palmi verso l'alto. In cima ruota i polsi verso il basso e scendi eccentricamente con palmi proni.",
+    "biomechanics": "Esercizio geniale: sali forte sfruttando il bicipite, scendi frenando il carico con il muscolo dell'avambraccio (brachioradiale).",
+    "tips": "Fai la rotazione dei polsi in modo netto e controllato quando arrivi alla massima contrazione in alto."
+  },
+  {
+    "name": "Pushdown cavo",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pushdown.gif",
+    "description": "In piedi davanti alla carrucola alta, afferra l'impugnatura e spingi verso il basso estendendo completamente i gomiti.",
+    "biomechanics": "Isolamento puro dei tricipiti (specialmente i capi monoarticolari laterale e mediale). Il cavo garantisce tensione costante.",
+    "tips": "Tieni i gomiti incollati ai fianchi e non usare il peso del corpo per 'schiacciare' la sbarra verso il basso."
+  },
+  {
+    "name": "Pushdown corda",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Rope-Pushdown.gif",
+    "description": "Spingi l'accessorio corda verso il basso. Nella parte finale del movimento, allontana le due estremità della corda verso l'esterno.",
+    "biomechanics": "Consente di raggiungere la massima contrazione di picco accorciando attivamente il tricipite grazie all'intrarotazione dell'omero.",
+    "tips": "Apri la corda verso l'esterno alla fine della discesa per 'strizzare' il muscolo."
+  },
+  {
+    "name": "Pushdown barra dritta",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pushdown.gif",
+    "description": "Spingi verso il basso una sbarra dritta rigida attaccata al cavo alto.",
+    "biomechanics": "Permette di utilizzare carichi leggermente più alti rispetto alla corda grazie alla presa rigida e stabile.",
+    "tips": "Se avverti fastidio ai polsi, prova a usare una sbarra a V (angolata) per una presa più naturale."
+  },
+  {
+    "name": "Pushdown inverso",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Reverse-Grip-Pushdown.gif",
+    "description": "Esegui il pushdown afferrando la sbarra con una presa supina (palmi rivolti verso l'alto).",
+    "biomechanics": "Sposta l'enfasi sul capo mediale del tricipite. La presa supina riduce la forza di presa globale della mano.",
+    "tips": "Usa carichi più leggeri rispetto al pushdown classico prono per non perdere la presa della sbarra."
+  },
+  {
+    "name": "French press bilanciere",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/French-Press.gif",
+    "description": "Sdraiato su panca, braccia tese verso l'alto. Fletti solo i gomiti portando il bilanciere verso la fronte e rispingi.",
+    "biomechanics": "L'omero a 90° rispetto al busto mette in tensione il capo lungo del tricipite, oltre ai capi laterale e mediale.",
+    "tips": "Non allargare i gomiti verso l'esterno durante la discesa; mantienili paralleli tra loro."
+  },
+  {
+    "name": "French press manubri",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-French-Press.gif",
+    "description": "Esecuzione della French press su panca piana utilizzando i manubri con presa neutra (palmi che si guardano).",
+    "biomechanics": "La presa neutra è molto più sicura per i gomiti e i polsi rispetto alla sbarra dritta, correggendo scompensi bilaterali.",
+    "tips": "Porta i manubri leggermente oltre la linea della testa per mantenere la tensione costante anche in alto."
+  },
+  {
+    "name": "French press EZ",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/French-Press.gif",
+    "description": "French press eseguita utilizzando il bilanciere sagomato EZ.",
+    "biomechanics": "La sagomatura del bilanciere EZ pone i polsi in una posizione di semi-pronazione naturale, salvaguardando l'articolazione.",
+    "tips": "È la variante con bilanciere consigliata se soffri di fastidi cronici ai gomiti."
+  },
+  {
+    "name": "Estensioni sopra testa manubrio",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Overhead-Triceps-Extension.gif",
+    "description": "Seduto o in piedi, afferra un manubrio con due mani sopra la testa. Fletti i gomiti portando il peso dietro la nuca e rispingi.",
+    "biomechanics": "Con il braccio elevato sopra la testa, il capo lungo del tricipite viene stirato al massimo livello possibile (ipertrofia da allungamento).",
+    "tips": "Tieni gli addominali tesi per non inarcare la schiena lombare per compensare la discesa del peso."
+  },
+  {
+    "name": "Estensioni sopra testa cavo",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Overhead-Triceps-Extension.gif",
+    "description": "Di spalle alla carrucola (alta o bassa), afferra la corda e fletti/estendi i gomiti sopra la testa.",
+    "biomechanics": "Tensione continua del cavo applicata al capo lungo del tricipite in massimo allungamento.",
+    "tips": "Posiziona i piedi sfalsati per avere stabilità d'appoggio mentre il cavo ti tira all'indietro."
+  },
+  {
+    "name": "Estensioni sopra testa bilanciere",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Overhead-Triceps-Extension.gif",
+    "description": "In piedi o seduto, fletti il bilanciere dietro la nuca mantenendo le braccia verticali.",
+    "biomechanics": "Esercizio multiarticolare pesante che richiede ottima mobilità di spalla per non sforzare la colonna.",
+    "tips": "Si consiglia l'uso di un bilanciere EZ per non stressare i polsi in questa posizione verticale."
+  },
+  {
+    "name": "Dips tricipiti",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Dips.gif",
+    "description": "Sospeso alle barre parallele, mantieni il busto perfettamente verticale. Scendi flettendo i gomiti stretti vicino al corpo.",
+    "biomechanics": "Esercizio calistenico fondamentale di spinta verticale. Rispetto alla versione petto, il busto dritto isola i tricipiti.",
+    "tips": "Non scendere eccessivamente oltre i 90° del gomito per non stirare eccessivamente la capsula anteriore della spalla."
+  },
+  {
+    "name": "Dips zavorrate",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Triceps-Dips.gif",
+    "description": "Esecuzione dei dips alle parallele verticali utilizzando un giubbotto zavorrato o dischi appesi alla cintura.",
+    "biomechanics": "Sovraccarico progressivo brutale sulle fibre rapide dei tricipiti per lo sviluppo della forza pura e dello spessore.",
+    "tips": "Fai un riscaldamento impeccabile a corpo libero e ai cavi prima di applicare la zavorra."
+  },
+  {
+    "name": "Panca presa stretta",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Close-Grip-Bench-Press.gif",
+    "description": "Sdraiato su panca, afferra il bilanciere con le mani a larghezza spalle. Scendi tenendo i gomiti vicini alle costole e rispingi.",
+    "biomechanics": "L'esercizio di spinta multiarticolare con bilanciere che permette di caricare più peso in assoluto per i tricipiti.",
+    "tips": "Non stringere le mani più del raggio delle tue spalle; faresti solo del male ai polsi senza attivare di più il tricipite."
+  },
+  {
+    "name": "Kickback manubrio",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Kickback.gif",
+    "description": "Busto flesso in avanti (poggiato su panca). Gomito alto allineato al busto; estendi l'avambraccio all'indietro.",
+    "biomechanics": "L'unico esercizio con pesi liberi dove la gravità agisce nel punto di massimo accorciamento (braccio teso dietro).",
+    "tips": "Fermati un secondo a braccio teso dietro per spremere la contrazione di picco. Non oscillare la spalla."
+  },
+  {
+    "name": "Kickback cavo",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Kickback.gif",
+    "description": "Busto flesso in avanti davanti alla carrucola. Estendi il braccio all'indietro tirando il cavo.",
+    "biomechanics": "Migliora il kickback con manubrio perché il cavo offre tensione continua anche all'inizio del movimento (in basso).",
+    "tips": "Tieni il braccio (omero) immobile e parallelo al pavimento. Solo l'avambraccio deve muoversi."
+  },
+  {
+    "name": "Estensioni al cavo basso",
+    "group": "Tricipiti",
+    "gif": "",
+    "description": "Sdraiato su panca davanti a un cavo basso (o in piedi rivolto verso il cavo). Fletti ed estendi i gomiti.",
+    "biomechanics": "Mantiene una tensione angolata differente dal pushdown classico fornendo uno stimolo biomeccanico di variazione.",
+    "tips": "Mantenere i gomiti rigidi e fissati nello spazio per non rubare tensione con i dorsali."
+  },
+  {
+    "name": "Estensioni unilaterali cavo",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Single-Arm-Pushdown.gif",
+    "description": "Pushdown eseguito con una maniglia singola azionando un solo braccio alla volta.",
+    "biomechanics": "Elimina le asimmetrie di forza tra il braccio destro e quello sinistro. Altissimo collegamento mente-muscolo.",
+    "tips": "Usa la mano libera per stabilizzare il tronco o monitorare la contrazione del tricipite che lavora."
+  },
+  {
+    "name": "Skull crusher",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Skullcrusher.gif",
+    "description": "Sdraiato su panca. Abbassa il bilanciere EZ verso la fronte (o dietro la testa) flettendo solo i gomiti, poi estendi esplosivo.",
+    "biomechanics": "Simile alla French Press, ma la traiettoria porta il bilanciere letteralmente a 'sfiorare la fronte' (da qui il nome macabro).",
+    "tips": "Se lo porti leggermente oltre la testa (e non sulla fronte) salvi i tendini del gomito dall'infiammazione cronica."
+  },
+  {
+    "name": "JM press",
+    "group": "Tricipiti",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/01/JM-Press.gif",
+    "description": "Un ibrido tra panca stretta e skull crusher. Abbassa il bilanciere dritto puntando i gomiti in avanti/basso verso il collo.",
+    "biomechanics": "Esercizio di potenza inventato nel powerlifting. Sposta un carico massimale sul tendine del tricipite in allungamento.",
+    "tips": "Esercizio avanzato e pesante. Da fare solo se i gomiti sono caldi e sani."
+  },
+  {
+    "name": "Squat bilanciere",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Squat.gif",
+    "description": "Bilanciere poggiato sui trapezi. Scendi flettendo contemporaneamente anche e ginocchia finché le cosce sono parallele al pavimento (o oltre), poi risali.",
+    "biomechanics": "Il re degli esercizi per le gambe. Coinvolge quadricipiti, glutei, adduttori e l'intera catena cinetica posteriore e core.",
+    "tips": "Mantieni il peso distribuito su tutto il piede (non solo sulle punte) e spingi le ginocchia verso l'esterno assecondando la punta dei piedi."
+  },
+  {
+    "name": "Front squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Front-Squat.gif",
+    "description": "Bilanciere poggiato sulla parte anteriore delle spalle (clavicole/deltoidi). Scendi mantenendo il busto il più verticale possibile.",
+    "biomechanics": "Sposta massicciamente il baricentro in avanti isolando i quadricipiti e riducendo lo stress di taglio sulla bassa schiena.",
+    "tips": "Tieni i gomiti alti durante tutta la discesa. Se i gomiti cadono in avanti, il bilanciere scivolerà via dalle spalle."
+  },
+  {
+    "name": "Zercher squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/06/Zercher-Squat.gif",
+    "description": "Squat tenendo il bilanciere incastrato nell'incavo dei gomiti flessi davanti al petto.",
+    "biomechanics": "Richiede una mostruosa attivazione del core, dei bicipiti e dell'alta schiena per sorreggere il peso, oltre a colpire i quadricipiti.",
+    "tips": "Usa un'imbottitura sul bilanciere o indossa una felpa spessa per proteggere la pelle dell'incavo del gomito."
+  },
+  {
+    "name": "Box squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Box-Squat.gif",
+    "description": "Esegui lo squat sedendoti attivamente su un box/panca dietro di te. Fai una breve pausa statica e risali esplosivo.",
+    "biomechanics": "Elimina totalmente il riflesso elastico (rimbalzo) in basso, costringendo i glutei e i femorali a generare forza dal punto morto.",
+    "tips": "Quando tocchi il box non 'rilassarti' lasciando andare la tensione muscolare, poggia il sedere mantenendo il core duro."
+  },
+  {
+    "name": "Pause squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Squat.gif",
+    "description": "Squat classico ma con un fermo immobile di 2-3 secondi nella posizione più bassa (buca) prima di risalire.",
+    "biomechanics": "Aumenta il tempo sotto tensione nel punto di massimo allungamento. Ottimo per correggere la postura e la forza di partenza.",
+    "tips": "Non perdere la compattezza della schiena durante la pausa in basso per evitare carichi compressivi pericolosi sulla colonna."
+  },
+  {
+    "name": "Tempo squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Squat.gif",
+    "description": "Squat eseguito imponendo un tempo di discesa lentissimo (es. 4-5 secondi) e una salita esplosiva.",
+    "biomechanics": "Il tempo eccentrico rallentato distrugge le fibre muscolari dei quadricipiti stimolando microlesioni ipertrofiche strutturali profonde.",
+    "tips": "Conta i secondi a mente per non barare e velocizzare la discesa quando la fatica inizia a farsi sentire."
+  },
+  {
+    "name": "Goblet squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Goblet-Squat.gif",
+    "description": "Afferra un manubrio o una kettlebell al petto con due mani. Scendi incastrando i gomiti all'interno delle ginocchia.",
+    "biomechanics": "Perfetto esercizio di introduzione allo squat. Il peso davanti fa da contrappeso permettendo di scendere molto profondi con la schiena dritta.",
+    "tips": "Sfrutta i gomiti in basso per spingere leggermente le ginocchia all'infuori e aprire le anche."
+  },
+  {
+    "name": "Hack squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hack-Squat.gif",
+    "description": "Squat eseguito al macchinario apposito con schienale inclinato, spingendo la pedana scorrevole verso l'alto.",
+    "biomechanics": "Rimuove totalmente la necessità di stabilizzare il busto, permettendo un isolamento ipertrofico devastante sui quadricipiti.",
+    "tips": "Posiziona i piedi più in basso sulla pedana per dare massima enfasi ai quadricipiti (purché la mobilità di caviglia lo consenta)."
+  },
+  {
+    "name": "Belt squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/01/Belt-Squat.gif",
+    "description": "Squat eseguito agganciando il carico a una cintura speciale legata alla vita (collegata a pulegge o macchinari).",
+    "biomechanics": "Scarica il 100% del peso dalla colonna vertebrale e lo scarica direttamente sul bacino. Ideale per chi ha ernie o problemi lombari.",
+    "tips": "Puoi aggrapparti alle maniglie del macchinario per migliorare l'equilibrio e forzare le ripetizioni finali."
+  },
+  {
+    "name": "Leg press",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Press.gif",
+    "description": "Seduto sul macchinario (inclinato a 45° o orizzontale), sblocca le sicure e spingi la pedana estendendo le ginocchia senza bloccarle.",
+    "biomechanics": "Elimina la debolezza del core e permette di spingere carichi altissimi cedendo esclusivamente con i muscoli delle gambe.",
+    "tips": "Non poggiare le mani sulle ginocchia per spingere. Non staccare mai i glutei e la bassa schiena dal sedile durante la discesa."
+  },
+  {
+    "name": "Leg press unilaterale",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Single-Leg-Press.gif",
+    "description": "Esecuzione della pressa spingendo la pedana utilizzando un solo piede per volta.",
+    "biomechanics": "Risolve scompensi di forza tra le due gambe e permette di raggiungere un ROM più profondo senza curvare la schiena bassa.",
+    "tips": "Poggia il piede libero a terra fuori dal macchinario per darti stabilità."
+  },
+  {
+    "name": "Affondi in avanti",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lunge.gif",
+    "description": "Fai un passo in avanti e fletti il ginocchio posteriore fino a fargli sfiorare il pavimento, poi spingi per tornare alla posizione iniziale.",
+    "biomechanics": "Forte componente decelerativa (eccentrica) che colpisce massicciamente i quadricipiti e richiede coordinazione.",
+    "tips": "Non far sbattere il ginocchio posteriore a terra bruscamente per non stressare l'articolazione."
+  },
+  {
+    "name": "Affondi indietro",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Rear-Lunge.gif",
+    "description": "Fai un passo all'indietro e scendi portando il ginocchio verso terra, mantenendo il baricentro sul piede anteriore.",
+    "biomechanics": "Meno stressante per l'articolazione del ginocchio rispetto all'affondo in avanti. Forte attivazione dei glutei e femorali.",
+    "tips": "Ideale se gli affondi in avanti ti provocano fitte alle ginocchia anteriori."
+  },
+  {
+    "name": "Affondi camminati",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Walking-Lunge.gif",
+    "description": "Affondi continui eseguiti spostandosi in avanti nello spazio, alternando le gambe passo dopo passo.",
+    "biomechanics": "Altissimo stress metabolico e cardiovascolare. Costruisce forza dinamica e condizionamento generale.",
+    "tips": "Esegui i passi ampi per colpire di più i glutei, passi più stretti per dare enfasi ai quadricipiti."
+  },
+  {
+    "name": "Affondi bulgari",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Bulgarian-Split-Squat.gif",
+    "description": "Poggia il dorso del piede posteriore su una panca dietro di te. Esegui uno squat con la gamba anteriore.",
+    "biomechanics": "Uno dei migliori esercizi ipertrofici unilaterali per glutei e quadricipiti. Fortissimo stiramento del muscolo rettofemorale posteriore.",
+    "tips": "Se ti inclini in avanti col busto lavora di più il gluteo; se resti verticale lavora di più il quadricipite anteriore."
+  },
+  {
+    "name": "Affondi deficit",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Lunge.gif",
+    "description": "Esegui l'affondo (avanti o indietro) partendo coi piedi sopra uno step o un piccolo rialzo.",
+    "biomechanics": "Aumenta il raggio di movimento in basso, costringendo il grande gluteo e il quadricipite a contrarsi da uno stiramento estremo.",
+    "tips": "Richiede una buona mobilità. Scendi lentamente per non sbilanciarti."
+  },
+  {
+    "name": "Affondi laterali",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Side-Lunge.gif",
+    "description": "Fai un ampio passo lateralmente, piegando il ginocchio di quel lato e tenendo l'altra gamba completamente tesa.",
+    "biomechanics": "Sposta lo sforzo sul piano frontale. Lavora intensamente sugli adduttori della coscia e sul medio gluteo.",
+    "tips": "Mantieni la pianta del piede della gamba tesa ben salda sul pavimento."
+  },
+  {
+    "name": "Affondi curtsy",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Curtsy-Lunge.gif",
+    "description": "Fai un passo incrociato all'indietro (diagonalmente dietro la gamba anteriore) e scendi piegando le ginocchia.",
+    "biomechanics": "La traiettoria diagonale allunga lateralmente le fibre del gluteo medio e del tensore della fascia lata.",
+    "tips": "Non torcere eccessivamente il ginocchio anteriore; deve rimanere allineato con la punta del piede."
+  },
+  {
+    "name": "Step-up",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Step-up.gif",
+    "description": "Poggia un piede sopra un box o panca e spingi con quel solo piede per sollevare il corpo verso l'alto.",
+    "biomechanics": "Simula la salita delle scale sotto carico. Ottimo esercizio di stabilità articolare per anca e ginocchio.",
+    "tips": "Non darti la spinta col piede che è a terra. Fai fare tutto il lavoro alla gamba sopra il box."
+  },
+  {
+    "name": "Step-up alto",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Step-up.gif",
+    "description": "Step-up eseguito su un box molto alto (dove l'altezza del ginocchio supera quella dell'anca in partenza).",
+    "biomechanics": "Richiede una flessione d'anca estrema. Recluta in modo massiccio le fibre profonde del grande gluteo.",
+    "tips": "Frena la discesa (eccentrica) per non crollare giù dal box dal punto più alto."
+  },
+  {
+    "name": "Sissy squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Sissy-Squat.gif",
+    "description": "Su panca sissy (o a corpo libero tenendoti), inclinati all'indietro col busto flettendo solo le ginocchia che vanno in avanti.",
+    "biomechanics": "Isolamento brutale dei quadricipiti (soprattutto il retto femorale). Azione di pura estensione di ginocchio in allungamento.",
+    "tips": "Se lo fai a corpo libero senza l'attrezzo fisso, tieni gli addominali d'acciaio per non spezzare la linea dell'anca."
+  },
+  {
+    "name": "Pistol squat",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pistol-Squat.gif",
+    "description": "Squat profondo su una gamba sola, tenendo l'altra gamba tesa in avanti nel vuoto.",
+    "biomechanics": "Livello avanzato calistenico. Richiede immensi livelli di mobilità alla caviglia, forza unilaterale ed equilibrio.",
+    "tips": "Se perdi equilibrio puoi farlo tenendo un TRX o una maniglia per aiutarti nella risalita."
+  },
+  {
+    "name": "Wall sit",
+    "group": "Gambe",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Wall-Sit.gif",
+    "description": "Schiena poggiata al muro, scendi fino ad avere le ginocchia a 90°. Mantieni la sedia isometrica statica.",
+    "biomechanics": "Lavoro isometrico puro. Non logora le articolazioni ma induce un forte bruciore lattacido locale.",
+    "tips": "Spingi i talloni a terra per forzare la contrazione del quadricipite senza scivolare."
+  },
+  {
+    "name": "Stacco rumeno",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Romanian-Deadlift.gif",
+    "description": "Partendo in piedi col bilanciere, spingi il bacino all'indietro flettendo leggermente le ginocchia. Fletti il busto finché la sbarra supera le ginocchia e risali contraendo i glutei.",
+    "biomechanics": "Esercizio di estensione d'anca (Hip-Hinge). Tensione ipertrofica micidiale sui bicipiti femorali e glutei in massimo allungamento.",
+    "tips": "Il bilanciere deve scorrere a contatto con le cosce. Non farlo allontanare in avanti per non gravare sulla bassa schiena."
+  },
+  {
+    "name": "Stacco stiff",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Deadlift.gif",
+    "description": "Variante dello stacco da terra in cui le ginocchia rimangono quasi completamente estese per tutto il movimento, partendo dal pavimento.",
+    "biomechanics": "Costringe i femorali e i glutei a sobbarcarsi tutto il peso iniziale senza l'aiuto della spinta dei quadricipiti.",
+    "tips": "Richiede ottimi livelli di flessibilità. Non curvare la colonna vertebrale pur di toccare il pavimento."
+  },
+  {
+    "name": "Stacco a gambe tese",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Romanian-Deadlift.gif",
+    "description": "Bilanciere in mano, gambe tese e bloccate. Fletti il busto in avanti spingendo i glutei indietro fino a sentire il forte stiramento dei bicipiti femorali.",
+    "biomechanics": "Isolamento estremo dei bicipiti femorali nel punto di massimo allungamento della catena cinetica posteriore.",
+    "tips": "Usa carichi nettamente inferiori rispetto allo stacco rumeno normale per non stressare i tendini del ginocchio."
+  },
+  {
+    "name": "Leg curl sdraiato",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Lying-Leg-Curl.gif",
+    "description": "Sdraiato prono sul macchinario, poggia le caviglie sotto il rullo. Fletti le ginocchia portando i talloni verso i glutei.",
+    "biomechanics": "Azione di pura flessione di ginocchio (funzione anatomica principale del bicipite femorale). Isola i femorali senza stress spinale.",
+    "tips": "Tieni le anche incollate al cuscino del macchinario; non alzare il sedere per aiutarti a flettere le ginocchia."
+  },
+  {
+    "name": "Leg curl seduto",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Leg-Curl.gif",
+    "description": "Seduto sul macchinario, poggia le gambe sopra il rullo. Spingi i talloni verso il basso flettendo le ginocchia.",
+    "biomechanics": "Poiché l'anca è flessa (sei seduto), i bicipiti femorali partono da uno stato di allungamento maggiore rispetto al leg curl prono, favorendo l'ipertrofia.",
+    "tips": "Blocca saldamente il cuscinetto sopra le cosce per non far oscillare le gambe durante lo sforzo."
+  },
+  {
+    "name": "Leg curl unilaterale",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Single-Leg-Curl.gif",
+    "description": "Esecuzione del leg curl (seduto o in piedi al macchinario) azionando una singola gamba alla volta.",
+    "biomechanics": "Corregge i deficit di forza simmetrici della coscia posteriore e migliora il collegamento mente-muscolo del femorale.",
+    "tips": "Usa carichi leggeri e concentrati sulla fase di discesa lenta (fase eccentrica)."
+  },
+  {
+    "name": "Nordic curl",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Nordic-Hamstring-Curl.gif",
+    "description": "In ginocchio, caviglie bloccate (da un partner o sotto un supporto). Lasciati cadere in avanti controllando la discesa solo con i femorali.",
+    "biomechanics": "Esercizio eccentrico durissimo. Sviluppa una forza strutturale titanica nei bicipiti femorali e previene gli infortuni sportivi (strappi).",
+    "tips": "Frena la caduta il più possibile. Quando non ce la fai più, usa le mani per attutire l'impatto a terra spingendoti su (stile piegamento)."
+  },
+  {
+    "name": "Nordic assistito",
+    "group": "Gambe / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Nordic-Hamstring-Curl.gif",
+    "description": "Esecuzione del Nordic curl utilizzando un elastico (legato in alto sopra la testa) o delle spinte di mani per alleggerire il peso corporeo.",
+    "biomechanics": "Permette di completare l'intera escursione di movimento (sia discesa che salita) a chi non ha ancora la forza per farlo a corpo libero.",
+    "tips": "Usa un elastico della giusta resistenza per fare le ripetizioni in modo fluido e non a scatti."
+  },
+  {
+    "name": "Hip thrust bilanciere",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Hip-Thrust.gif",
+    "description": "Schiena poggiata alla panca, bilanciere poggiato sul bacino. Spingi i fianchi verso l'alto stringendo i glutei, poi scendi.",
+    "biomechanics": "Il miglior esercizio per l'ipertrofia del grande gluteo. La tensione massima si ottiene nel punto di accorciamento finale (in alto).",
+    "tips": "Tieni lo sguardo rivolto in avanti, non guardare il soffitto. Questo aiuta a mantenere la colonna lombare neutra."
+  },
+  {
+    "name": "Hip thrust monopodalico",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/01/Single-Leg-Hip-Thrust.gif",
+    "description": "Esecuzione dell'Hip thrust spingendo il bacino verso l'alto poggiando a terra una sola gamba (l'altra flessa a mezz'aria).",
+    "biomechanics": "Isola prepotentemente il gluteo della gamba a terra e recluta massicciamente i muscoli stabilizzatori del bacino (medio gluteo).",
+    "tips": "Spingi forte sul tallone della gamba a terra per reclutare le fibre del gluteo senza sprecare energia sul quadricipite."
+  },
+  {
+    "name": "Hip thrust con pausa",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Hip-Thrust.gif",
+    "description": "Esegui l'Hip thrust fermandoti immobile per 2-3 secondi nella parte più alta del movimento prima di scendere.",
+    "biomechanics": "Annulla l'inerzia e costringe a generare una contrazione di picco isometrica violentissima nel punto dove il gluteo lavora di più.",
+    "tips": "Durante la pausa strizza i glutei più forte che puoi. Se non riesci a tenere la pausa, abbassa il carico."
+  },
+  {
+    "name": "Glute bridge",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Glute-Bridge.gif",
+    "description": "Sdraiato a terra sulla schiena, ginocchia piegate e piedi a terra. Spingi il bacino verso l'alto staccando i glutei dal pavimento.",
+    "biomechanics": "Simile all'Hip thrust ma a raggio di movimento ridotto (stando a terra). Ottimo per l'isolamento dei glutei senza carico sulla schiena.",
+    "tips": "Controlla la discesa sfiorando il pavimento e riparti immediatamente."
+  },
+  {
+    "name": "Glute bridge monopodalico",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/03/Single-Leg-Glute-Bridge.gif",
+    "description": "Glute bridge a terra spingendo il bacino con un solo tallone a terra e l'altra gamba distesa in aria.",
+    "biomechanics": "Esercizio unilaterale fantastico a corpo libero. Alti livelli di reclutamento senza pesi esterni.",
+    "tips": "Tieni le mani poggiate a terra lungo i fianchi per aiutarti a mantenere l'equilibrio del bacino."
+  },
+  {
+    "name": "Frog pump",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Frog-Pump.gif",
+    "description": "Sdraiato a terra supino, unisci le piante dei piedi tra loro aprendo le ginocchia a rana. Da qui, solleva il bacino strizzando i glutei.",
+    "biomechanics": "La posizione extrarotata e abdotta dell'anca disattiva i bicipiti femorali e scarica tutta la tensione sul grande e medio gluteo.",
+    "tips": "Esercizio ad alte ripetizioni. Spingi forte i piedi l'uno contro l'altro durante la salita."
+  },
+  {
+    "name": "Cable pull-through",
+    "group": "Glutei / Femorali",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Pull-Through.gif",
+    "description": "Di spalle al cavo basso. Fletti il busto lasciando passare la corda tra le gambe e raddrizzati stringendo i glutei.",
+    "biomechanics": "Eccellente esercizio di Hip-Hinge con tensione costante del cavo che simula lo stacco rumeno ma con minor carico sulla colonna lombare.",
+    "tips": "Spingi il sedere verso la carrucola dietro di te durante la discesa e spingi i fianchi in avanti con i glutei durante la salita."
+  },
+  {
+    "name": "Cable kickback",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Kickback.gif",
+    "description": "Davanti alla carrucola bassa con una cavigliera. Calcia la gamba all'indietro stringendo forte il gluteo.",
+    "biomechanics": "Isolamento puro dell'estensione d'anca. Tensione costante per tutto il movimento del gluteo.",
+    "tips": "Non inarcare la schiena lombare per alzare la gamba più in alto del dovuto. Il movimento della gamba deve finire quando il gluteo è contratto."
+  },
+  {
+    "name": "Donkey kicks",
+    "group": "Glutei",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Donkey-Kick.gif",
+    "description": "In quadrupedia a terra. Calcia il tallone di una gamba verso l'alto mantenendo il ginocchio flesso a 90° gradi.",
+    "biomechanics": "Isolamento meccanico del grande gluteo senza il coinvolgimento dei quadricipiti. Altissimo stress metabolico.",
+    "tips": "Esegui il movimento in modo controllato senza darti slanci eccessivi col bacino."
+  },
+  {
+    "name": "Abduzioni elastico",
+    "group": "Medio Gluteo",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Banded-Abduction.gif",
+    "description": "Elastico posizionato sopra le ginocchia. Da seduti o a terra, spingi le ginocchia verso l'esterno contro la resistenza elastica.",
+    "biomechanics": "Reclutamento e isolamento specifico delle fibre del medio e piccolo gluteo (muscoli laterali dell'anca).",
+    "tips": "Esegui movimenti lenti e controllati e fai una breve pausa di mezzo secondo quando le gambe sono aperte."
+  },
+  {
+    "name": "Abduzioni macchina",
+    "group": "Medio Gluteo",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Hip-Abduction.gif",
+    "description": "Seduto al macchinario per l'abduzione delle anche (spinte esterne). Spingi le ginocchia lateralmente.",
+    "biomechanics": "Traiettoria vincolata dal macchinario che elimina carichi parassiti e isola il comparto gluteo laterale per lo spessore dell'anca.",
+    "tips": "Inclina leggermente il busto in avanti per colpire una porzione differente e più profonda delle fibre del gluteo."
+  },
+  {
+    "name": "Calf raise in piedi",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Calf-Raise.gif",
+    "description": "In piedi su un rialzo con gli avampiedi. Abbassa i talloni sotto la linea del rialzo per allungare il polpaccio e spingi verso l'alto estendendo la caviglia.",
+    "biomechanics": "A ginocchio esteso, il focus ipertrofico primario ricade sul gastrocnemio (il muscolo visibile a 'due teste' del polpaccio).",
+    "tips": "Fai una pausa in basso di 1-2 secondi per eliminare il rimbalzo del tendine d'Achille e forzare il muscolo a lavorare."
+  },
+  {
+    "name": "Calf raise seduto",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Calf-Raise.gif",
+    "description": "Seduto al macchinario con le ginocchia flesse a 90° e il peso sulle cosce. Solleva i talloni estendendo la caviglia.",
+    "biomechanics": "Poiché il gastrocnemio è biarticolare, flettendo il ginocchio viene disattivato. Questo isola quasi al 100% il muscolo soleo (che dà spessore laterale alla gamba).",
+    "tips": "Ottimo per dare spessore alla parte inferiore e laterale della gamba."
+  },
+  {
+    "name": "Calf raise alla pressa",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Press-Calf-Raise.gif",
+    "description": "Seduto alla leg press, poggia solo gli avampiedi sul bordo inferiore della pedana. Spingi la pedana flettendo ed estendendo la caviglia.",
+    "biomechanics": "Tensione costante a ginocchio esteso (gastrocnemio). Rimuove il carico dalla colonna vertebrale rispetto al calf in piedi con bilanciere.",
+    "tips": "Non sbloccare le ginocchia facendole piegare durante la spinta; il movimento deve avvenire solo alle caviglie."
+  },
+  {
+    "name": "Calf raise monopodalico",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/01/Single-Leg-Calf-Raise.gif",
+    "description": "Esecuzione dell'estensione del polpaccio su un solo piede alla volta, tenendo un manubrio dal lato che lavora.",
+    "biomechanics": "Unilaterale. Risolve i deficit di forza e simmetria estetica tra i due polpacci.",
+    "tips": "Usa la mano libera per sorreggerti a una spalliera per mantenere l'equilibrio."
+  },
+  {
+    "name": "Donkey calf raise",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Donkey-Calf-Raise.gif",
+    "description": "Busto flesso in avanti a 90° (poggiato su un supporto). Estensione dei polpacci con il peso che grava sul bacino.",
+    "biomechanics": "Variante resa celebre da Arnold Schwarzenegger. Il bicipite femorale e il gastrocnemio sono stirati contemporaneamente dall'anca flessa.",
+    "tips": "Se non hai il macchinario apposito, puoi farlo fare con un partner seduto sulla tua schiena lombare."
+  },
+  {
+    "name": "Calf raise con fermo",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Calf-Raise.gif",
+    "description": "Esegui il calf raise fermandoti immobile per 2 secondi sia nel punto di massimo allungamento (in basso) che in massima contrazione (in alto).",
+    "biomechanics": "Il tendine d'Achille dissipa l'energia elastica dopo circa 1,5 secondi di fermo. Questo costringe il muscolo a fare tutto il lavoro senza rimbalzo inerziale.",
+    "tips": "Esercizio bruciante ma fondamentale per far crescere polpacci geneticamente restii."
+  },
+  {
+    "name": "Calf raise tempo lento",
+    "group": "Polpacci",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Standing-Calf-Raise.gif",
+    "description": "Calf raise eseguito con una discesa eccentrica controllata di 4-5 secondi.",
+    "biomechanics": "Il tempo sotto tensione prolungato crea microlesioni ipertrofiche strutturali profonde nel tessuto muscolare del polpaccio.",
+    "tips": "Cerca di non accelerare la discesa quando subentra il bruciore acido lattacido."
+  },
+  {
+    "name": "Crunch",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Crunch.gif",
+    "description": "Sdraiato supino, ginocchia piegate. Solleva solo le spalle e la parte alta della schiena dal pavimento avvicinando lo sterno al bacino.",
+    "biomechanics": "Flessione spinale pura. Isola il retto dell'addome accorciandolo senza coinvolgere i flessori dell'anca (psoas).",
+    "tips": "Non tirare il collo con le mani. Immagina di voler schiacciare le costole verso l'ombelico."
+  },
+  {
+    "name": "Crunch inverso",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Reverse-Crunch.gif",
+    "description": "Sdraiato a terra, porta le ginocchia flesse verso il petto staccando leggermente il bacino dal pavimento.",
+    "biomechanics": "Retro-versione del bacino. Sposta l'enfasi ipertrofica sulla porzione inferiore del retto addominale.",
+    "tips": "Scendi controllando il movimento senza far oscillare le gambe per inerzia."
+  },
+  {
+    "name": "Sit-up",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Sit-up.gif",
+    "description": "Sdraiato a terra, solleva l'intero busto fino a portarlo seduto vicino alle ginocchia.",
+    "biomechanics": "Oltre al retto addominale, coinvolge pesantemente i flessori dell'anca (retto femorale e psoas) per completare il raggio di movimento.",
+    "tips": "Esegui il movimento 'arrotolando' la colonna vertebra dopo vertebra, senza salire a schiena dritta a mo' di tavoletta."
+  },
+  {
+    "name": "Sit-up zavorrato",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Weighted-Sit-up.gif",
+    "description": "Esecuzione del Sit-up stringendo al petto un disco o un manubrio.",
+    "biomechanics": "Sovraccarico ipertrofico progressivo sulla muscolatura addominale per far risaltare i tasselli visivamente (spessore muscolare).",
+    "tips": "Tieni il disco attaccato saldamente allo sterno per non alterare la leva di salita."
+  },
+  {
+    "name": "Plank",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Plank.gif",
+    "description": "In appoggio sugli avambracci e sulle punte dei piedi. Mantieni il corpo dritto come una tavola stringendo addome e glutei.",
+    "biomechanics": "Esercizio anti-estensione isometrico. Allena la stabilità del torchio addominale profondo (trasverso).",
+    "tips": "Non far cadere il bacino verso il basso e non alzare il sedere a piramide. Il corpo deve essere dritto."
+  },
+  {
+    "name": "Plank zavorrato",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Plank.gif",
+    "description": "Plank isometrico eseguito con un disco di ghisa posizionato sulla parte centrale della schiena.",
+    "biomechanics": "Aumenta la resistenza gravitazionale forzando il trasverso e il retto addominale a produrre più tensione isometrica.",
+    "tips": "Richiede un partner che ti posizioni il disco sulla schiena e te lo tolga a fine serie."
+  },
+  {
+    "name": "Plank RKC",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Plank.gif",
+    "description": "Plank russo in cui stringi i pugni, tiri i gomiti verso i piedi e i piedi verso i gomiti (creando tensione attiva) strizzando i glutei al massimo.",
+    "biomechanics": "Produce una tensione neuromuscolare immensamente più alta del plank normale. Pochi secondi equivalgono a minuti di plank classico.",
+    "tips": "Non conta quanto tempo resisti, ma quanta tensione riesci a generare in 10-15 secondi."
+  },
+  {
+    "name": "Side plank",
+    "group": "Addome / Obliqui",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Side-Plank.gif",
+    "description": "Poggiato lateralmente su un solo avambraccio e sul bordo esterno del piede. Corpo sollevato e teso.",
+    "biomechanics": "Isolamento isometrico dei muscoli obliqui interni ed esterni del core e del quadrato dei lombi.",
+    "tips": "Tieni il bacino alto e allineato. Non farlo crollare verso il pavimento."
+  },
+  {
+    "name": "Side plank dinamico",
+    "group": "Addome / Obliqui",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Side-Plank-Hip-Abduction.gif",
+    "description": "Dalla posizione di side plank, abbassa il fianco fino a sfiorare il pavimento e risollevalo verso l'alto flettendo il busto lateralmente.",
+    "biomechanics": "Combina la stabilità isometrica alla contrazione concentrica/eccentrica dei muscoli obliqui del tronco.",
+    "tips": "Movimento controllato e lento. Inspira scendendo, espira strizzando l'obliquo salendo."
+  },
+  {
+    "name": "Plank con tocco spalle",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Plank-Shoulder-Tap.gif",
+    "description": "In posizione di plank alto (sulle mani), stacca una mano e tocca la spalla opposta senza ruotare il bacino.",
+    "biomechanics": "Esercizio anti-rotazione del core. Obbliga gli stabilizzatori a mantenere le anche parallele al suolo su 3 soli appoggi.",
+    "tips": "Allarga leggermente i piedi per darti più stabilità ed evitare che le anche oscillino a destra e sinistra."
+  },
+  {
+    "name": "Mountain climber",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Mountain-Climber.gif",
+    "description": "Dalla posizione di plank alto (sulle mani), porta alternativamente le ginocchia al petto in modo rapido e dinamico.",
+    "biomechanics": "Unisce la stabilità isometrica del core a un forte stress metabolico cardiovascolare e flessione dell'anca.",
+    "tips": "Mantieni il sedere basso, non farlo saltare in alto mentre muovi le gambe."
+  },
+  {
+    "name": "Leg raise",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Leg-Raise.gif",
+    "description": "Sdraiato a terra supino, gambe tese. Solleva le gambe fino a 90° gradi e riportale giù sfiorando il pavimento senza toccarlo.",
+    "biomechanics": "L'addome lavora isometricamente per tenere salda la colonna lombare a terra mentre i flessori dell'anca muovono le gambe.",
+    "tips": "Se senti dolore alla bassa schiena che si inarca, piega leggermente le ginocchia o poggia le mani sotto il sedere."
+  },
+  {
+    "name": "Hanging leg raise",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hanging-Leg-Raise.gif",
+    "description": "Appeso alla sbarra delle trazioni, gambe tese. Solleva le gambe tese fino a renderle parallele al pavimento.",
+    "biomechanics": "Flessione d'anca pesante ad alta leva gravitazionale contro l'addome inferiore. Richiede forza nella presa delle mani.",
+    "tips": "Per colpire l'addome e non solo i flessori d'anca, devi 'arrotolare' il bacino alla fine della salita."
+  },
+  {
+    "name": "Hanging knee raise",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Hanging-Knee-Raise.gif",
+    "description": "Appeso alla sbarra, solleva le ginocchia flesse portandole verso il petto arrotolando il bacino.",
+    "biomechanics": "Versione più accessibile rispetto alle gambe tese, diminuisce la leva di sforzo pur mantenendo un eccellente lavoro addominale.",
+    "tips": "Controlla l'oscillazione del corpo nella fase di discesa."
+  },
+  {
+    "name": "Toes to bar",
+    "group": "Addome / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Toes-To-Bar.gif",
+    "description": "Appeso alla sbarra, solleva le gambe tese fino a toccare letteralmente la sbarra con la punta dei piedi.",
+    "biomechanics": "Flessione addominale completa e brutale. Richiede grande flessibilità della catena posteriore e forza di dorsali e core.",
+    "tips": "Spingi attivamente sulla sbarra con le braccia tese per aiutarti a inclinare il busto all'indietro e far salire i piedi."
+  },
+  {
+    "name": "L-sit",
+    "group": "Addome / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/L-Sit.gif",
+    "description": "In appoggio sulle mani alle parallele (o a terra). Solleva il corpo e tieni le gambe tese in avanti a 90° formando una 'L'.",
+    "biomechanics": "Tenuta isometrica violentissima per quadricipiti e addome. Richiede anche depressione scapolare attiva delle braccia.",
+    "tips": "Se a gambe tese è troppo difficile, inizia tenendo le ginocchia piegate al petto (Tuck L-sit)."
+  },
+  {
+    "name": "Dragon flag",
+    "group": "Addome / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Dragon-Flag.gif",
+    "description": "Sdraiato su panca afferrando i bordi dietro la testa. Solleva tutto il corpo dritto (dal collo ai piedi) reggendoti solo sulle spalle.",
+    "biomechanics": "Esercizio reso celebre da Bruce Lee. Stress eccentrico spaventoso su tutto il retto addominale e dorsali.",
+    "tips": "Il corpo deve scendere come un unico blocco dritto. Se pieghi le anche, perdi il lavoro del core."
+  },
+  {
+    "name": "Dragon flag negativo",
+    "group": "Addome / Calisthenics",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Dragon-Flag.gif",
+    "description": "Sali in verticale (più facile) e scendi frenando la caduta del corpo dritto il più lentamente possibile fino alla panca.",
+    "biomechanics": "Sovraccarico eccentrico puro. Ottimo per costruire la forza necessaria a completare il dragon flag completo.",
+    "tips": "Concentrati sul rallentare i centimetri finali della discesa, i più duri."
+  },
+  {
+    "name": "Ab rollout",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Ab-Wheel-Rollout.gif",
+    "description": "In ginocchio con la ruota addominale. Rotola in avanti estendendo il corpo e richiuditi strizzando l'addome.",
+    "biomechanics": "Anti-estensione dinamica. Uno degli esercizi più efficaci in assoluto testato tramite elettromiografia per il retto addominale.",
+    "tips": "Inizia la discesa arrotolando il bacino (retroversione). Se inarchi la schiena scarichi il peso sulla zona lombare anziché sull'addome."
+  },
+  {
+    "name": "Ab rollout in piedi",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Ab-Wheel-Rollout.gif",
+    "description": "Rollout eseguito partendo in piedi anziché in ginocchio, rotolando fino ad appiattirsi a terra.",
+    "biomechanics": "Livello élite di anti-estensione addominale. Leva di carico gravitazionale estrema.",
+    "tips": "Da tentare solo se si padroneggiano perfettamente almeno 15-20 ripetizioni in ginocchio."
+  },
+  {
+    "name": "Russian twist",
+    "group": "Addome / Obliqui",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Russian-Twist.gif",
+    "description": "Seduto a terra, piedi sollevati. Ruota il busto a destra e sinistra toccando terra con le mani (o con un peso).",
+    "biomechanics": "Lavora sulla rotazione del tronco e sulla stabilità isometrica del core. Colpisce intensamente gli obliqui.",
+    "tips": "Segui il movimento delle mani con gli occhi per assicurarti di girare le spalle e non solo le braccia."
+  },
+  {
+    "name": "Bicycle crunch",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Bicycle-Crunch.gif",
+    "description": "Sdraiato a terra, porta alternativamente il gomito destro al ginocchio sinistro e viceversa, simulando una pedalata.",
+    "biomechanics": "Combina flessione del retto addominale e rotazione degli obliqui. Altissimo reclutamento muscolare complessivo.",
+    "tips": "Esegui il movimento lentamente, la fretta toglie tensione al muscolo."
+  },
+  {
+    "name": "V-up",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/V-up.gif",
+    "description": "Sdraiato a terra, solleva contemporaneamente busto e gambe tese fino a toccare le punte dei piedi, formando una 'V'.",
+    "biomechanics": "Leva dinamica bilaterale. Coinvolge la parte superiore e inferiore del core simultaneamente.",
+    "tips": "Richiede ottima coordinazione e flessibilità della catena posteriore."
+  },
+  {
+    "name": "Hollow hold",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Hollow-Hold.gif",
+    "description": "Sdraiato supino. Schiaccia la zona lombare a terra, solleva leggermente le gambe tese e le braccia tese dietro la testa. Mantieni la posa a 'barchetta'.",
+    "biomechanics": "Il fondamentale ginnico di base per il core. Insegna a mantenere la colonna vertebrale incollata al suolo sotto sforzo.",
+    "tips": "Se la zona lombare si stacca da terra, alza di più le gambe per ritrovare la postura corretta."
+  },
+  {
+    "name": "Dead bug",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/03/Dead-Bug.gif",
+    "description": "Sdraiato supino con braccia e gambe sollevate a 90°. Distendi braccio destro e gamba sinistra senza inarcare la schiena, alternando.",
+    "biomechanics": "Posturale fantastico. Allena la coordinazione crociata e l'anti-estensione preservando la colonna.",
+    "tips": "Movimento calmo e respiro sincronizzato. È un esercizio di controllo posturale, non di velocità."
+  },
+  {
+    "name": "Cable crunch",
+    "group": "Addome",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Crunch.gif",
+    "description": "In ginocchio davanti al cavo alto con la corda alle orecchie. Fletti la colonna portando i gomiti verso le ginocchia.",
+    "biomechanics": "L'unico esercizio per l'addome che permette un sovraccarico progressivo ipertrofico controllato grazie ai pesi del cavo.",
+    "tips": "Fletti la spina dorsale a mo' di riccio. Non flettere l'anca (non sederti sui talloni), il sedere deve rimanere alto."
+  },
+  {
+    "name": "Pallof press",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pallof-Press.gif",
+    "description": "In piedi di lato al cavo. Tira la maniglia al petto e distendi le braccia tese in avanti contrastando la forza del cavo che vorrebbe farti ruotare.",
+    "biomechanics": "Esercizio anti-rotazione del core. Stabilizza il bacino e i muscoli paravertebrali della colonna vertebrale.",
+    "tips": "Mantieni la posizione dei piedi solida a terra. Se le braccia tremano un po' quando le distendi in avanti, stai lavorando bene."
+  },
+  {
+    "name": "Burpees",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/burpee.gif",
+    "description": "Dalla posizione eretta, scendi in squat, appoggia le mani a terra e lancia i piedi indietro arrivando a toccare il pavimento col petto. Ritorna rapidamente con i piedi vicino alle mani e fai un salto verso l'alto battendo le mani sopra la testa.",
+    "biomechanics": "Esercizio calistenico full-body ad altissimo impatto metabolico. Allena la pliometria, la resistenza cardiovascolare e la coordinazione motoria globale.",
+    "tips": "Trova un ritmo costante che tu possa mantenere senza andare subito in affanno respiratorio. Non frenare la caduta del petto a terra stile piegamento, lasciati andare dolcemente per risparmiare energia."
+  },
+  {
+    "name": "Burpee over bar",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/burpee.gif",
+    "description": "Esegui un burpee classico di fianco a un bilanciere poggiato a terra. Invece del salto verticale finale, salta lateralmente o frontalmente oltrepassando il bilanciere.",
+    "biomechanics": "Aggiunge una forte componente di agilità e salto pliometrico laterale/frontale allo stress metabolico del burpee normale.",
+    "tips": "Atterra con i piedi uniti e ammortizza il salto. Gira il corpo mentre sei in volo sopra la sbarra per essere già pronto per il burpee successivo."
+  },
+  {
+    "name": "Thruster",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Thruster.gif",
+    "description": "Combina un Front squat e un Push press in un unico movimento fluido. Scendi in accosciata frontale completa e risali usando la spinta delle gambe per lanciare il bilanciere sopra la testa.",
+    "biomechanics": "Esercizio cardine del CrossFit. Richiede il trasferimento di forza cinetica dalla parte inferiore (gambe) a quella superiore del corpo (spalle) senza interruzioni.",
+    "tips": "Non spezzare il movimento. Aspetta di aver quasi completato l'estensione delle gambe prima di iniziare a spingere con le braccia."
+  },
+  {
+    "name": "Thruster manubri",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Thruster.gif",
+    "description": "Esecuzione del thruster tenendo due manubri poggiati sulle spalle anziché il bilanciere.",
+    "biomechanics": "Richiede maggiore stabilità unilaterale e corregge gli squilibri di spinta tra le due braccia. Meno vincolante per la mobilità dei polsi.",
+    "tips": "Tieni i manubri appoggiati stabilmente sulle spalle durante la discesa dello squat per non affaticare prematuramente le braccia."
+  },
+  {
+    "name": "Clean",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Power-Clean.gif",
+    "description": "Porta il bilanciere da terra alle spalle (in posizione front rack) in un unico movimento esplosivo, infilandoti sotto la sbarra mentre questa sale.",
+    "biomechanics": "Coinvolge la tripla estensione (caviglia, ginocchio, anca). Produce i più alti livelli di potenza muscolare misurabili nella catena cinetica posteriore.",
+    "tips": "La sbarra deve viaggiare vicina al corpo. Tira forte con i trapezi e gira i gomiti in avanti il più velocemente possibile."
+  },
+  {
+    "name": "Power clean",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Power-Clean.gif",
+    "description": "Variante del clean in cui ricevi il bilanciere sulle spalle rimanendo sopra la linea del parallelo (senza scendere in squat completo).",
+    "biomechanics": "Richiede che il bilanciere venga tirato più in alto rispetto allo squat clean classico, ponendo enfasi sulla forza di tirata iniziale.",
+    "tips": "Atterra in posizione stabile di mezzo squat e frena l'impatto del bilanciere sulle clavicole usando i deltoidi."
+  },
+  {
+    "name": "Hang clean",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Power-Clean.gif",
+    "description": "Il bilanciere non parte da terra ma viene tenuto sospeso sopra o sotto le ginocchia (posizione hang), per poi essere girato alle spalle.",
+    "biomechanics": "Elimina la spinta iniziale dal pavimento. Allena l'esplosività dell'anca pura e la coordinazione della tirata dal bacino.",
+    "tips": "Spingi il sedere all'indietro nella posizione di partenza e salta verticalmente estendendo le anche con violenza."
+  },
+  {
+    "name": "Squat clean",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Power-Clean.gif",
+    "description": "Il bilanciere parte da terra e viene ricevuto scendendo immediatamente in uno squat frontale completo sotto di esso.",
+    "biomechanics": "Consente di sollevare il massimo carico possibile nel clean, poiché ci si infila sotto la sbarra anziché tirarla eccessivamente in alto.",
+    "tips": "Richiede un'ottima mobilità di caviglie, anche e polsi per mantenere il petto verticale in ricezione."
+  },
+  {
+    "name": "Snatch",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Barbell-Snatch.gif",
+    "description": "Porta il bilanciere da terra a sopra la testa a braccia tese in un unico movimento continuo, afferrando la sbarra con una presa molto larga.",
+    "biomechanics": "L'alzata olimpica più complessa. Richiede potenza estrema, coordinazione millimetrica e mobilità articolare completa di tutto il corpo.",
+    "tips": "Non anticipare la tirata di braccia. Aspetta che il bilanciere tocchi il bacino prima di saltare ed infilarti sotto di esso."
+  },
+  {
+    "name": "Power snatch",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Barbell-Snatch.gif",
+    "description": "Snatch in cui il bilanciere viene ricevuto sopra la testa senza scendere sotto la linea del parallelo (non in squat completo).",
+    "biomechanics": "Focalizza lo sforzo sulla potenza di estensione d'anca e sulla velocità di spinta verticale degli arti inferiori.",
+    "tips": "Blocca i gomiti all'istante non appena ricevi la sbarra sopra la testa per evitare pericolose oscillazioni."
+  },
+  {
+    "name": "Hang snatch",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/11/Barbell-Snatch.gif",
+    "description": "Snatch che parte dalla posizione 'sospesa' sopra o sotto le ginocchia anziché dal pavimento.",
+    "biomechanics": "Isola la fase di caricamento dell'anca e insegna a generare potenza senza l'ausilio della spinta iniziale delle gambe dal suolo.",
+    "tips": "Mantieni il bilanciere aderente alle cosce durante il caricamento e non farlo sbandare in avanti."
+  },
+  {
+    "name": "Clean & jerk",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Power-Clean.gif",
+    "description": "L'alzata olimpica regina: prima porti il bilanciere alle spalle (clean) e successivamente lo spingi sopra la testa (jerk).",
+    "biomechanics": "Coinvolge letteralmente ogni muscolo del corpo umano. È l'alzata che permette di sollevare il peso massimo assoluto da terra a sopra la testa.",
+    "tips": "Prenditi un secondo per stabilizzarti e respirare dopo la fase di clean prima di lanciare il jerk sopra la testa."
+  },
+  {
+    "name": "Split jerk",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Military-Press.gif",
+    "description": "Spingi il bilanciere sopra la testa divaricando le gambe una in avanti e una all'indietro (posizione di forbice affondo) per infilarti sotto la sbarra.",
+    "biomechanics": "La posizione a forbice offre la base d'appoggio frontale-sagittale più stabile in assoluto per sorreggere carichi pesantissimi sopra la testa.",
+    "tips": "Il piede anteriore deve fare un passo in avanti e quello posteriore un passo indietro. Ritrova la stabilità muovendo prima il piede anteriore."
+  },
+  {
+    "name": "Push jerk",
+    "group": "Pesistica",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/06/Barbell-Push-Jerk.gif",
+    "description": "Spingi il bilanciere sopra la testa flettendo le ginocchia per infilarti sotto la sbarra senza spostare i piedi in avanti o indietro (rimangono paralleli). Atterri in mezzo squat.",
+    "biomechanics": "Richiede un'eccellente coordinazione e velocità di discesa. Viene usato spesso nei WOD di CrossFit per l'efficienza ciclica.",
+    "tips": "Garantisci un blocco dei gomiti simultaneo all'atterraggio dei piedi a terra."
+  },
+  {
+    "name": "Deadlift",
+    "group": "Pesistica / Forza",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Deadlift.gif",
+    "description": "Afferra il bilanciere a terra e sollevalo raddrizzando contemporaneamente anche e ginocchia fino alla posizione eretta.",
+    "biomechanics": "Il fondamentale della catena cinetica posteriore per eccellenza. Coinvolge glutei, bicipiti femorali, erettori spinali, trapezi e forza di presa.",
+    "tips": "Mantieni la barra attaccata alle tibie. Spingi attivamente il pavimento via dai tuoi piedi anziché tirare di schiena."
+  },
+  {
+    "name": "Sumo deadlift",
+    "group": "Pesistica / Forza",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Sumo-Deadlift.gif",
+    "description": "Stacco da terra tenendo le gambe molto larghe (posizione sumo) e le mani all'interno delle ginocchia sul bilanciere.",
+    "biomechanics": "Riduce il braccio di leva sulla colonna lombare e sposta il focus ipertrofico sui muscoli adduttori e sui glutei.",
+    "tips": "Apri bene le ginocchia assecondando la punta dei piedi per far scendere il bacino il più vicino possibile alla sbarra."
+  },
+  {
+    "name": "Kettlebell swing",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Swings.gif",
+    "description": "Dondola la kettlebell tra le gambe spingendo i glutei indietro. Spingi esplosivamente l'anca in avanti per lanciare la palla fino all'altezza delle spalle (variante russa).",
+    "biomechanics": "Movimento ciclico di estensione dell'anca balistico. Allena la potenza dei glutei e la resistenza lombare.",
+    "tips": "È un movimento di spinta delle anche (hip hinge), non uno squat. Non piegare eccessivamente le ginocchia."
+  },
+  {
+    "name": "American swing",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Kettlebell-Swings.gif",
+    "description": "Kettlebell swing in cui la spinta dell'anca è tale da portare la kettlebell perfettamente sopra la testa a braccia tese.",
+    "biomechanics": "Estende il ROM dello swing russo classico. Richiede mobilità articolare delle spalle e un forte blocco del core per non inarcare la schiena lombare in cima.",
+    "tips": "Mantieni la kettlebell capovolta verso l'alto quando ti trovi sopra la testa per ottimizzare l'equilibrio."
+  },
+  {
+    "name": "Farmer walk",
+    "group": "Funzionale / Strongman",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Farmers-Walk.gif",
+    "description": "Afferra due carichi pesanti (manubri o barre speciali) e cammina per una distanza prefissata mantenendo il petto alto e la schiena dritta.",
+    "biomechanics": "Costruisce una forza d'acciaio nella presa (avambracci), nei trapezi e nella stabilità del core sotto carico dinamico.",
+    "tips": "Fai passi rapidi e corti. Guarda dritto davanti a te per mantenere l'equilibrio posturale."
+  },
+  {
+    "name": "Overhead carry",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Overhead-Walk.gif",
+    "description": "Cammina tenendo un bilanciere o dei manubri bloccati sopra la testa a braccia tese.",
+    "biomechanics": "Sfida pesantemente i muscoli stabilizzatori del cingolo scapolare (cuffia dei rotatori e trapezi) e gli obliqui dell'addome.",
+    "tips": "Incastra bene le spalle (attive verso le orecchie) e stringi l'addome per evitare sbandamenti laterali."
+  },
+  {
+    "name": "Front rack carry",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Barbell-Front-Squat.gif",
+    "description": "Cammina tenendo il carico (bilanciere, kettlebell o sandbag) posizionato e sorretto davanti al petto o sulle clavicole.",
+    "biomechanics": "Il baricentro sbilanciato in avanti costringe gli erettori spinali lombari a un lavoro isometrico immenso per non flettersi.",
+    "tips": "Tieni i gomiti alti e respira con la pancia per non perdere la pressione intra-addominale."
+  },
+  {
+    "name": "Bear crawl",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Bear-Crawl.gif",
+    "description": "Cammina carponi a terra su mani e piedi. Le ginocchia sono flesse e sollevate a pochi centimetri dal suolo.",
+    "biomechanics": "Esercizio posturale primitivo e funzionale. Attiva il core profondo, spalle e gambe coordinando il movimento controlaterale.",
+    "tips": "Non alzare il bacino verso il soffitto. Tieni la schiena piatta come un tavolino."
+  },
+  {
+    "name": "Crab walk",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/crab-walk.gif",
+    "description": "Seduto a terra, poggia le mani dietro e i piedi davanti. Solleva il bacino e cammina spostandoti all'indietro o in avanti.",
+    "biomechanics": "Apertura della catena anteriore. Allungamento e stabilità delle spalle, tricipiti e catena posteriore.",
+    "tips": "Tieni il bacino il più alto possibile per attivare i glutei e allungare i bicipiti e bicipiti femorali."
+  },
+  {
+    "name": "Box jump",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Box-Jump.gif",
+    "description": "Salta a piedi uniti sopra un box di legno o foam e distendi completamente le anche una volta atterrato sopra.",
+    "biomechanics": "Pura potenza esplosiva e pliometrica degli arti inferiori (estensori di anca e ginocchio).",
+    "tips": "Ammortizza l'atterraggio atterrando silenziosamente. Scendi dal box facendo un passo alla volta anziché saltando giù per salvaguardare i tendini d'Achille."
+  },
+  {
+    "name": "Box jump over",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Box-Jump.gif",
+    "description": "Salta sopra il box e oltrepassalo atterrando dal lato opposto (senza estendere l'anca sopra la scatola).",
+    "biomechanics": "Esercizio tipico dei circuiti CrossFit che unisce potenza del salto a velocità di spostamento ciclico.",
+    "tips": "Non serve estendere le anche in cima. Atterra basso sul box e girati subito per scendere dall'altro lato."
+  },
+  {
+    "name": "Box step-over",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Step-up.gif",
+    "description": "Oltrepassa il box (spesso tenendo dei manubri) salendo con un passo e scendendo dall'altro lato.",
+    "biomechanics": "Lavoro di forza unilaterale condizionata dal carico. Tassante per quadricipiti e glutei sotto sforzo aerobico.",
+    "tips": "Poggia l'intera pianta del piede sul box per garantire la massima spinta e sicurezza."
+  },
+  {
+    "name": "Wall ball",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/03/Wall-Ball.gif",
+    "description": "Afferra la palla medica al petto. Scendi in squat e risali lanciando la palla verso un bersaglio sul muro (3 metri d'altezza), riprendendola e continuando ciclicamente.",
+    "biomechanics": "Unisce lo squat alla spinta delle braccia ad alto impatto metabolico e lattacido (gambe e spalle bruciano molto).",
+    "tips": "Usa la forza di risalita dello squat per lanciare la palla, non usare solo la forza delle braccia. Tieni le mani pronte a ricevere la palla."
+  },
+  {
+    "name": "Slam ball",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Slam-Ball.gif",
+    "description": "Solleva la palla medica sopra la testa e scagliala violentemente a terra flettendo il busto con forza.",
+    "biomechanics": "Potenza esplosiva della flessione dell'addome e dei dorsali. Produce un forte scarico di adrenalina.",
+    "tips": "Usa tutto il peso del corpo per schiacciare la palla a terra, flettendo le ginocchia per raccoglierla in sicurezza."
+  },
+  {
+    "name": "Tire flip",
+    "group": "Funzionale / Strongman",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Tire-Flip.gif",
+    "description": "Incastra le mani sotto un enorme pneumatico pesante, staccalo da terra spingendo con le gambe e ribaltalo spingendolo in avanti.",
+    "biomechanics": "Esercizio Strongman di potenza pura. Richiede una transizione di spinta di gambe unita a un push pettorale e delle braccia.",
+    "tips": "Mantieni il petto attaccato allo pneumatico durante lo stacco iniziale per non far curvare la schiena."
+  },
+  {
+    "name": "Sled push",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Prowler-Sled-Push.gif",
+    "description": "Spingi la slitta zavorrata sull'erba sintetica correndo a piccoli passi con il busto inclinato in avanti.",
+    "biomechanics": "Uno dei migliori esercizi metabolici. Sviluppa quadricipiti d'acciaio senza stressare i tendini articolari in modo eccentrico (solo contrazione concentrica).",
+    "tips": "Tieni le braccia tese e la colonna vertebrale allineata. Spingi attivamente dai talloni."
+  },
+  {
+    "name": "Sled pull",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/09/Prowler-Sled-Push.gif",
+    "description": "Tira a te la slitta zavorrata camminando all'indietro o tirando una corda attaccata ad essa.",
+    "biomechanics": "Forte sovraccarico per i quadricipiti (nella camminata indietro) o per dorsali e braccia (se si tira la corda).",
+    "tips": "Fai passi piccoli e potenti quando tiri all'indietro, mantenendo il baricentro basso."
+  },
+  {
+    "name": "Turkish get-up",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Turkish-Get-Up.gif",
+    "description": "Sdraiato a terra con un manubrio o kettlebell alzato a braccio teso. Alzati in piedi passo dopo passo senza mai piegare il braccio o distogliere lo sguardo dal peso.",
+    "biomechanics": "Capolavoro di stabilità articolare della spalla, mobilità toracica ed equilibrio strutturale globale.",
+    "tips": "Esercizio calmo e calcolato. Spezza il movimento nelle sue fasi (gomito, mano, ponte, affondo, in piedi)."
+  },
+  {
+    "name": "Man maker",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/03/Man-Maker.gif",
+    "description": "In posizione di plank sui manubri: esegui un piegamento, un rematore per lato, balzo dei piedi verso le mani, squat clean e finale in thruster.",
+    "biomechanics": "Un mostro metabolico full-body. Unisce spinta, tirata, stabilità di core e pliometria delle gambe in una singola ripetizione.",
+    "tips": "Usa pesi moderati, la fatica accumulata in questo esercizio composito è istantanea."
+  },
+  {
+    "name": "Devil press",
+    "group": "Funzionale",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Devil-Press.gif",
+    "description": "Esegui un burpee poggiando il petto sopra i manubri. Balza in piedi e lancia i manubri direttamente sopra la testa con una tirata esplosiva d'anca.",
+    "biomechanics": "Unione tra burpee e kettlebell swing americano con manubri. Tassante per glutei, spalle e cuore.",
+    "tips": "Usa la catena posteriore delle cosce per lanciare i pesi sopra la testa, non usare i bicipiti e bicipiti brachiali."
+  },
+  {
+    "name": "Double unders",
+    "group": "Funzionale / Cardio",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Jump-Rope.gif",
+    "description": "Salto della corda in cui quest'ultima compie due giri completi sotto i piedi per ogni singolo balzo effettuato.",
+    "biomechanics": "Allena la propriocezione balistica, la contrazione dei polpacci e la coordinazione polso-cervello.",
+    "tips": "Tieni i gomiti vicini alle costole e fai girare la corda muovendo solo i polsi, non l'intera spalla."
+  },
+  {
+    "name": "Row erg",
+    "group": "Cardio",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Seated-Cable-Row.gif",
+    "description": "Esercizio sul vogatore ad aria. Spingi con le gambe, inclina il busto e tira la maniglia verso lo sterno.",
+    "biomechanics": "Cardio a basso impatto articolare ma ad altissimo consumo calorico. Coinvolge circa l'80% della muscolatura corporea (60% gambe, 30% schiena, 10% braccia).",
+    "tips": "La spinta parte dalle gambe. Non iniziare a tirare con le braccia prima che le gambe siano distese."
+  },
+  {
+    "name": "Assault bike",
+    "group": "Cardio",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Air-Bike.gif",
+    "description": "Pedalata sulla cyclette ad aria tirando e spingendo contemporaneamente le maniglie con le braccia.",
+    "biomechanics": "Condizionamento metabolico massimo. Maggiore è la velocità applicata, maggiore è la resistenza generata dall'aria della ventola.",
+    "tips": "Richiede una gestione mentale della fatica estrema. Usa la sinergia di braccia e gambe contemporaneamente per non affaticare un solo comparto muscolare."
+  },
+  {
+    "name": "Ski erg",
+    "group": "Cardio",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Ski-Machine.gif",
+    "description": "Simulatore di sci di fondo. Tira le maniglie dall'alto verso il basso flettendo le ginocchia e il busto estendendo le anche.",
+    "biomechanics": "Allena la catena anteriore (addome, tricipiti, dorsali) in una contrazione aerobica ciclica dall'alto verso il basso.",
+    "tips": "Non usare solo le braccia per tirare. Sfrutta il peso del tuo corpo flettendoti in avanti per abbassare le maniglie."
+  },
+  {
+    "name": "Stretch pettorale muro",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Wall-Chest-Stretch.gif",
+    "description": "Poggia l'avambraccio e il gomito contro lo stipite di una porta o un muro (altezza spalla). Ruota il busto dalla parte opposta fino a sentire tensione sul petto.",
+    "biomechanics": "Allungamento statico passivo del grande e piccolo pettorale e del deltoide anteriore. Decomprime l'articolazione della spalla chiusa in avanti.",
+    "tips": "Non spingere con violenza. Respira profondamente e rilassa la spalla; la tensione deve essere piacevole, non dolorosa."
+  },
+  {
+    "name": "Stretch dorsale",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Lat-Pulldown-Stretch.gif",
+    "description": "Afferra un palo o una spalliera all'altezza del bacino. Spingi il sedere all'indietro lasciando che le braccia si tendano in avanti e inclina il busto.",
+    "biomechanics": "Allunga le fibre del gran dorsale e del grande rotondo, riducendo la rigidità della parte alta della schiena e delle spalle.",
+    "tips": "Rilassa il collo e lascia cadere la testa tra le braccia. Ruota leggermente il busto per enfatizzare un lato alla volta."
+  },
+  {
+    "name": "Stretch deltoide",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Shoulder-Stretch.gif",
+    "description": "Porta un braccio teso davanti al petto. Con l'altro braccio, afferra il gomito e tiralo verso di te stringendolo al torace.",
+    "biomechanics": "Allungamento della capsula posteriore della spalla e del deltoide posteriore.",
+    "tips": "Tieni la spalla del braccio che si allunga bassa, non farla salire verso l'orecchio."
+  },
+  {
+    "name": "Stretch tricipite",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Triceps-Stretch.gif",
+    "description": "Porta una mano dietro la nuca toccando la parte alta della schiena. Con l'altra mano afferra il gomito e tiralo dolcemente dietro la testa.",
+    "biomechanics": "Allunga i tre capi del tricipite, specialmente il capo lungo che si inserisce sulla scapola.",
+    "tips": "Non spingere la testa in avanti con il braccio; mantieni lo sguardo dritto davanti a te."
+  },
+  {
+    "name": "Stretch bicipite",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Biceps-Stretch.gif",
+    "description": "Di spalle a un muro o a un rack. Poggia il palmo della mano all'indietro con il braccio teso e ruota il busto in avanti.",
+    "biomechanics": "Allungamento del bicipite brachiale e dei flessori dell'avambraccio.",
+    "tips": "Assicurati che il pollice sia rivolto verso l'alto o verso il basso per trovare l'angolo di allungamento migliore senza pizzicare la spalla."
+  },
+  {
+    "name": "Stretch quadricipite",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Quad-Stretch.gif",
+    "description": "In piedi, fletti il ginocchio all'indietro afferrando la caviglia con la mano. Tira il tallone verso il gluteo.",
+    "biomechanics": "Allungamento dei quattro capi del quadricipite. Se l'anca viene estesa all'indietro, si allunga fortemente il retto femorale.",
+    "tips": "Mantieni le ginocchia vicine tra loro e contrai il gluteo della gamba che si allunga per stabilizzare il bacino."
+  },
+  {
+    "name": "Stretch femorale",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Hamstring-Stretch.gif",
+    "description": "Poggia il tallone di una gamba tesa su un rialzo. Fletti il busto in avanti partendo dalle anche, mantenendo la schiena dritta.",
+    "biomechanics": "Allungamento statico dei bicipiti femorali e della fascia poplitea dietro al ginocchio.",
+    "tips": "Non curvare la schiena per toccare la punta dei piedi; il movimento deve partire dalla rotazione del bacino (hip hinge)."
+  },
+  {
+    "name": "Stretch gluteo figura 4",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Glute-Stretch.gif",
+    "description": "Sdraiato supino, poggia la caviglia destra sul ginocchio sinistro. Afferra la coscia sinistra con le mani e tirala verso il petto.",
+    "biomechanics": "Mette l'anca in flessione ed extrarotazione, allungando piriforme, grande gluteo e muscoli rotatori profondi.",
+    "tips": "Esercizio eccellente per alleviare la tensione del nervo sciatico causata dalla rigidità del piriforme."
+  },
+  {
+    "name": "Stretch polpaccio",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Calf-Stretch.gif",
+    "description": "Poggia gli avampiedi su un gradino e lascia cadere i talloni verso il basso, oppure spingi contro un muro con la gamba posteriore tesa e il tallone a terra.",
+    "biomechanics": "Allungamento passivo del gastrocnemio e del tendine d'Achille.",
+    "tips": "Tieni il ginocchio teso per allungare il gastrocnemio; piega leggermente il ginocchio se vuoi allungare il muscolo soleo più profondo."
+  },
+  {
+    "name": "Stretch adduttori",
+    "group": "Stretching",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Adductor-Stretch.gif",
+    "description": "Seduto a terra, unisci le piante dei piedi (posizione a farfalla). Spingi delicatamente le ginocchia verso il basso usando i gomiti.",
+    "biomechanics": "Allungamento dei muscoli dell'interno coscia (adduttore lungo, breve, grande e gracile).",
+    "tips": "Tieni la schiena dritta e il petto in fuori. Non incurvarti verso i piedi."
+  },
+  {
+    "name": "Pancake stretch",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Seated-Straddle-Stretch.gif",
+    "description": "Seduto a terra a gambe divaricate il più possibile. Fletti il busto in avanti cercando di poggiare i gomiti o la pancia a terra.",
+    "biomechanics": "Allungamento estremo della catena posteriore, degli adduttori e mobilità attiva d'anca.",
+    "tips": "Se la schiena si curva troppo, siediti su un piccolo rialzo (un blocco yoga) per favorire la rotazione anteriore del bacino."
+  },
+  {
+    "name": "Cossack squat mobilità",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Dumbbell-Side-Lunge.gif",
+    "description": "Gambe molto divaricate. Scendi lateralmente su una gamba flettendo il ginocchio e tenendo l'altra tesa con la punta del piede rivolta al soffitto.",
+    "biomechanics": "Dinamico. Sviluppa mobilità articolare profonda d'anca, caviglia e allungamento degli adduttori.",
+    "tips": "Mantieni il tallone della gamba che si piega ben piantato a terra. Se si alza, non scendere troppo profondo."
+  },
+  {
+    "name": "Deep squat hold",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Wall-Sit.gif",
+    "description": "Scendi nella posizione più profonda di squat a corpo libero e mantienila passivamente per diversi secondi/minuti.",
+    "biomechanics": "Decompressione della colonna lombare, apertura delle anche e forte dorsiflessione della caviglia.",
+    "tips": "Usa i gomiti all'interno delle ginocchia per spingerle all'infuori. Se perdi l'equilibrio, afferrati a un palo del rack."
+  },
+  {
+    "name": "Cat cow",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/cat-cow.gif",
+    "description": "In quadrupedia. Alterna l'inarcamento della schiena verso l'alto (gobba del gatto) all'estensione verso il basso (mucca), coordinando il respiro.",
+    "biomechanics": "Mobilità segmentale della colonna vertebrale (flessione ed estensione lombare, toracica e cervicale).",
+    "tips": "Muoviti lentamente. Espira quando fai la gobba del gatto, inspira quando inarchi la schiena nella mucca."
+  },
+  {
+    "name": "World’s greatest stretch",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/worlds-greatest-stretch.gif",
+    "description": "Dalla posizione di affondo profondo, poggia la mano opposta a terra. Ruota il busto portando l'altro braccio teso verso il soffitto.",
+    "biomechanics": "Considerato il miglior esercizio di riscaldamento globale: unisce estensione dell'anca posteriore, flessione dell'anca anteriore e rotazione toracica.",
+    "tips": "Segui la mano che sale verso l'alto con lo sguardo per massimizzare la torsione della colonna toracica."
+  },
+  {
+    "name": "Affondo con rotazione",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/worlds-greatest-stretch.gif",
+    "description": "Esegui un affondo in avanti e ruota il busto verso il lato della gamba anteriore.",
+    "biomechanics": "Lavora sulla stabilità del core e sulla dissociazione tra l'anello pelvico (bloccato) e quello scapolare (che ruota).",
+    "tips": "Mantieni il ginocchio anteriore stabile; non farlo cedere verso l'interno mentre ruoti il busto."
+  },
+  {
+    "name": "Jefferson curl",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/03/Barbell-Jefferson-Curl.gif",
+    "description": "In piedi su un box con un peso leggero tra le mani. Arrotola la colonna vertebra dopo vertebra scendendo verso il basso a gambe tese, poi srotola tornando su.",
+    "biomechanics": "Rinforzo e allungamento della catena posteriore sotto carico progressivo tramite flessione spinale controllata.",
+    "tips": "Esercizio avanzato. Usa carichi molto leggeri inizialmente. Immagina di muovere una vertebra alla volta, sia in discesa che in salita."
+  },
+  {
+    "name": "Shoulder dislocazioni bastone",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2022/02/Broomstick-Shoulder-Dislocates.gif",
+    "description": "Impugna un bastone di legno con presa molto larga. Porta il bastone sopra la testa e fallo passare dietro la schiena fino ai glutei a braccia tese.",
+    "biomechanics": "Circonduzione articolare completa della spalla. Mobilizza la cuffia dei rotatori sul piano frontale.",
+    "tips": "Se le braccia si piegano durante il passaggio dietro la schiena, allarga di più la presa delle mani sul bastone."
+  },
+  {
+    "name": "Mobilità anche 90/90",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/90-90-hip-switch.gif",
+    "description": "Seduto a terra, piega la gamba anteriore a 90° e quella posteriore a 90°. Senza staccare i talloni, ruota le ginocchia dall'altro lato.",
+    "biomechanics": "Allena la rotazione interna di un'anca e la rotazione esterna dell'altra contemporaneamente.",
+    "tips": "Tieni il petto alto e cerca di non usare le mani poggiate a terra per stabilizzarti (se la mobilità lo consente)."
+  },
+  {
+    "name": "Hip CARs",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Hip-Cars.gif",
+    "description": "In quadrupedia o in piedi appoggiato a un muro. Solleva il ginocchio, aprilo lateralmente, ruota l'anca all'indietro e chiudi il cerchio.",
+    "biomechanics": "Rotazioni articolari controllate (CARs). Isolano l'articolazione dell'anca muovendola nel suo massimo perimetro fisiologico senza compensi lombari.",
+    "tips": "Immagina che la gamba si muova nel fango denso; crea tensione interna e non muovere la schiena mentre la gamba gira."
+  },
+  {
+    "name": "Shoulder CARs",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Shoulder-Cars.gif",
+    "description": "In piedi, braccio teso lungo il fianco. Sollevalo in avanti, ruota la mano verso l'esterno quando arrivi sopra la testa e chiudi la circonduzione dietro la schiena.",
+    "biomechanics": "Valutazione e rinforzo attivo della capsula articolare della spalla in tutti i suoi piani di movimento.",
+    "tips": "Non ruotare il torace o il busto per far girare il braccio; il petto deve rimanere immobile e rivolto in avanti."
+  },
+  {
+    "name": "Mobilità caviglia",
+    "group": "Mobilità",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Ankle-Mobility.gif",
+    "description": "In ginocchio davanti a un muro (posizione affondo). Spingi il ginocchio in avanti oltre la punta del piede senza mai staccare il tallone da terra.",
+    "biomechanics": "Migliora la dorsiflessione della caviglia (scorrimento dell'astragalo), fondamentale per sbloccare la profondità dello squat.",
+    "tips": "Puoi poggiare un peso (un manubrio o disco) sopra il ginocchio per forzare dolcemente la spinta in avanti."
+  },
+  {
+    "name": "External rotation elastico",
+    "group": "Cuffia / Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Banded-External-Rotation.gif",
+    "description": "Fissa l'elastico all'altezza del gomito. Afferralo lateralmente e ruota l'avambraccio verso l'esterno tenendo il gomito attaccato al fianco.",
+    "biomechanics": "Isolamento degli extrarotatori della cuffia dei rotatori (sottospinato e piccolo rotondo). Rinforza la stabilità posteriore della spalla.",
+    "tips": "Metti un asciugamano arrotolato tra il gomito e il fianco. Ti costringerà a non staccare il braccio dal busto barando con il deltoide."
+  },
+  {
+    "name": "Internal rotation elastico",
+    "group": "Cuffia / Spalle",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/Banded-Internal-Rotation.gif",
+    "description": "Fissa l'elastico lateralmente. Tira l'elastico verso l'ombelico ruotando l'avambraccio verso l'interno, mantenendo il gomito fisso al fianco.",
+    "biomechanics": "Isolamento dell'intrarotatore della cuffia dei rotatori (sottoscapolare) e del grande pettorale.",
+    "tips": "Usa una resistenza elastica molto leggera. La cuffia dei rotatori risponde meglio ad alte ripetizioni e tensione controllata."
+  },
+  {
+    "name": "Scapular pull-up",
+    "group": "Dorso / Scapole",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Scapula-Pull-ups.gif",
+    "description": "Appeso alla sbarra a braccia completamente tese. Abbassa le scapole (depressione) sollevando il corpo di pochi centimetri senza piegare i gomiti.",
+    "biomechanics": "Attivazione pura del trapezio inferiore e del gran dentato. Insegna ad iniziare la trazione alla sbarra con la schiena e non con le braccia.",
+    "tips": "Immagina di voler allontanare le orecchie dalle spalle. I gomiti rimangono rigidi come dei pali."
+  },
+  {
+    "name": "Scapular push-up",
+    "group": "Petto / Scapole",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Scapula-Push-ups.gif",
+    "description": "In posizione di plank alto sulle mani. Senza piegare i gomiti, avvicina le scapole facendo scendere il petto e poi spingile verso l'alto allontanandole (creando una gobba).",
+    "biomechanics": "Isolamento del muscolo gran dentato (serratus anterior), fondamentale per la salute della spalla e la stabilità della scapola sulla gabbia toracica.",
+    "tips": "Il petto sale e scende solo grazie al movimento delle scapole dietro la schiena. Le braccia restano tese."
+  },
+  {
+    "name": "Y-T-W su panca",
+    "group": "Spalle / Postura",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/05/Prone-Y-Extension.gif",
+    "description": "Sdraiato prono su panca inclinata a 30° con pesi leggerissimi. Solleva le braccia tese formando una Y, poi una T (apertura laterale) e infine una W (gomiti flessi e retrazione).",
+    "biomechanics": "Colpisce selettivamente i trapezi medi, inferiori, romboidi e deltoidi posteriori. Corregge la postura ipercifotica (spalle curve).",
+    "tips": "I pollici devono essere rivolti verso l'alto durante i movimenti per favorire l'extrarotazione dell'omero."
+  },
+  {
+    "name": "Bird dog",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/04/bird-dog-exercise.gif",
+    "description": "In quadrupedia a terra. Solleva e distendi contemporaneamente il braccio destro in avanti e la gamba sinistra all'indietro. Mantieni il corpo allineato.",
+    "biomechanics": "Stabilità anti-rotazione e anti-flessione del core. Fortifica gli erettori spinali e la coordinazione controlaterale.",
+    "tips": "Non calciare la gamba troppo in alto inarcando la schiena; deve essere in linea retta con il gluteo e il busto."
+  },
+  {
+    "name": "Pallof press dinamico",
+    "group": "Addome / Core",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Pallof-Press.gif",
+    "description": "In piedi di lato al cavo. Distendi le braccia in avanti (Pallof classico) e muovile disegnando piccoli cerchi o alzandole sopra la testa senza ruotare il bacino.",
+    "biomechanics": "Porta l'anti-rotazione del core a un livello superiore inserendo perturbazioni dinamiche che destabilizzano la postura.",
+    "tips": "Stringi i glutei e i piedi a terra. Se il bacino ruota anche di un millimetro verso il cavo, il peso è troppo alto."
+  },
+  {
+    "name": "Face pull leggero",
+    "group": "Spalle / Postura",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/02/Cable-Face-Pull.gif",
+    "description": "Al cavo alto con la corda. Tira verso gli occhi/fronte con carico molto basso concentrandoti sulla rotazione finale del polso e l'apertura.",
+    "biomechanics": "A differenza della versione pesante di forza, qui si cerca l'attivazione propriocettiva della cuffia dei rotatori e del trapezio.",
+    "tips": "Usa questo esercizio come attivazione nel riscaldamento prima della panca piana per preparare la spalla a ricevere carichi."
+  },
+  {
+    "name": "Wall slide",
+    "group": "Spalle / Postura",
+    "gif": "https://fitnessprogramer.com/wp-content/uploads/2021/10/Wall-Slide.gif",
+    "description": "Schiena, glutei, gomiti e dorso delle mani aderenti al muro. Fai scivolare le braccia verso l'alto e verso il basso senza staccare i punti di contatto dal muro.",
+    "biomechanics": "Mobilità toracica e controllo scapolare attivo. Valuta la rigidità del piccolo pettorale e dei rotatori interni.",
+    "tips": "Se le mani o i gomiti si staccano dal muro mentre sali, significa che hai le spalle rigide e chiuse in avanti; sali solo finché riesci a tenere il contatto."
+  }
+]
