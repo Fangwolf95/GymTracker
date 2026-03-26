@@ -1043,7 +1043,7 @@ function clearAll() {
 
 // ===== LIBRERIA E GESTIONE JSON =====
 
-let exDatabase = []; // Database globale degli esercizi (JSON + Custom)
+exDatabase = []; // Database globale degli esercizi (JSON + Custom)
 
 async function inizializzaLibreria() {
     try {
