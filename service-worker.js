@@ -27,6 +27,7 @@ self.addEventListener('activate', event => {
 
 // Fetch: serve dalla cache, aggiorna in background (stale-while-revalidate)
 self.addEventListener('fetch', event => {
+    if (!event.request.url.startsWith('http')) return;
     event.respondWith(
         caches.match(event.request).then(cached => {
             const fetchPromise = fetch(event.request).then(response => {

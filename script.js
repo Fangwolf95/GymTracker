@@ -1086,6 +1086,10 @@ function renderLibrary(filteredList = null) {
         filteredList = [...exDatabase, ...customEx];
     }
 
+    if (!Array.isArray(filteredList)) {
+        filteredList = [];
+    }
+
     // Ordina alfabeticamente
     filteredList.sort((a, b) => a.name.localeCompare(b.name));
 
