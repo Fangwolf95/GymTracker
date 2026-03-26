@@ -1052,7 +1052,23 @@ async function inizializzaLibreria() {
         // ✅ MODIFICA QUI: Se il JSON fallisce o è vuoto, usa un array vuoto []
         exDatabase = (await response.json()) || []; 
 
-        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || []; 
+        let customEx = [];
+        try {
+            const localData = localStorage.getItem('gymCustomExercises');
+            if (localData) {
+                customEx = JSON.parse(localData);
+            }
+            
+            // 🔥 IL CONTROLLO MAGICO: Se non è un array, lo resettiamo noi nel codice!
+            if (!Array.isArray(customEx)) {
+                console.warn("Dati corrotti trovati nel telefono. Reset automatico a []");
+                customEx = [];
+                localStorage.setItem('gymCustomExercises', '[]'); // Lo corregge da solo per la prossima volta!
+            }
+        } catch (e) {
+            customEx = [];
+            localStorage.setItem('gymCustomExercises', '[]'); // Se crasha il JSON.parse, lo resetta da solo!
+        } 
         
         const fullDb = [...exDatabase, ...customEx];
 
