@@ -1066,7 +1066,6 @@ async function inizializzaLibreria() {
         console.error("Impossibile caricare esercizi.json da GitHub:", error);
         
         // ✅ Se il fetch fallisce del tutto, forziamo exDatabase a essere un array vuoto per evitare crash futuri
-        exDatabase = []; 
         const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
         
         if (typeof renderLibrary === 'function') {
