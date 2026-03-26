@@ -1041,30 +1041,23 @@ function clearAll() {
     }
 }
 
-// ===== LIBRERIA E GESTIONE JSON =====
-
-exDatabase = []; // Database globale degli esercizi (JSON + Custom)
-
 async function inizializzaLibreria() {
     try {
-        // 1. Usiamo './' per dire a GitHub Pages di cercare nella stessa cartella
         const response = await fetch('./esercizi.json');
         
         if (!response.ok) {
             throw new Error(`Errore HTTP! Stato: ${response.status}`);
         }
 
-        // 2. Salviamo i dati direttamente dentro la variabile GLOBALE exDatabase
-        exDatabase = await response.json(); 
+        // ✅ MODIFICA QUI: Se il JSON fallisce o è vuoto, usa un array vuoto []
+        exDatabase = (await response.json()) || []; 
 
         const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || []; 
         
-        // 3. Ora fullDb unisce il JSON scaricato + quelli del localStorage senza crashare
         const fullDb = [...exDatabase, ...customEx];
 
         console.log(`Libreria inizializzata. Esercizi base: ${exDatabase.length}, Custom: ${customEx.length}`);
 
-        // 4. RICORDATI DI DISEGNARE LA LIBRERIA!
         if (typeof renderLibrary === 'function') {
             renderLibrary(fullDb); 
         }
@@ -1072,7 +1065,8 @@ async function inizializzaLibreria() {
     } catch (error) {
         console.error("Impossibile caricare esercizi.json da GitHub:", error);
         
-        // Se GitHub fallisce, prendiamo i custom dal localStorage senza distruggere exDatabase
+        // ✅ Se il fetch fallisce del tutto, forziamo exDatabase a essere un array vuoto per evitare crash futuri
+        exDatabase = []; 
         const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
         
         if (typeof renderLibrary === 'function') {
