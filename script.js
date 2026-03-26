@@ -1,4 +1,5 @@
 // ===== STATE =====
+var exDatabase = [];
 var countdown;
 var activeProg = null;
 var currentRest = 90;
@@ -7,6 +8,7 @@ var currentCommentKey = null; // chiave esercizio per modale commento
 var wakeLock = null;
 var sessionStartTime = null;
 var sessionClockInterval = null;
+
 
 // ===== INIT =====
 window.onload = function () {
@@ -1045,14 +1047,37 @@ let exDatabase = []; // Database globale degli esercizi (JSON + Custom)
 
 async function inizializzaLibreria() {
     try {
-        const response = await fetch('esercizi.json');
-        const data = await response.json();
-        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-        exDatabase = [...data, ...customEx];
-        console.log(`Libreria inizializzata. Totale: ${exDatabase.length} esercizi.`);
+        // 1. Usiamo './' per dire a GitHub Pages di cercare nella stessa cartella
+        const response = await fetch('./esercizi.json');
+        
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Stato: ${response.status}`);
+        }
+
+        // 2. Salviamo i dati direttamente dentro la variabile GLOBALE exDatabase
+        exDatabase = await response.json(); 
+
+        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || []; 
+        
+        // 3. Ora fullDb unisce il JSON scaricato + quelli del localStorage senza crashare
+        const fullDb = [...exDatabase, ...customEx];
+
+        console.log(`Libreria inizializzata. Esercizi base: ${exDatabase.length}, Custom: ${customEx.length}`);
+
+        // 4. RICORDATI DI DISEGNARE LA LIBRERIA!
+        if (typeof renderLibrary === 'function') {
+            renderLibrary(fullDb); 
+        }
+
     } catch (error) {
-        console.error("Impossibile caricare esercizi.json:", error);
-        exDatabase = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
+        console.error("Impossibile caricare esercizi.json da GitHub:", error);
+        
+        // Se GitHub fallisce, prendiamo i custom dal localStorage senza distruggere exDatabase
+        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
+        
+        if (typeof renderLibrary === 'function') {
+            renderLibrary(customEx);
+        }
     }
 }
 
