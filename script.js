@@ -1082,6 +1082,7 @@ function renderLibrary(filteredList = null) {
 
     if (!filteredList) {
         const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
+        const baseDb = Array.isArray(exDatabase) ? exDatabase : [];
         filteredList = [...exDatabase, ...customEx];
     }
 
