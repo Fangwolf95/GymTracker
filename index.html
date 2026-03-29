@@ -6,7 +6,7 @@
     <title>AZ GymTracker</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00adb5">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="AZ Gym">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -21,128 +21,82 @@
         <div class="nav-menu">
             <button onclick="switchMode('training')" id="nav-training" class="nav-active">Allenamento</button>
             <button onclick="switchMode('setup')" id="nav-setup">Programma</button>
-            <button onclick="switchMode('libreria')" id="nav-libreria">Libreria</button>
             <button onclick="switchMode('stats')" id="nav-stats">Stats</button>
         </div>
 
         <!-- ===== SETUP SECTION ===== -->
         <div id="setup-section" class="mode-section" style="display:none;">
-    
-            <div class="sub-tab-menu" style="display: flex; gap: 8px; margin-bottom: 20px; padding: 6px; border-radius: 12px;">
-                <button onclick="switchSetupSubTab('view')" id="subnav-view" class="sub-tab-btn active" style="flex: 1;">
-                    📂 Archivio
-                </button>
-                <button onclick="switchSetupSubTab('create')" id="subnav-create" class="sub-tab-btn" style="flex: 1;">
-                    📝 Crea
-                </button>
-                <button onclick="switchSetupSubTab('bulk')" id="subnav-bulk" class="sub-tab-btn" style="flex: 1;">
-                    ⚡ Import/Export
-                </button>
+            <div class="card-editor" style="border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 15px;">
+                <label><small>Gestisci programma esistente:</small></label>
+                <select id="editProgSelect" onchange="syncEditorProg()" style="border-color: var(--main); margin-top:5px;">
+                    <option value="">-- Seleziona Programma --</option>
+                </select>
             </div>
 
-            <div id="setup-view-area">
-                <div id="program-selector-area">
-                    <h4 style="color: var(--text-secondary); margin-top: 0;">📂 Archivio Schede</h4>
-                    <div id="saved-programs-list" class="mini-list" style="margin-bottom: 20px;">
-                        </div>
+            <div id="new-prog-area" class="card-editor">
+                <h4 style="margin:0 0 10px 0; color:var(--accent);">🆕 Crea Nuovo Programma</h4>
+                <input type="text" id="progName" placeholder="Nome (es. Idro Pump 2)">
+                <input type="number" id="progWeeks" placeholder="Durata (settimane)">
+                <button class="btn-add" onclick="initEditor()">Crea e Apri</button>
+            </div>
+
+            <div id="editor-controls" style="display:none; margin-top:15px;">
+                <div style="background: #111; padding: 15px; border-radius: 15px; border: 1px solid var(--main);">
+                    <h4 id="editing-title" style="margin-top:0; color:var(--main);">Editando: -</h4>
+                    <label><small>Giorno:</small></label>
+                    <div class="row">
+                        <select id="editDaySelect" onchange="refreshEditorTable()" style="flex:1"></select>
+                        <input type="text" id="dayName" placeholder="O scrivi nuovo" style="flex:1">
+                    </div>
                 </div>
 
-                <div id="editor-controls" style="display:none; transition: all 0.3s;">
-                    
-                    <div class="card-editor" style="margin-bottom: 10px; border: 1px solid var(--border); background: var(--card2);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3 id="editing-title" style="margin:0; color:var(--main);">NOME SCHEDA</h3>
-                            <button onclick="closeEditor()" style="background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer;">✖</button>
-                        </div>
-                        <p style="font-size:0.8rem; color:var(--text-secondary); margin: 5px 0 0 0;">Modifica gli esercizi o trascinali per riordinarli.</p>
-                    </div>
+                <div id="editor-preview" style="margin-top:20px;">
+                    <h5 style="margin-bottom:10px;">Esercizi salvati:</h5>
+                    <div id="preview-table"></div>
+                </div>
 
-                    <div class="card-editor" style="margin-bottom: 10px; border: 1px solid var(--border); background: var(--card2);">
-                        <h4 style="color:var(--text); margin-top:0; margin-bottom:10px;">➕ Aggiungi Esercizio</h4>
-                        
-                        <input type="text" id="addExName" list="library-datalist" placeholder="Nome esercizio...">
-                        
-                        <div class="input-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 5px;">
-                            <input type="text" id="addExSets" placeholder="Set" style="margin-bottom:0;">
-                            <input type="text" id="addExReps" placeholder="Reps" style="margin-bottom:0;">
-                            <input type="number" id="addExRest" placeholder="Rest(s)" value="90" style="margin-bottom:0;">
-                            <input type="number" id="addExPerc" placeholder="%" value="0" style="margin-bottom:0;">
-                        </div>
-                        
-                        <input type="text" id="addExNote" placeholder="Note (opzionale)..." style="margin-top:10px;">
-                        
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
-                            <label style="font-size:0.85rem; color:var(--text-secondary);">
-                                <input type="checkbox" id="addExLinked" style="width:auto; margin:0 5px 0 0; vertical-align:middle;"> Collega al precedente (Superset)
-                            </label>
-                            <button onclick="addExToProg()" class="btn-add" style="width:auto; padding: 10px 20px;">Aggiungi</button>
-                        </div>
+                <div class="card-editor" style="background:#222; margin-top:20px;">
+                    <h5 style="margin-top:0;">Aggiungi Esercizio:</h5>
+                    <div class="input-grid">
+                        <input type="text" id="exName" placeholder="Esercizio">
+                        <input type="number" id="exPerc" placeholder="%">
+                        <input type="number" id="exSets" placeholder="Set">
+                        <input type="text" id="exReps" placeholder="Reps">
                     </div>
+                    <div class="row">
+                        <input type="number" id="exRest" placeholder="Recup. (sec)" style="flex:1">
+                        <input type="text" id="exNote" placeholder="Note" style="flex:2">
+                    </div>
+                    <div class="row">
+                        <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
+                        <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
+                    </div>
+                </div>
 
-                    <div class="card-editor" style="border: 1px solid var(--border); background: var(--card2);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <h4 style="color:var(--text); margin:0;">🔄 Trascina per riordinare</h4>
-                            <select id="editDaySelect" onchange="refreshEditorTable()" style="width:auto; margin:0; padding: 6px 12px; font-size: 0.85rem;"></select>
-                        </div>
-                        
-                        <div id="preview-table">
-                            </div>
-                        
-                        <div id="reorder-list-container" class="reorder-list" style="margin-top: 15px;">
-                            </div>
-                    </div>
+                <!-- Riordino esercizi -->
+                <div class="card-editor" style="background:#1a1a1a; margin-top:15px;">
+                    <h5 style="margin-top:0; color:#aaa;">↕️ Riordina Esercizi</h5>
+                    <p style="font-size:0.8rem; color:#666; margin:0 0 8px 0;">Trascina per cambiare l'ordine</p>
+                    <div id="reorder-list"></div>
+                    <button class="btn-secondary" style="margin-top:10px;" onclick="saveReorder()">💾 Salva Ordine</button>
                 </div>
             </div>
 
-            <div id="setup-create-area" style="display:none;">
-                <h4 style="color: var(--accent); margin-top: 0;">📝 Creazione Guidata Nuova Scheda</h4>
-                
-                <div style="background: var(--card2); padding: 15px; border-radius: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;">
-                    
-                    <div>
-                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 5px;">Nome della Scheda *</label>
-                        <input type="text" id="create-nome-scheda" placeholder="Es: Massa Invernale, Forza Autunno...">
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div>
-                            <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 5px;">Durata (Settimane)</label>
-                            <input type="number" id="create-durata-scheda" value="6" min="1">
-                        </div>
-                        <div>
-                            <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 5px;">Giorni a Settimana</label>
-                            <input type="number" id="create-giorni-count" value="3" min="1" max="7">
-                        </div>
-                    </div>
-
-                    <button class="btn-add" onclick="generaSchedaGuidata()" style="margin-top: 10px; width: 100%; font-weight: bold; background: var(--accent); color: #000;">🚀 Genera Scheda vuota</button>
-                </div>
+            <div class="card-editor" style="margin-top:40px; border: 1px dashed #555; opacity: 0.8;">
+                <h4 style="margin:0 0 5px 0;">⚡ Bulk Import</h4>
+                <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Squat;80;4;6;120;note&#10;*Leg Press;0;3;12;90;superserie"></textarea>
+                <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
             </div>
 
-            <div id="setup-bulk-area" style="display:none;">
-                <h4 style="color: var(--main); margin-top: 0;">⚡ Import / Export Testo</h4>
-                
-                <div style="background: var(--card2); padding: 15px; border-radius: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;">
-                    
-                    <div>
-                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 5px;">Seleziona la scheda da esportare:</label>
-                        <select id="export-select-scheda" style="margin-bottom: 10px;"></select>
-                        <button class="btn-add" onclick="esportaSchedaTesto()" style="width: 100%; background: var(--main); color: #fff;">📤 Genera Testo Esportazione</button>
-                    </div>
-
-                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 5px 0;">
-
-                    <div>
-                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 5px;">Testo della Scheda (Copia o Incolla qui):</label>
-                        <textarea id="bulk-text-area" style="width: 100%; height: 180px; background: var(--input-bg); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 10px; font-family: monospace; font-size: 0.8rem; resize: vertical;" placeholder="Nome Scheda; Durata Settimane..."></textarea>
-                    </div>
-
-                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 5px 0;">
-
-                    <div>
-                        <button class="btn-add" onclick="importaSchedaTesto()" style="width: 100%; background: var(--accent); color: #000; font-weight: bold;">📥 Importa Testo come Nuova Scheda</button>
-                    </div>
+            <!-- Export / Import -->
+            <div class="card-editor" style="margin-top:20px; border:1px solid #333;">
+                <h4 style="margin:0 0 10px 0;">💾 Backup Dati</h4>
+                <div class="row">
+                    <button class="btn-add" onclick="exportData()" style="flex:1;">⬇️ Esporta JSON</button>
+                    <button class="btn-secondary" onclick="document.getElementById('importFile').click()" style="flex:1;">⬆️ Importa JSON</button>
                 </div>
+                <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+                <small style="color:#666; display:block; margin-top:5px;">Esporta per backup o trasferimento su altro dispositivo.</small>
             </div>
         </div>
 
@@ -163,54 +117,6 @@
                     <button id="btn-auto-timer" class="btn-timer" style="background:var(--main); color:white" onclick="startTimer(currentRest)">Recupero</button>
                     <button class="btn-timer" onclick="startTimer(60)">+60s</button>
                     <button class="btn-stop" onclick="stopTimer()">Reset</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== LIBRERIA SECTION ===== -->
-         <div id="libreria-section" class="mode-section" style="display:none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h3 style="color: var(--main); margin: 0;">📚 Libreria Esercizi</h3>
-                <button class="btn-add" onclick="openAddExerciseModal()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">➕ Nuovo</button>
-            </div>
-            
-            <input type="text" id="search-library" placeholder="🔍 Cerca esercizio..." oninput="filterLibrary()">
-            
-            <div id="library-list" style="display:flex; flex-direction:column; gap:10px;">
-                </div>
-        </div>
-
-        <div id="info-modal" class="modal-overlay" style="display:none;">
-            <div class="modal-box" style="max-height: 85vh; overflow-y: auto;">
-                <h4 id="info-modal-title" style="color: var(--main); margin-top:0;">📖 NOME ESERCIZIO</h4>
-                <div id="info-modal-content"></div>
-                <button class="btn-secondary" onclick="closeInfoModal()" style="margin-top: 15px; width: 100%;">Chiudi</button>
-            </div>
-        </div>
-
-        <div id="add-exercise-modal" class="modal-overlay" style="display:none;">
-            <div class="modal-box" style="max-height: 85vh; overflow-y: auto;">
-                <h4 style="color: var(--main); margin-top: 0;">🆕 Nuovo Esercizio Personale</h4>
-                
-                <input type="text" id="new-ex-name" placeholder="Nome Esercizio *">
-
-                <select id="new-ex-group">
-                    <option value="Petto">Petto</option>
-                    <option value="Dorso">Dorso</option>
-                    <option value="Gambe">Gambe</option>
-                    <option value="Spalle">Spalle</option>
-                    <option value="Braccia">Braccia</option>
-                    <option value="Addome">Addome</option>
-                    <option value="Altro">Altro</option>
-                </select>
-
-                <textarea id="new-ex-desc" placeholder="Esecuzione..." style="height: 70px; resize: none;"></textarea>
-                <textarea id="new-ex-biomech" placeholder="Note Biomeccaniche..." style="height: 60px; resize: none;"></textarea>
-                <textarea id="new-ex-tips" placeholder="Tips Tecnici..." style="height: 60px; resize: none;"></textarea>
-
-                <div class="row" style="margin-top: 15px;">
-                    <button class="btn-add" onclick="salvaNuovoEsercizio()" style="flex: 1.5;">💾 Salva</button>
-                    <button class="btn-secondary" onclick="closeAddExerciseModal()" style="flex: 1;">Annulla</button>
                 </div>
             </div>
         </div>
@@ -243,7 +149,7 @@
             <h4 style="color:var(--text); margin-top:0;">✏️ Modifica Esercizio</h4>
             <input type="text" id="edit-ex-name" placeholder="Nome esercizio">
             <div class="input-grid">
-                <input type="text" id="edit-ex-perc" placeholder="%">
+                <input type="number" id="edit-ex-perc" placeholder="%">
                 <input type="number" id="edit-ex-sets" placeholder="Serie">
                 <input type="text" id="edit-ex-reps" placeholder="Reps">
                 <input type="number" id="edit-ex-rest" placeholder="Rec. (s)">
@@ -285,7 +191,7 @@
     </div>
 
     <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

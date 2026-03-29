@@ -1,5 +1,4 @@
 // ===== STATE =====
-var exDatabase = [];
 var countdown;
 var activeProg = null;
 var currentRest = 90;
@@ -9,24 +8,14 @@ var wakeLock = null;
 var sessionStartTime = null;
 var sessionClockInterval = null;
 
-
 // ===== INIT =====
 window.onload = function () {
-    // Definire quali chiavi devono essere Array [] e quali Oggetti {}
-    const arrayKeys = ['gymSessionLogs', 'gymCustomExercises'];
-    const objectKeys = ['gymMaxes', 'gymProgs', 'gymDrafts', 'gymComments'];
-
-    arrayKeys.forEach(k => {
-        if (!localStorage.getItem(k) || localStorage.getItem(k) === '{}') localStorage.setItem(k, '[]');
+    ['gymMaxes','gymProgs','gymSessionLogs','gymDrafts','gymComments'].forEach(k => {
+        if (!localStorage.getItem(k)) localStorage.setItem(k, k === 'gymSessionLogs' ? '[]' : '{}');
     });
-    objectKeys.forEach(k => {
-        if (!localStorage.getItem(k) || localStorage.getItem(k) === '[]') localStorage.setItem(k, '{}');
-    });
-
     applyTheme();
     refreshDropdowns();
     renderStats();
-    inizializzaLibreria();
     switchMode('training');
 };
 
@@ -46,52 +35,24 @@ function toggleTheme() {
 
 // ===== NAV =====
 function switchMode(m) {
-    ['setup', 'training', 'stats','libreria'].forEach(s => {
+    ['setup', 'training', 'stats'].forEach(s => {
         document.getElementById(s + '-section').style.display = (m === s ? 'block' : 'none');
         const btn = document.getElementById('nav-' + s);
         if (btn) btn.classList.toggle('nav-active', m === s);
     });
     if (m === 'stats') { renderStats(); populateStatsExSelect(); }
-    if (m === 'libreria') { renderLibrary(); } // Disegna la lista quando ci clicchi
-    if (m === 'setup') { switchSetupSubTab('view'); }
     refreshDropdowns();
 }
 
 // ===== DROPDOWNS =====
 function refreshDropdowns() {
-    const progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    const pSel = document.getElementById('selectProg');
-    const dSel = document.getElementById('selectDay');
-
-    // 1. Aggiorna la tendina della scheda SOLO SE esiste nella pagina corrente
-    if (pSel) {
-        let pOpts = '<option value="">-- Scegli Scheda --</option>';
-        for (let p in progs) {
-            pOpts += `<option value="${p}">${p.toUpperCase()}</option>`;
-        }
-        pSel.innerHTML = pOpts;
-    }
-
-    // 2. Aggiorna la tendina del giorno SOLO SE esiste nella pagina corrente
-    if (dSel) {
-        const active = pSel ? pSel.value : null;
-        let dOpts = '<option value="">-- Scegli Giorno --</option>';
-        if (active && progs[active]) {
-            for (let d in progs[active]) {
-                if (d !== '_duration') dOpts += `<option value="${d}">${d}</option>`;
-            }
-        }
-        dSel.innerHTML = dOpts;
-    }
-
-    // 3. Se esiste la lista dell'archivio visivo nel DOM, la aggiorna
-    const savedList = document.getElementById('saved-programs-list');
-    if (savedList) {
-        // Chiamiamo la funzione solo se l'elemento visivo esiste a schermo
-        if (typeof renderSavedProgramsList === "function") {
-            renderSavedProgramsList();
-        }
-    }
+    const s = JSON.parse(localStorage.getItem('gymProgs'));
+    const selTraining = document.getElementById('selectProg');
+    const selEdit = document.getElementById('editProgSelect');
+    let opts = '<option value="">-- Seleziona Programma --</option>';
+    for (let p in s) opts += `<option value="${p}">${p}</option>`;
+    selTraining.innerHTML = opts;
+    selEdit.innerHTML = opts;
 }
 
 // ===== SESSION PERSISTENCE =====
@@ -143,27 +104,27 @@ function syncEditorProg() {
 
 function refreshEditorTable() {
     const selDay = document.getElementById('editDaySelect').value;
+    const inputDay = document.getElementById('dayName').value.trim();
+    const day = selDay || inputDay;
     const container = document.getElementById('preview-table');
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-
-    if (!selDay || !progs[activeProg] || !progs[activeProg][selDay]) {
-        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio in questa giornata.</p>";
+    let progs = JSON.parse(localStorage.getItem('gymProgs'));
+    if (!day || !progs[activeProg] || !progs[activeProg][day]) {
+        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio salvato.</p>";
+        document.getElementById('reorder-list').innerHTML = '';
         return;
     }
-
     let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
-    progs[activeProg][selDay].forEach((ex, idx) => {
-        html += `<tr style='border-bottom:1px solid #333'>
+    progs[activeProg][day].forEach((ex, idx) => {
+        html += `<tr style='border-bottom:1px solid var(--border)'>
             <td style='padding:10px;'>${ex.linked ? '🔗' : ''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s${ex.note ? ' · ' + ex.note : ''}</small></td>
             <td style='text-align:right; white-space:nowrap;'>
-                <button onclick="openEditModal('${selDay}', ${idx})" style='background:none; border:none; color:var(--main); font-size:1.1rem; cursor:pointer; padding:4px 6px; margin-right:5px;'>✏️</button>
-                <button onclick="removeEx('${selDay}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer; padding:4px 6px;'>✖</button>
+                <button onclick="openEditModal('${day}', ${idx})" style='background:none; border:none; color:var(--main); font-size:1.1rem; cursor:pointer; padding:4px 6px;'>✏️</button>
+                <button onclick="removeEx('${day}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer; padding:4px 6px;'>✖</button>
             </td>
         </tr>`;
     });
     container.innerHTML = html + '</table>';
-    
-    renderReorderList(selDay);
+    renderReorderList(day);
 }
 
 // ===== REORDER =====
@@ -224,7 +185,6 @@ function openEditModal(day, idx) {
 function saveEditModal() {
     const name = document.getElementById('edit-ex-name').value.trim();
     if (!name) return alert('Il nome è obbligatorio');
-    
     let progs = JSON.parse(localStorage.getItem('gymProgs'));
     progs[activeProg][editDay][editIdx] = {
         name,
@@ -237,9 +197,7 @@ function saveEditModal() {
     };
     localStorage.setItem('gymProgs', JSON.stringify(progs));
     closeEditModal();
-    
-    refreshDropdowns(); // ✅ Avvisa l'allenamento del cambio nome/peso
-    refreshEditorTable(); // ✅ Ricarica la tabella dell'archivio visivo
+    refreshEditorTable();
 }
 
 function closeEditModal() {
@@ -509,13 +467,9 @@ function startWorkout(isRestore) {
             ? `<span class="ex-target deload-target">${deloadTarget}kg <small>(-15%)</small></span>`
             : `<span class="ex-target">${target > 0 ? target + 'kg' : '--'}</span>`;
 
-        // Modifichiamo solo la variabile cardHtml per aggiungere l'icona Info
         const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}" id="card-${idx}" style="${isDone ? 'opacity:0.5; border-color:#555;' : ''}">
-            <div class="ex-header" style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <strong style="color: var(--main);">${ex.name.toUpperCase()}</strong>
-                    <span onclick="openInfoModal('${ex.name.replace(/'/g, "\\'")}')" style="cursor: pointer; font-size: 1.1rem; color: var(--accent); user-select: none;">ℹ️</span>
-                </div>
+            <div class="ex-header">
+                <strong>${ex.name.toUpperCase()}</strong>
                 <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
             </div>
             <div class="ex-header" style="margin-top:5px;">
@@ -525,9 +479,9 @@ function startWorkout(isRestore) {
             <div class="ex-last">Ultima: ${lastDisplay}</div>
             ${suggestion}
             <div class="row" style="margin-top:10px;">
-                <input type="text" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})" style="flex:2">
-                <input type="text" id="r_${idx}" placeholder="Reps" value="${restoredReps}" oninput="saveDraft(${idx})" style="flex:1; min-width:60px;">
-                <button class="btn-ok" onclick="confirmSet('${ex.name.replace(/'/g, "\\'")}', ${ex.perc}, ${idx}, ${ex.rest}, ${ex.sets})">OK</button>
+                <input type="number" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})" style="flex:2">
+                <input type="number" id="r_${idx}" placeholder="Reps" value="${restoredReps}" oninput="saveDraft(${idx})" style="flex:1; min-width:60px;">
+                <button class="btn-ok" onclick="confirmSet('${ex.name}', ${ex.perc}, ${idx}, ${ex.rest}, ${ex.sets})">OK</button>
             </div>
             <button class="${commentClass}" id="comment-btn-${idx}" onclick="openCommentModal('${commentKey}', ${idx})">${commentLabel}</button>
         </div>`;
@@ -1046,563 +1000,5 @@ function clearLogs() {
 function clearAll() {
     if (confirm('Cancellare tutto? Questa operazione è irreversibile.')) {
         localStorage.clear(); location.reload();
-    }
-}
-
-async function inizializzaLibreria() {
-    try {
-        const response = await fetch('./esercizi.json');
-        
-        if (!response.ok) {
-            throw new Error(`Errore HTTP! Stato: ${response.status}`);
-        }
-
-        // ✅ MODIFICA QUI: Se il JSON fallisce o è vuoto, usa un array vuoto []
-        exDatabase = (await response.json()) || []; 
-
-        let customEx = [];
-        try {
-            const localData = localStorage.getItem('gymCustomExercises');
-            if (localData) {
-                customEx = JSON.parse(localData);
-            }
-            
-            // 🔥 IL CONTROLLO MAGICO: Se non è un array, lo resettiamo noi nel codice!
-            if (!Array.isArray(customEx)) {
-                console.warn("Dati corrotti trovati nel telefono. Reset automatico a []");
-                customEx = [];
-                localStorage.setItem('gymCustomExercises', '[]'); // Lo corregge da solo per la prossima volta!
-            }
-        } catch (e) {
-            customEx = [];
-            localStorage.setItem('gymCustomExercises', '[]'); // Se crasha il JSON.parse, lo resetta da solo!
-        } 
-        
-        const fullDb = [...exDatabase, ...customEx];
-
-        console.log(`Libreria inizializzata. Esercizi base: ${exDatabase.length}, Custom: ${customEx.length}`);
-
-        if (typeof renderLibrary === 'function') {
-            renderLibrary(fullDb); 
-        }
-
-    } catch (error) {
-        console.error("Impossibile caricare esercizi.json da GitHub:", error);
-        
-        // ✅ Se il fetch fallisce del tutto, forziamo exDatabase a essere un array vuoto per evitare crash futuri
-        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-        
-        if (typeof renderLibrary === 'function') {
-            renderLibrary(customEx);
-        }
-    }
-}
-
-function renderLibrary(filteredList = null) {
-    const listContainer = document.getElementById('library-list');
-    if (!listContainer) return; 
-
-    listContainer.innerHTML = '';
-
-    if (!filteredList) {
-        const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-        const baseDb = Array.isArray(exDatabase) ? exDatabase : [];
-        filteredList = [...exDatabase, ...customEx];
-    }
-
-    if (!Array.isArray(filteredList)) {
-        filteredList = [];
-    }
-
-    // Ordina alfabeticamente
-    filteredList.sort((a, b) => a.name.localeCompare(b.name));
-
-    if (filteredList.length === 0) {
-        listContainer.innerHTML = `<p style="color: var(--text-secondary); text-align:center; padding: 20px;">Nessun esercizio trovato.</p>`;
-        return;
-    }
-
-    filteredList.forEach(ex => {
-        // ✅ CORRETTO: Sostituito style="color:#fff;" con style="color:var(--text);"
-        listContainer.innerHTML += `
-            <div class="stat-item" style="border-left-color: var(--main); display:flex; justify-content: space-between; align-items:center; padding: 12px; cursor:pointer;" onclick="openInfoModal('${ex.name.replace(/'/g, "\\'")}')">
-                <div>
-                    <strong style="color: var(--text);">${ex.name}</strong><br>
-                    <small style="color: var(--text-secondary);">${ex.group}</small>
-                </div>
-                <span style="color: var(--main); font-size: 1.2rem;">ℹ️</span>
-            </div>
-        `;
-    });
-}
-
-function filterLibrary() {
-    const query = document.getElementById('search-library').value.toLowerCase().trim();
-    const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-    const listaCompleta = [...exDatabase, ...customEx];
-
-    const filtered = listaCompleta.filter(ex => 
-        ex.name.toLowerCase().includes(query) || 
-        ex.group.toLowerCase().includes(query)
-    );
-    renderLibrary(filtered);
-}
-
-function openInfoModal(exName) {
-    const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-    const fullDb = [...exDatabase, ...customEx]; 
-    
-    const ex = fullDb.find(e => e.name.toLowerCase() === exName.toLowerCase());
-
-    const modal = document.getElementById('info-modal');
-    const content = document.getElementById('info-modal-content');
-
-    if (!modal || !content) return;
-
-    if (!ex) {
-        content.innerHTML = `<p style="color:var(--text);">Esercizio personalizzato o non trovato nel database.</p>`;
-        modal.style.display = 'flex';
-        return;
-    }
-
-    let htmlContent = `
-        <h3 style="color:var(--main); margin-top:0; margin-bottom:5px;">${ex.name.toUpperCase()}</h3>
-        <span style="font-size:0.8rem; color:var(--text-secondary); background:var(--input-bg); padding:4px 8px; border-radius:5px; border:1px solid var(--border); display:inline-block; margin-bottom:15px;">
-            🏷️ ${ex.group}
-        </span>
-    `;
-
-    // 🎥 Mostra la GIF SOLO se l'esercizio ce l'ha nel JSON
-    if (ex.gif) {
-        htmlContent += `
-            <div id="gif-container" style="width:100%; text-align:center; margin-bottom:15px; background:#fff; border-radius:10px; padding:5px; border:1px solid var(--border);">
-                <img src="${ex.gif}" alt="${ex.name}" style="width:100%; max-height:220px; object-fit:contain; border-radius:8px;" 
-                onerror="this.parentElement.style.display='none';">
-            </div>
-        `;
-    }
-
-    htmlContent += `
-        <div style="display:flex; flex-direction:column; gap:12px; font-size:0.9rem; line-height:1.5; color:var(--text);">
-            <div>
-                <strong style="color:var(--main);">📝 Esecuzione:</strong>
-                <p style="margin:4px 0 0 0; color:var(--text-secondary);">${ex.description || 'Non disponibile.'}</p>
-            </div>
-            
-            <div>
-                <strong style="color:var(--accent);">🧠 Note Ipertrofia & Biomeccanica:</strong>
-                <p style="margin:4px 0 0 0; color:var(--text-secondary);">${ex.biomechanics || ex.hypertrophy_notes || 'Spingi forte e controlla il carico!'}</p>
-            </div>
-
-            <div>
-                <strong style="color:#ff9800;">💡 Consigli del Coach (Tips):</strong>
-                <p style="margin:4px 0 0 0; color:var(--text-secondary);">${ex.tips || 'Usa la tecnica corretta!'}</p>
-            </div>
-        </div>
-    `;
-
-    content.innerHTML = htmlContent;
-    modal.style.display = 'flex';
-}
-
-function closeInfoModal() {
-    document.getElementById('info-modal').style.display = 'none';
-}
-
-function openAddExerciseModal() { document.getElementById('add-exercise-modal').style.display = 'flex'; }
-function closeAddExerciseModal() { document.getElementById('add-exercise-modal').style.display = 'none'; }
-
-function salvaNuovoEsercizio() {
-    const nome = document.getElementById('new-ex-name').value.trim();
-    if (!nome) return alert("Il nome è obbligatorio!");
-
-    const nuovoEsercizio = {
-        name: nome,
-        group: document.getElementById('new-ex-group').value,
-        description: document.getElementById('new-ex-desc').value.trim(),
-        biomechanics: document.getElementById('new-ex-biomech').value.trim(),
-        tips: document.getElementById('new-ex-tips').value.trim()
-    };
-
-    let customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-    customEx.push(nuovoEsercizio);
-    localStorage.setItem('gymCustomExercises', JSON.stringify(customEx));
-
-    inizializzaLibreria(); // Aggiorna il database
-    renderLibrary();       // Ridisegna la lista
-    closeAddExerciseModal();
-}
-
-// ===== 📁 GESTIONE PROGRAMMA (ARCHIVIO & EDITOR) =====
-
-// Funzione per navigare tra Archivio, Crea e Bulk senza ricaricare la pagina
-function switchSetupSubTab(tab) {
-    document.getElementById('setup-view-area').style.display = (tab === 'view' ? 'block' : 'none');
-    document.getElementById('setup-create-area').style.display = (tab === 'create' ? 'block' : 'none');
-    document.getElementById('setup-bulk-area').style.display = (tab === 'bulk' ? 'block' : 'none');
-    
-    document.getElementById('subnav-view').style.background = (tab === 'view' ? 'var(--main)' : 'transparent');
-    document.getElementById('subnav-view').style.color = (tab === 'view' ? '#000' : '#fff');
-    
-    document.getElementById('subnav-create').style.background = (tab === 'create' ? 'var(--main)' : 'transparent');
-    document.getElementById('subnav-create').style.color = (tab === 'create' ? '#000' : '#fff');
-    
-    document.getElementById('subnav-bulk').style.background = (tab === 'bulk' ? 'var(--main)' : 'transparent');
-    document.getElementById('subnav-bulk').style.color = (tab === 'bulk' ? '#000' : '#fff');
-
-    if (tab === 'view') {
-        renderSavedProgramsList();
-        costruisciDatalistAutocomplete();
-    }
-
-    if (tab === 'bulk') {
-        aggiornaSelectExport(); // 👈 AGGIUNGIAMO QUESTA RIGA PER POPOLARE I MENU DELL'EXPORT
-    }
-}
-
-// Crea la lista delle schede nell'Archivio
-function renderSavedProgramsList(filterQuery = "") {
-    const container = document.getElementById('saved-programs-list');
-    const progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    if (!container) return;
-    container.innerHTML = '';
-
-    const sortedProgs = Object.keys(progs).filter(p => p.toLowerCase().includes(filterQuery.toLowerCase()));
-
-    if (sortedProgs.length === 0) {
-        container.innerHTML = `<p style="color: var(--text-secondary); font-size: 0.85rem;">Nessuna scheda trovata.</p>`;
-        return;
-    }
-
-    sortedProgs.forEach(p => {
-        const weeks = progs[p]._duration || "?";
-        container.innerHTML += `
-            <div class="stat-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px;">
-                <div onclick="selezionaSchedaArchivio('${p.replace(/'/g, "\\'")}')" style="flex: 1; cursor: pointer;">
-                    <strong style="color: var(--text);">${p.toUpperCase()}</strong><br>
-                    <small style="color: var(--text-secondary);">Durata: ${weeks} sett.</small>
-                </div>
-                <button onclick="eliminaProgramma('${p.replace(/'/g, "\\'")}')" style="background: none; border: none; color: var(--danger); font-size: 1.2rem; cursor: pointer; padding: 5px;">🗑️</button>
-            </div>
-        `;
-    });
-}
-
-function filterSavedPrograms() {
-    const q = document.getElementById('search-saved-programs').value;
-    renderSavedProgramsList(q);
-}
-
-// Quando clicchi su una scheda dell'archivio, si apre l'editor sotto
-function selezionaSchedaArchivio(nomeScheda) {
-    activeProg = nomeScheda;
-    document.getElementById('editing-title').innerText = "Editando: " + nomeScheda;
-    
-    const progs = JSON.parse(localStorage.getItem('gymProgs'));
-    const daySel = document.getElementById('editDaySelect');
-    
-    let dayOpts = '';
-    for (let d in progs[nomeScheda]) {
-        if (d !== '_duration') dayOpts += `<option value="${d}">${d}</option>`;
-    }
-    daySel.innerHTML = dayOpts;
-
-    document.getElementById('editor-controls').style.display = 'block';
-    refreshEditorTable();
-}
-
-function chiudiSchedaAttiva() {
-    let activeProg = null;
-    document.getElementById('editor-controls').style.display = 'none';
-}
-
-function eliminaProgramma(nomeProgramma) {
-    if (!confirm(`Sei sicuro di voler eliminare definitivamente la scheda "${nomeProgramma}"?`)) return;
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    delete progs[nomeProgramma];
-    localStorage.setItem('gymProgs', JSON.stringify(progs));
-    
-    if (activeProg === nomeProgramma) chiudiSchedaAttiva();
-    renderSavedProgramsList();
-    refreshDropdowns(); // Aggiorna anche il menu dell'allenamento
-}
-
-// Aggiorna la tabella degli esercizi della giornata nell'editor
-function refreshEditorTable() {
-    const selDay = document.getElementById('editDaySelect').value;
-    const container = document.getElementById('preview-table');
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-
-    if (!selDay || !progs[activeProg] || !progs[activeProg][selDay]) {
-        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio in questa giornata.</p>";
-        return;
-    }
-
-    let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
-    progs[activeProg][selDay].forEach((ex, idx) => {
-        html += `<tr style='border-bottom:1px solid #333'>
-            <td style='padding:10px;'>${ex.linked ? '🔗' : ''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s${ex.note ? ' · ' + ex.note : ''}</small></td>
-            <td style='text-align:right; white-space:nowrap;'>
-                <button onclick="openEditModal('${selDay}', ${idx})" style='background:none; border:none; color:var(--main); font-size:1.1rem; cursor:pointer; padding:4px 6px; margin-right:5px;'>✏️</button>
-                <button onclick="removeEx('${selDay}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer; padding:4px 6px;'>✖</button>
-            </td>
-        </tr>`;
-    });
-    container.innerHTML = html + '</table>';
-    
-    renderReorderList(selDay);
-}
-
-function removeEx(day, idx) {
-    if (!confirm('Eliminare questo esercizio dalla giornata?')) return;
-    let progs = JSON.parse(localStorage.getItem('gymProgs'));
-    progs[activeProg][day].splice(idx, 1);
-    localStorage.setItem('gymProgs', JSON.stringify(progs));
-    refreshEditorTable();
-}
-
-function addEx(isLinked) {
-    const selDay = document.getElementById('editDaySelect').value;
-    const name = document.getElementById('exName').value.trim();
-    
-    if (!selDay) return alert('Seleziona prima una giornata!');
-    if (!name) return alert('Scegli il nome dell\'esercizio!');
-
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-
-    progs[activeProg][selDay].push({
-        name: name,
-        sets: document.getElementById('exSets').value.trim() || "0",
-        reps: document.getElementById('exReps').value.trim() || "0",
-        perc: parseInt(document.getElementById('exPerc').value) || 0,
-        rest: parseInt(document.getElementById('exRest').value) || 90,
-        note: document.getElementById('exNote').value.trim(),
-        linked: isLinked
-    });
-
-    localStorage.setItem('gymProgs', JSON.stringify(progs));
-    
-    // Pulisce i campi di input
-    document.getElementById('exName').value = '';
-    document.getElementById('exSets').value = '';
-    document.getElementById('exReps').value = '';
-    document.getElementById('exPerc').value = '';
-    document.getElementById('exNote').value = '';
-    document.getElementById('exRest').value = '90';
-
-    refreshEditorTable();
-}
-
-// Prepara la barra dei suggerimenti autocompilanti pescando dal database JSON
-function costruisciDatalistAutocomplete() {
-    const datalist = document.getElementById('library-suggestions');
-    if (!datalist) return;
-    datalist.innerHTML = '';
-    
-    const customEx = JSON.parse(localStorage.getItem('gymCustomExercises')) || [];
-    const listaCompleta = [...exDatabase, ...customEx];
-
-    listaCompleta.sort((a,b) => a.name.localeCompare(b.name)).forEach(ex => {
-        datalist.innerHTML += `<option value="${ex.name}"></option>`;
-    });
-}
-
-// ↕️ FUNZIONE DRAG & DROP PER RIORDINARE
-var dragSrcIdx = null;
-function renderReorderList(day) {
-    const progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    const exercises = progs[activeProg][day];
-    const list = document.getElementById('reorder-list');
-    if (!list) return;
-    list.innerHTML = '';
-
-    exercises.forEach((ex, idx) => {
-        const item = document.createElement('div');
-        item.style = "background:#1e1e1e; padding:10px; border-radius:8px; margin-bottom:5px; border:1px solid #333; display:flex; align-items:center; cursor:move;";
-        item.draggable = true;
-        item.innerHTML = `<span style="margin-right:15px; color:#666;">☰</span> ${ex.linked ? '🔗' : ''} ${ex.name}`;
-        
-        item.addEventListener('dragstart', (e) => { dragSrcIdx = idx; });
-        item.addEventListener('dragover', (e) => { e.preventDefault(); });
-        item.addEventListener('drop', (e) => {
-            e.preventDefault();
-            if (dragSrcIdx === null || dragSrcIdx === idx) return;
-            const progs2 = JSON.parse(localStorage.getItem('gymProgs'));
-            const arr = progs2[activeProg][day];
-            const moved = arr.splice(dragSrcIdx, 1)[0];
-            arr.splice(idx, 0, moved);
-            localStorage.setItem('gymProgs', JSON.stringify(progs2));
-            refreshEditorTable();
-        });
-        list.appendChild(item);
-    });
-}
-
-// ===== CREAZIONE GUIDATA SCHEDA =====
-function generaSchedaGuidata() {
-    const nome = document.getElementById('create-nome-scheda').value.trim();
-    const settimane = document.getElementById('create-durata-scheda').value || "6";
-    const numeroGiorni = parseInt(document.getElementById('create-giorni-count').value) || 3;
-
-    if (!nome) {
-        return alert("Devi inserire un nome per la nuova scheda!");
-    }
-
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-
-    // Controlla se esiste già una scheda con lo stesso nome per non sovrascriverla per sbaglio
-    if (progs[nome]) {
-        if (!confirm(`Esiste già una scheda chiamata "${nome}". Vuoi sovrascriverla del tutto?`)) {
-            return;
-        }
-    }
-
-    // Creiamo la struttura base della scheda
-    progs[nome] = {
-        "_duration": settimane
-    };
-
-    // Creiamo i giorni vuoti (Giorno 1, Giorno 2, ecc.)
-    for (let i = 1; i <= numeroGiorni; i++) {
-        const nomeGiorno = `Giorno ${i}`;
-        progs[nome][nomeGiorno] = []; // Inizializza l'array degli esercizi vuoto per quel giorno
-    }
-
-    // Salviamo nel localStorage
-    localStorage.setItem('gymProgs', JSON.stringify(progs));
-
-    // Puliamo i campi dell'interfaccia
-    document.getElementById('create-nome-scheda').value = "";
-    document.getElementById('create-durata-scheda').value = "6";
-    document.getElementById('create-giorni-count').value = "3";
-
-    alert(`Scheda "${nome}" creata con successo con ${numeroGiorni} giorni vuoti!`);
-
-    // ✅ Azione finale automatica: portiamo l'utente direttamente all'Archivio per vederla e riempirla!
-    switchSetupSubTab('view');
-    refreshDropdowns(); 
-}
-
-// ===== ⚡ IMPORT / EXPORT TESTUALE =====
-
-// Popola la tendina dell'export quando entri nella sotto-scheda bulk
-function aggiornaSelectExport() {
-    const progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    const select = document.getElementById('export-select-scheda');
-    if (!select) return;
-
-    let opts = '<option value="">-- Scegli Scheda --</option>';
-    for (let p in progs) {
-        opts += `<option value="${p}">${p.toUpperCase()}</option>`;
-    }
-    select.innerHTML = opts;
-}
-
-// 📤 Esporta una scheda esistente nel formato testo leggibile
-function esportaSchedaTesto() {
-    const nomeScheda = document.getElementById('export-select-scheda').value;
-    if (!nomeScheda) return alert("Seleziona una scheda da esportare!");
-
-    const progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-    const scheda = progs[nomeScheda];
-
-    let output = `${nomeScheda}; ${scheda._duration || "6"}\n`;
-
-    for (let giorno in scheda) {
-        if (giorno === '_duration') continue;
-        output += `\n${giorno}\n`;
-        
-        scheda[giorno].forEach(ex => {
-            // Formato: Nome; Set; Reps; Rest; %; Note; Linked
-            output += `${ex.name}; ${ex.sets}; ${ex.reps}; ${ex.rest}; ${ex.perc || 0}; ${ex.note || ""}; ${ex.linked ? "linked" : ""}\n`;
-        });
-    }
-
-    document.getElementById('bulk-text-area').value = output.trim();
-    alert("Testo generato! Copialo dall'area di testo sottostante.");
-}
-
-// 📥 Importa un testo scritto e lo trasforma in una scheda vera
-function importaSchedaTesto() {
-    const text = document.getElementById('bulk-text-area').value.trim();
-    if (!text) return alert("L'area di testo è vuota!");
-
-    const lines = text.split('\n');
-    let progs = JSON.parse(localStorage.getItem('gymProgs')) || {};
-
-    let currentSchedaName = "";
-    let currentGiorno = "";
-
-    lines.forEach((line, index) => {
-        line = line.trim();
-        if (!line) return; // Salta le righe vuote
-
-        // Riga 1: Nome Scheda; Durata
-        if (index === 0 && line.includes(';')) {
-            const parts = line.split(';');
-            currentSchedaName = parts[0].trim();
-            const durata = parts[1] ? parts[1].trim() : "6";
-
-            progs[currentSchedaName] = { "_duration": durata };
-            return;
-        }
-
-        // Rilevamento del Giorno (es. "Giorno 1" o "Giorno 2")
-        if (line.toLowerCase().startsWith('giorno')) {
-            currentGiorno = line;
-            if (currentSchedaName) {
-                progs[currentSchedaName][currentGiorno] = [];
-            }
-            return;
-        }
-
-        // Rilevamento Esercizio (se contiene un punto e virgola)
-        if (line.includes(';') && currentSchedaName && currentGiorno) {
-            const p = line.split(';');
-            
-            progs[currentSchedaName][currentGiorno].push({
-                name: p[0] ? p[0].trim() : "Esercizio",
-                sets: p[1] ? p[1].trim() : "0",
-                reps: p[2] ? p[2].trim() : "0",
-                rest: p[3] ? parseInt(p[3].trim()) : 90,
-                perc: p[4] ? parseInt(p[4].trim()) : 0,
-                note: p[5] ? p[5].trim() : "",
-                linked: p[6] ? p[6].trim().toLowerCase() === "linked" : false
-            });
-        }
-    });
-
-    if (!currentSchedaName) {
-        return alert("Errore nel formato del testo. Assicurati che la prima riga contenga 'NomeScheda; Durata'!");
-    }
-
-    localStorage.setItem('gymProgs', JSON.stringify(progs));
-    alert(`Scheda "${currentSchedaName}" importata con successo!`);
-    
-    document.getElementById('bulk-text-area').value = ""; // Svuota
-    
-    // Torna all'archivio visivo
-    switchSetupSubTab('view');
-    refreshDropdowns();
-}
-
-function switchSetupSubTab(tab) {
-    // 1. Nascondi le tre aree
-    document.getElementById('setup-view-area').style.display = 'none';
-    document.getElementById('setup-create-area').style.display = 'none';
-    document.getElementById('setup-bulk-area').style.display = 'none';
-
-    // 2. Spegni tutti i bottoni (usando i TUOI ID originali)
-    document.getElementById('subnav-view').classList.remove('active');
-    document.getElementById('subnav-create').classList.remove('active');
-    document.getElementById('subnav-bulk').classList.remove('active');
-
-    // 3. Mostra l'area scelta e accendi il bottone cliccato
-    document.getElementById(`setup-${tab}-area`).style.display = 'block';
-    document.getElementById(`subnav-${tab}`).classList.add('active');
-
-    // Se entriamo in Import/Export aggiorniamo la tendina
-    if (tab === 'bulk') {
-        aggiornaSelectExport();
     }
 }
