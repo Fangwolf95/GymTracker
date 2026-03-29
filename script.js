@@ -12,13 +12,21 @@ var sessionClockInterval = null;
 
 // ===== INIT =====
 window.onload = function () {
-    ['gymMaxes','gymProgs','gymSessionLogs','gymDrafts','gymComments','gymCustomExercises'].forEach(k => {
-        if (!localStorage.getItem(k)) localStorage.setItem(k, k === 'gymSessionLogs' ? '[]' : '{}');
+    // Definire quali chiavi devono essere Array [] e quali Oggetti {}
+    const arrayKeys = ['gymSessionLogs', 'gymCustomExercises'];
+    const objectKeys = ['gymMaxes', 'gymProgs', 'gymDrafts', 'gymComments'];
+
+    arrayKeys.forEach(k => {
+        if (!localStorage.getItem(k) || localStorage.getItem(k) === '{}') localStorage.setItem(k, '[]');
     });
+    objectKeys.forEach(k => {
+        if (!localStorage.getItem(k) || localStorage.getItem(k) === '[]') localStorage.setItem(k, '{}');
+    });
+
     applyTheme();
     refreshDropdowns();
     renderStats();
-    inizializzaLibreria(); // Carica il JSON degli esercizi
+    inizializzaLibreria();
     switchMode('training');
 };
 
