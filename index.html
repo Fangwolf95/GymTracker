@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AZ GymTracker</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00adb5">
@@ -14,8 +14,8 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="position:relative;">🏋️ AZ GymTracker
-            <button id="theme-btn" class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        <h1 class="app-title">🏋️ AZ GymTracker
+            <button id="theme-btn" class="theme-toggle" onclick="toggleTheme()" aria-label="Cambia tema">☀️</button>
         </h1>
 
         <div class="nav-menu">
@@ -25,38 +25,38 @@
         </div>
 
         <!-- ===== SETUP SECTION ===== -->
-        <div id="setup-section" class="mode-section" style="display:none;">
-            <div class="card-editor" style="border-bottom: 2px solid #333; margin-bottom: 20px; padding-bottom: 15px;">
-                <label><small>Gestisci programma esistente:</small></label>
-                <select id="editProgSelect" onchange="syncEditorProg()" style="border-color: var(--main); margin-top:5px;">
+        <div id="setup-section" class="mode-section hidden">
+            <div class="card-editor setup-section-divider">
+                <label for="editProgSelect"><small>Gestisci programma esistente:</small></label>
+                <select id="editProgSelect" onchange="syncEditorProg()" class="select-accent">
                     <option value="">-- Seleziona Programma --</option>
                 </select>
             </div>
 
             <div id="new-prog-area" class="card-editor">
-                <h4 style="margin:0 0 10px 0; color:var(--accent);">🆕 Crea Nuovo Programma</h4>
+                <h4 class="section-heading section-heading--accent">🆕 Crea Nuovo Programma</h4>
                 <input type="text" id="progName" placeholder="Nome (es. Idro Pump 2)">
                 <input type="number" id="progWeeks" placeholder="Durata (settimane)">
                 <button class="btn-add" onclick="initEditor()">Crea e Apri</button>
             </div>
 
-            <div id="editor-controls" style="display:none; margin-top:15px;">
-                <div style="background: #111; padding: 15px; border-radius: 15px; border: 1px solid var(--main);">
-                    <h4 id="editing-title" style="margin-top:0; color:var(--main);">Editando: -</h4>
-                    <label><small>Giorno:</small></label>
+            <div id="editor-controls" class="editor-controls hidden">
+                <div class="editor-day-box">
+                    <h4 id="editing-title" class="editing-title">Editando: -</h4>
+                    <label for="editDaySelect"><small>Giorno:</small></label>
                     <div class="row">
-                        <select id="editDaySelect" onchange="refreshEditorTable()" style="flex:1"></select>
-                        <input type="text" id="dayName" placeholder="O scrivi nuovo" style="flex:1">
+                        <select id="editDaySelect" onchange="refreshEditorTable()" class="flex-1"></select>
+                        <input type="text" id="dayName" placeholder="O scrivi nuovo" class="flex-1">
                     </div>
                 </div>
 
-                <div id="editor-preview" style="margin-top:20px;">
-                    <h5 style="margin-bottom:10px;">Esercizi salvati:</h5>
+                <div id="editor-preview" class="editor-preview">
+                    <h5 class="section-subheading">Esercizi salvati:</h5>
                     <div id="preview-table"></div>
                 </div>
 
-                <div class="card-editor" style="background:#222; margin-top:20px;">
-                    <h5 style="margin-top:0;">Aggiungi Esercizio:</h5>
+                <div class="card-editor card-editor--dark mt-20">
+                    <h5 class="section-subheading">Aggiungi Esercizio:</h5>
                     <div class="input-grid">
                         <input type="text" id="exName" placeholder="Esercizio">
                         <input type="number" id="exPerc" placeholder="%">
@@ -64,8 +64,8 @@
                         <input type="text" id="exReps" placeholder="Reps">
                     </div>
                     <div class="row">
-                        <input type="number" id="exRest" placeholder="Recup. (sec)" style="flex:1">
-                        <input type="text" id="exNote" placeholder="Note" style="flex:2">
+                        <input type="number" id="exRest" placeholder="Recup. (sec)" class="flex-1">
+                        <input type="text" id="exNote" placeholder="Note" class="flex-2">
                     </div>
                     <div class="row">
                         <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
@@ -74,29 +74,29 @@
                 </div>
 
                 <!-- Riordino esercizi -->
-                <div class="card-editor" style="background:#1a1a1a; margin-top:15px;">
-                    <h5 style="margin-top:0; color:#aaa;">↕️ Riordina Esercizi</h5>
-                    <p style="font-size:0.8rem; color:#666; margin:0 0 8px 0;">Trascina per cambiare l'ordine</p>
+                <div class="card-editor card-editor--darker mt-15">
+                    <h5 class="reorder-heading">↕️ Riordina Esercizi</h5>
+                    <p class="reorder-hint">Trascina per cambiare l'ordine</p>
                     <div id="reorder-list"></div>
-                    <button class="btn-secondary" style="margin-top:10px;" onclick="saveReorder()">💾 Salva Ordine</button>
+                    <button class="btn-secondary mt-10" onclick="saveReorder()">💾 Salva Ordine</button>
                 </div>
             </div>
 
-            <div class="card-editor" style="margin-top:40px; border: 1px dashed #555; opacity: 0.8;">
-                <h4 style="margin:0 0 5px 0;">⚡ Bulk Import</h4>
+            <div class="card-editor card-editor--bulk mt-40">
+                <h4 class="section-heading--sm">⚡ Bulk Import</h4>
                 <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Squat;80;4;6;120;note&#10;*Leg Press;0;3;12;90;superserie"></textarea>
                 <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
             </div>
 
             <!-- Export / Import -->
-            <div class="card-editor" style="margin-top:20px; border:1px solid #333;">
-                <h4 style="margin:0 0 10px 0;">💾 Backup Dati</h4>
+            <div class="card-editor card-editor--bordered mt-20">
+                <h4 class="section-heading">💾 Backup Dati</h4>
                 <div class="row">
-                    <button class="btn-add" onclick="exportData()" style="flex:1;">⬇️ Esporta JSON</button>
-                    <button class="btn-secondary" onclick="document.getElementById('importFile').click()" style="flex:1;">⬆️ Importa JSON</button>
+                    <button class="btn-add flex-1" onclick="exportData()">⬇️ Esporta JSON</button>
+                    <button class="btn-secondary flex-1" onclick="document.getElementById('importFile').click()">⬆️ Importa JSON</button>
                 </div>
                 <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
-                <small style="color:#666; display:block; margin-top:5px;">Esporta per backup o trasferimento su altro dispositivo.</small>
+                <small class="help-text">Esporta per backup o trasferimento su altro dispositivo.</small>
             </div>
         </div>
 
@@ -107,14 +107,14 @@
                 <select id="selectDay" onchange="loadWorkoutDisplay()"></select>
             </div>
             <div id="workout-display-area"></div>
-            <button id="save-session-btn" class="btn-save-workout" style="display:none;" onclick="finishWorkout()">💾 Termina e Salva Sessione</button>
-            <button id="abandon-session-btn" class="btn-abandon" style="display:none;" onclick="abandonSession()">✕ Abbandona sessione</button>
+            <button id="save-session-btn" class="btn-save-workout hidden" onclick="finishWorkout()">💾 Termina e Salva Sessione</button>
+            <button id="abandon-session-btn" class="btn-abandon hidden" onclick="abandonSession()">✕ Abbandona sessione</button>
 
-            <div id="timer-area" class="timer-card" style="display:none;">
-                <div id="session-clock" class="session-clock" style="display:none;"></div>
+            <div id="timer-area" class="timer-card hidden">
+                <div id="session-clock" class="session-clock hidden"></div>
                 <h2 id="display-timer">00:00</h2>
                 <div class="timer-buttons">
-                    <button id="btn-auto-timer" class="btn-timer" style="background:var(--main); color:white" onclick="startTimer(currentRest)">Recupero</button>
+                    <button id="btn-auto-timer" class="btn-timer btn-timer--primary" onclick="startTimer(currentRest)">Recupero</button>
                     <button class="btn-timer" onclick="startTimer(60)">+60s</button>
                     <button class="btn-stop" onclick="stopTimer()">Reset</button>
                 </div>
@@ -122,31 +122,31 @@
         </div>
 
         <!-- ===== STATS SECTION ===== -->
-        <div id="stats-section" class="mode-section" style="display:none;">
+        <div id="stats-section" class="mode-section hidden">
             <h3>📊 Statistiche</h3>
 
             <!-- Grafico progressione -->
-            <div class="card-editor" style="margin-bottom:20px;">
-                <h5 style="margin:0 0 10px 0; color:var(--main);">📈 Progressione Esercizio</h5>
+            <div class="card-editor card-editor--chart">
+                <h5 class="section-subheading section-subheading--accent">📈 Progressione Esercizio</h5>
                 <select id="statsExSelect" onchange="renderProgressChart()">
                     <option value="">-- Seleziona Esercizio --</option>
                 </select>
-                <canvas id="progressChart" width="460" height="210" style="display:none; width:100%; margin-top:12px; border-radius:10px;"></canvas>
+                <canvas id="progressChart" width="460" height="210" class="progress-canvas hidden"></canvas>
                 <div id="chartLegend" class="chart-legend"></div>
-                <div id="progressChartEmpty" style="display:none; color:#666; font-size:0.85rem; text-align:center; padding:20px 0;">Nessun dato per questo esercizio</div>
+                <div id="progressChartEmpty" class="chart-empty hidden">Nessun dato per questo esercizio</div>
             </div>
 
             <div id="stats-container"></div>
             <hr>
             <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
-            <button class="btn-secondary" style="color:var(--danger); margin-top:10px;" onclick="clearAll()">Reset Totale</button>
+            <button class="btn-secondary btn-danger mt-10" onclick="clearAll()">Reset Totale</button>
         </div>
     </div>
 
     <!-- Modale modifica esercizio -->
-    <div id="edit-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-box" style="border-color:#aaa;">
-            <h4 style="color:var(--text); margin-top:0;">✏️ Modifica Esercizio</h4>
+    <div id="edit-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+        <div class="modal-box modal-box--muted">
+            <h4 id="edit-modal-title" class="modal-title">✏️ Modifica Esercizio</h4>
             <input type="text" id="edit-ex-name" placeholder="Nome esercizio">
             <div class="input-grid">
                 <input type="number" id="edit-ex-perc" placeholder="%">
@@ -155,43 +155,42 @@
                 <input type="number" id="edit-ex-rest" placeholder="Rec. (s)">
             </div>
             <input type="text" id="edit-ex-note" placeholder="Note">
-            <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px; cursor:pointer;">
-                <input type="checkbox" id="edit-ex-linked" style="width:auto; margin:0;">
+            <label class="checkbox-label">
+                <input type="checkbox" id="edit-ex-linked" class="checkbox-input">
                 🔗 Superserie (collegato al precedente)
             </label>
             <div class="row">
-                <button class="btn-add" onclick="saveEditModal()" style="flex:1;">💾 Salva</button>
-                <button class="btn-secondary" onclick="closeEditModal()" style="flex:1;">Annulla</button>
+                <button class="btn-add flex-1" onclick="saveEditModal()">💾 Salva</button>
+                <button class="btn-secondary flex-1" onclick="closeEditModal()">Annulla</button>
             </div>
         </div>
     </div>
 
     <!-- Modale commento esercizio -->
-    <div id="comment-modal" class="modal-overlay" style="display:none;">
+    <div id="comment-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="comment-modal-title">
         <div class="modal-box">
-            <h4 id="comment-modal-title" style="color:var(--main); margin-top:0;"></h4>
-            <textarea id="comment-modal-input" placeholder="Es: salito bene, prossima volta prova 90kg..." style="height:100px; resize:none;"></textarea>
-            <div class="row" style="margin-top:10px;">
-                <button class="btn-add" onclick="saveComment()" style="flex:1;">💾 Salva</button>
-                <button class="btn-secondary" onclick="closeCommentModal()" style="flex:1;">Annulla</button>
+            <h4 id="comment-modal-title" class="modal-title modal-title--accent"></h4>
+            <textarea id="comment-modal-input" placeholder="Es: salito bene, prossima volta prova 90kg..." class="modal-textarea modal-textarea--tall"></textarea>
+            <div class="row mt-10">
+                <button class="btn-add flex-1" onclick="saveComment()">💾 Salva</button>
+                <button class="btn-secondary flex-1" onclick="closeCommentModal()">Annulla</button>
             </div>
         </div>
     </div>
 
     <!-- Modale nota post-sessione -->
-    <div id="session-note-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-box" style="border-color:var(--accent);">
-            <h4 style="color:var(--accent); margin-top:0;">📝 Nota Sessione (opzionale)</h4>
-            <textarea id="session-note-input" placeholder="Es: gambe stanche, sonno scarso, ottima energia..." style="height:90px; resize:none;"></textarea>
-            <div class="row" style="margin-top:10px;">
-                <button class="btn-save-workout" onclick="confirmFinishWorkout()" style="flex:1; margin:0; padding:12px; font-size:0.9rem;">✅ Salva Sessione</button>
-                <button class="btn-secondary" onclick="confirmFinishWorkout(true)" style="flex:1;">Salta</button>
+    <div id="session-note-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="session-note-modal-title">
+        <div class="modal-box modal-box--accent">
+            <h4 id="session-note-modal-title" class="modal-title modal-title--accent-color">📝 Nota Sessione (opzionale)</h4>
+            <textarea id="session-note-input" placeholder="Es: gambe stanche, sonno scarso, ottima energia..." class="modal-textarea modal-textarea--short"></textarea>
+            <div class="row mt-10">
+                <button class="btn-save-workout btn-save-workout--compact flex-1" onclick="confirmFinishWorkout()">✅ Salva Sessione</button>
+                <button class="btn-secondary flex-1" onclick="confirmFinishWorkout(true)">Salta</button>
             </div>
         </div>
     </div>
 
-    <audio id="beep-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -604,7 +604,53 @@ body.light-mode .deload-banner {
     opacity: 0.8;
 }
 
-/* ===== 🎛️ SUB TAB MENU (ARCHIVIO / CREA / IMPORT) UNIFORMATO ===== */
+/* ===== TOAST NOTIFICATION ===== */
+.gym-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #222;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    white-space: nowrap;
+    pointer-events: none;
+}
+.gym-toast-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.gym-toast-success { border-left: 4px solid var(--accent); }
+.gym-toast-error   { border-left: 4px solid var(--danger); }
+.gym-toast-info    { border-left: 4px solid var(--main); }
+
+body.light-mode .gym-toast { background: #1a1a1a; }
+
+/* ===== TIMER DONE BANNER ===== */
+.timer-done-banner {
+    background: rgba(68, 255, 68, 0.12);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-align: center;
+    margin-bottom: 8px;
+    animation: fadeSlideUp 0.3s ease;
+}
+
+/* ===== TIMER COUNTDOWN COLOR ===== */
+#display-timer {
+    transition: color 0.4s ease;
+} (ARCHIVIO / CREA / IMPORT) UNIFORMATO ===== */
 .sub-tab-menu {
     /* Usa var(--card2) o var(--input-bg) per lo sfondo del contenitore, 
        così nel tema chiaro sarà chiaro e nel tema scuro sarà scuro. */
@@ -651,3 +697,125 @@ body:not(.light-mode) .sub-tab-btn:hover {
     color: #fff !important; /* Testo bianco sull'azzurro */
     box-shadow: 0 2px 8px rgba(0, 173, 181, 0.3);
 }
+
+/* ===== UTILITY: HIDDEN (sostituisce style="display:none") ===== */
+.hidden { display: none !important; }
+
+/* ===== UTILITY: FLEX ===== */
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+
+/* ===== UTILITY: MARGIN TOP ===== */
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+
+/* ===== APP TITLE ===== */
+.app-title { position: relative; }
+
+/* ===== SETUP SECTION ===== */
+.setup-section-divider {
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+.editor-controls { margin-top: 15px; }
+.editor-day-box {
+    background: var(--input-bg);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--main);
+}
+.editor-preview { margin-top: 20px; }
+.select-accent {
+    border-color: var(--main);
+    margin-top: 5px;
+}
+
+/* ===== CARD EDITOR VARIANTS ===== */
+.card-editor--dark    { background: var(--card2); }
+.card-editor--darker  { background: var(--input-bg); }
+.card-editor--bulk    { border: 1px dashed var(--border); opacity: 0.8; }
+.card-editor--bordered { border: 1px solid var(--border); }
+.card-editor--chart   { margin-bottom: 20px; }
+
+/* ===== SECTION HEADINGS ===== */
+.section-heading     { margin: 0 0 10px 0; }
+.section-heading--sm { margin: 0 0 5px 0; }
+.section-heading--accent { margin: 0 0 10px 0; color: var(--accent); }
+.section-subheading  { margin-bottom: 10px; }
+.section-subheading--accent { margin: 0 0 10px 0; color: var(--main); }
+.editing-title { margin-top: 0; color: var(--main); }
+
+/* ===== HELP TEXT ===== */
+.help-text {
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 5px;
+}
+
+/* ===== TIMER VARIANT ===== */
+.btn-timer--primary {
+    background: var(--main);
+    color: #fff;
+}
+
+/* ===== DANGER BUTTON ===== */
+.btn-danger { color: var(--danger); }
+
+/* ===== MODAL VARIANTS ===== */
+.modal-overlay {
+    /* override: quando non-hidden usa flex */
+    display: flex;
+}
+.modal-overlay.hidden { display: none !important; }
+
+.modal-box--muted   { border-color: #aaa; }
+.modal-box--accent  { border-color: var(--accent); }
+
+.modal-title        { color: var(--text); margin-top: 0; }
+.modal-title--accent       { margin-top: 0; }
+.modal-title--accent-color { color: var(--accent); margin-top: 0; }
+
+.modal-textarea          { resize: none; }
+.modal-textarea--tall    { height: 100px; }
+.modal-textarea--short   { height: 90px; }
+
+/* ===== CHECKBOX LABEL ===== */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+.checkbox-input { width: auto; margin: 0; }
+
+/* ===== BTN SAVE WORKOUT COMPACT ===== */
+.btn-save-workout--compact {
+    margin: 0;
+    padding: 12px;
+    font-size: 0.9rem;
+}
+
+/* ===== PROGRESS CANVAS ===== */
+.progress-canvas {
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 10px;
+}
+
+/* ===== CHART EMPTY ===== */
+.chart-empty {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* ===== REORDER SECTION ===== */
+.reorder-heading { margin-top: 0; color: var(--text-secondary); }
+.reorder-hint    { font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 8px 0; }
