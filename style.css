@@ -819,3 +819,169 @@ body:not(.light-mode) .sub-tab-btn:hover {
 /* ===== REORDER SECTION ===== */
 .reorder-heading { margin-top: 0; color: var(--text-secondary); }
 .reorder-hint    { font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 8px 0; }
+
+/* ===== ARCHIVIO ESERCIZI ===== */
+.archive-search-bar {
+    margin-bottom: 16px;
+}
+.archive-search-bar input {
+    font-size: 1rem;
+}
+
+.archive-group {
+    margin-bottom: 18px;
+}
+.archive-group-title {
+    color: var(--main);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+}
+
+.archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.archive-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    color: var(--text);
+    transition: border-color 0.18s, background 0.18s;
+}
+.archive-item:hover,
+.archive-item:active {
+    border-color: var(--main);
+    background: rgba(0,173,181,0.07);
+}
+.archive-item-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+.archive-item-arrow {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.archive-loading,
+.archive-empty {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9rem;
+}
+
+/* ===== MODAL INFO ESERCIZIO ===== */
+.modal-box--info {
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-color: var(--main);
+}
+
+.info-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+.info-modal-name {
+    color: var(--text);
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    flex: 1;
+}
+.info-modal-group-badge {
+    background: rgba(0,173,181,0.15);
+    color: var(--main);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.info-gif-wrap {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: var(--card2);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info-gif {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+}
+
+.info-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.info-section {
+    background: var(--card2);
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+.info-section--tips {
+    background: rgba(0,173,181,0.07);
+    border: 1px solid rgba(0,173,181,0.2);
+}
+.info-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--main);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+.info-text {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* ===== BOTTONE INFO NELLA CARD ALLENAMENTO ===== */
+.ex-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-info-ex {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 6px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.btn-info-ex:hover { opacity: 1; }

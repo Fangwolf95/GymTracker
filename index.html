@@ -22,6 +22,7 @@
             <button onclick="switchMode('training')" id="nav-training" class="nav-active">Allenamento</button>
             <button onclick="switchMode('setup')" id="nav-setup">Programma</button>
             <button onclick="switchMode('stats')" id="nav-stats">Stats</button>
+            <button onclick="switchMode('archive')" id="nav-archive">Archivio</button>
         </div>
 
         <!-- ===== SETUP SECTION ===== -->
@@ -140,6 +141,44 @@
             <hr>
             <button class="btn-secondary" onclick="clearLogs()">Svuota Diario</button>
             <button class="btn-secondary btn-danger mt-10" onclick="clearAll()">Reset Totale</button>
+        </div>
+
+        <!-- ===== ARCHIVE SECTION ===== -->
+        <div id="archive-section" class="mode-section hidden">
+            <h3>📚 Archivio Esercizi</h3>
+            <div class="archive-search-bar">
+                <input type="text" id="archiveSearch" placeholder="🔍 Cerca esercizio..." oninput="filterArchive()">
+            </div>
+            <div id="archiveGroups"></div>
+        </div>
+    </div>
+
+    <!-- Modale info esercizio (archivio + durante sessione) -->
+    <div id="info-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+        <div class="modal-box modal-box--info">
+            <div class="info-modal-header">
+                <h4 id="info-modal-title" class="info-modal-name"></h4>
+                <span id="info-modal-group" class="info-modal-group-badge"></span>
+            </div>
+            <div id="info-modal-gif-wrap" class="info-gif-wrap">
+                <img id="info-modal-gif" src="" alt="Animazione esercizio" class="info-gif"
+                     onerror="this.closest('.info-gif-wrap').classList.add('hidden')">
+            </div>
+            <div class="info-modal-body">
+                <div class="info-section">
+                    <span class="info-label">📋 Descrizione</span>
+                    <p id="info-modal-desc" class="info-text"></p>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">🔬 Biomeccanica</span>
+                    <p id="info-modal-bio" class="info-text"></p>
+                </div>
+                <div class="info-section info-section--tips">
+                    <span class="info-label">💡 Tips</span>
+                    <p id="info-modal-tips" class="info-text"></p>
+                </div>
+            </div>
+            <button class="btn-secondary mt-10" onclick="closeInfoModal()">Chiudi</button>
         </div>
     </div>
 

@@ -55,13 +55,14 @@ function toggleTheme() {
 
 // ===== NAV =====
 function switchMode(m) {
-    ['setup', 'training', 'stats'].forEach(s => {
+    ['setup', 'training', 'stats', 'archive'].forEach(s => {
         const el = document.getElementById(s + '-section');
         el.classList.toggle('hidden', m !== s);
         const btn = document.getElementById('nav-' + s);
         if (btn) btn.classList.toggle('nav-active', m === s);
     });
     if (m === 'stats') { renderStats(); populateStatsExSelect(); }
+    if (m === 'archive') initArchive();
     refreshDropdowns();
 }
 
@@ -540,7 +541,10 @@ function startWorkout(isRestore) {
         const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}" id="card-${idx}" style="${isDone ? 'opacity:0.5; border-color:#555;' : ''}">
             <div class="ex-header">
                 <strong>${ex.name.toUpperCase()}</strong>
-                <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
+                <div class="ex-header-actions">
+                    <button class="btn-info-ex" onclick="openInfoModalByName('${safeExName}')" title="Scheda esercizio" aria-label="Info su ${ex.name}">ℹ️</button>
+                    <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
+                </div>
             </div>
             <div class="ex-header" style="margin-top:5px;">
                 <span class="ex-info">${ex.sets}×${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</span>
@@ -1173,4 +1177,137 @@ function clearAll() {
     if (confirm('Cancellare tutto? Questa operazione è irreversibile.')) {
         localStorage.clear(); location.reload();
     }
+}
+// ===== ARCHIVIO ESERCIZI =====
+let _archiveData = null; // cache caricata una volta sola
+
+async function loadArchive() {
+    if (_archiveData) return _archiveData;
+    try {
+        const res = await fetch('esercizi.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        _archiveData = await res.json();
+    } catch (e) {
+        console.warn('esercizi.json non disponibile:', e.message);
+        _archiveData = [];
+    }
+    return _archiveData;
+}
+
+async function initArchive() {
+    const container = document.getElementById('archiveGroups');
+    if (!container) return;
+
+    // Se già renderizzato non rifarlo
+    if (container.children.length > 0) return;
+
+    container.innerHTML = '<p class="archive-loading">Caricamento...</p>';
+    const data = await loadArchive();
+
+    if (!data || data.length === 0) {
+        container.innerHTML = '<p class="archive-empty">Nessun esercizio nell\'archivio.</p>';
+        return;
+    }
+
+    renderArchive(data, '');
+}
+
+function renderArchive(data, query) {
+    const container = document.getElementById('archiveGroups');
+    if (!container) return;
+
+    const q = query.trim().toLowerCase();
+    const filtered = q
+        ? data.filter(e =>
+            e.name.toLowerCase().includes(q) ||
+            (e.group && e.group.toLowerCase().includes(q))
+          )
+        : data;
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="archive-empty">Nessun esercizio trovato.</p>';
+        return;
+    }
+
+    // Raggruppa per gruppo muscolare
+    const groups = {};
+    filtered.forEach(ex => {
+        const g = ex.group || 'Altro';
+        if (!groups[g]) groups[g] = [];
+        groups[g].push(ex);
+    });
+
+    let html = '';
+    Object.keys(groups).sort().forEach(group => {
+        html += `<div class="archive-group">
+            <h4 class="archive-group-title">${group}</h4>
+            <div class="archive-list">`;
+        groups[group].forEach(ex => {
+            html += `<button class="archive-item" onclick="openInfoModal(${JSON.stringify(ex.name)})">
+                <span class="archive-item-name">${ex.name}</span>
+                <span class="archive-item-arrow">›</span>
+            </button>`;
+        });
+        html += `</div></div>`;
+    });
+
+    container.innerHTML = html;
+}
+
+async function filterArchive() {
+    const q = document.getElementById('archiveSearch').value;
+    const data = await loadArchive();
+    renderArchive(data, q);
+}
+
+// ===== MODAL INFO ESERCIZIO =====
+async function openInfoModal(exName) {
+    const data = await loadArchive();
+    const ex = data.find(e => e.name === exName);
+    if (!ex) return;
+
+    document.getElementById('info-modal-title').textContent = ex.name;
+    document.getElementById('info-modal-group').textContent = ex.group || '';
+    document.getElementById('info-modal-desc').textContent = ex.description || '';
+    document.getElementById('info-modal-bio').textContent = ex.biomechanics || '';
+    document.getElementById('info-modal-tips').textContent = ex.tips || '';
+
+    // GIF: mostra il wrap, poi assegna src
+    // onerror nel tag img nasconderà il wrap se la gif non carica
+    const gifWrap = document.getElementById('info-modal-gif-wrap');
+    const gifImg  = document.getElementById('info-modal-gif');
+    if (ex.gif) {
+        gifWrap.classList.remove('hidden');
+        gifImg.src = ex.gif;
+    } else {
+        gifWrap.classList.add('hidden');
+        gifImg.src = '';
+    }
+
+    document.getElementById('info-modal').classList.remove('hidden');
+}
+
+function closeInfoModal() {
+    document.getElementById('info-modal').classList.add('hidden');
+    // Reset gif per evitare flickering alla prossima apertura
+    const gifImg = document.getElementById('info-modal-gif');
+    const gifWrap = document.getElementById('info-modal-gif-wrap');
+    gifImg.src = '';
+    gifWrap.classList.remove('hidden');
+}
+
+// Cerca nell'archivio un esercizio per nome (match parziale, case-insensitive)
+// Usata dalla card allenamento per il bottone ℹ️
+async function openInfoModalByName(rawName) {
+    const data = await loadArchive();
+    if (!data || data.length === 0) return;
+    const name = rawName.toLowerCase().trim();
+    const ex = data.find(e => e.name.toLowerCase() === name)
+             || data.find(e => e.name.toLowerCase().includes(name))
+             || data.find(e => name.includes(e.name.toLowerCase()));
+    if (!ex) {
+        showToast('Esercizio non presente nell\'archivio', 'info');
+        return;
+    }
+    openInfoModal(ex.name);
 }
