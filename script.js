@@ -1198,16 +1198,21 @@ async function initArchive() {
     const container = document.getElementById('archiveGroups');
     if (!container) return;
 
-    // Se già renderizzato non rifarlo
-    if (container.children.length > 0) return;
+    // Mostra loading solo se il container è vuoto (primo accesso)
+    if (container.children.length === 0) {
+        container.innerHTML = '<p class="archive-loading">Caricamento...</p>';
+    }
 
-    container.innerHTML = '<p class="archive-loading">Caricamento...</p>';
     const data = await loadArchive();
 
     if (!data || data.length === 0) {
         container.innerHTML = '<p class="archive-empty">Nessun esercizio nell\'archivio.</p>';
         return;
     }
+
+    // Reset campo di ricerca ad ogni apertura della tab
+    const searchInput = document.getElementById('archiveSearch');
+    if (searchInput) searchInput.value = '';
 
     renderArchive(data, '');
 }
@@ -1243,7 +1248,8 @@ function renderArchive(data, query) {
             <h4 class="archive-group-title">${group}</h4>
             <div class="archive-list">`;
         groups[group].forEach(ex => {
-            html += `<button class="archive-item" onclick="openInfoModal(${JSON.stringify(ex.name)})">
+            // Uso data-name per evitare problemi di quoting nell'onclick inline
+            html += `<button class="archive-item" data-exname="${escAttr(ex.name)}">
                 <span class="archive-item-name">${ex.name}</span>
                 <span class="archive-item-arrow">›</span>
             </button>`;
@@ -1252,6 +1258,11 @@ function renderArchive(data, query) {
     });
 
     container.innerHTML = html;
+
+    // Event delegation: un solo listener sul container invece di uno per ogni bottone
+    container.querySelectorAll('.archive-item').forEach(btn => {
+        btn.addEventListener('click', () => openInfoModal(btn.dataset.exname));
+    });
 }
 
 async function filterArchive() {
@@ -1263,8 +1274,14 @@ async function filterArchive() {
 // ===== MODAL INFO ESERCIZIO =====
 async function openInfoModal(exName) {
     const data = await loadArchive();
-    const ex = data.find(e => e.name === exName);
-    if (!ex) return;
+    if (!data || data.length === 0) return;
+    const nameLower = exName.toLowerCase().trim();
+    const ex = data.find(e => e.name === exName)
+             || data.find(e => e.name.toLowerCase() === nameLower);
+    if (!ex) {
+        showToast('Esercizio non presente nell\'archivio', 'info');
+        return;
+    }
 
     document.getElementById('info-modal-title').textContent = ex.name;
     document.getElementById('info-modal-group').textContent = ex.group || '';
