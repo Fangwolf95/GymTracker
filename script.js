@@ -156,18 +156,18 @@ function refreshEditorTable() {
     const container = document.getElementById('preview-table');
     let progs = getStore('gymProgs');
     if (!day || !progs[activeProg] || !progs[activeProg][day]) {
-        container.innerHTML = "<p style='color:#666; font-size:12px;'>Nessun esercizio salvato.</p>";
+        container.innerHTML = "<p class='empty-message-sm'>Nessun esercizio salvato.</p>";
         document.getElementById('reorder-list').innerHTML = '';
         return;
     }
     const safeDay = escAttr(day);
-    let html = "<table style='width:100%; font-size:13px; border-collapse:collapse;'>";
+    let html = "<table class='editor-table'>";
     progs[activeProg][day].forEach((ex, idx) => {
-        html += `<tr style='border-bottom:1px solid var(--border)'>
-            <td style='padding:10px;'>${ex.linked ? '🔗' : ''} <b>${ex.name}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s${ex.note ? ' · ' + ex.note : ''}</small></td>
-            <td style='text-align:right; white-space:nowrap;'>
-                <button onclick="openEditModal('${safeDay}', ${idx})" style='background:none; border:none; color:var(--main); font-size:1.1rem; cursor:pointer; padding:4px 6px;'>✏️</button>
-                <button onclick="removeEx('${safeDay}', ${idx})" style='background:none; border:none; color:var(--danger); font-size:1.2rem; cursor:pointer; padding:4px 6px;'>✖</button>
+        html += `<tr class='editor-table-row'>
+            <td class='editor-table-cell'>${ex.linked ? '🔗' : ''} <b>${escHtml(ex.name)}</b><br><small>${ex.sets}x${ex.reps} - ${ex.rest}s${ex.note ? ' · ' + escHtml(ex.note) : ''}</small></td>
+            <td class='editor-table-actions'>
+                <button onclick="openEditModal('${safeDay}', ${idx})" class='editor-btn-edit'>✏️</button>
+                <button onclick="removeEx('${safeDay}', ${idx})" class='editor-btn-remove'>✖</button>
             </td>
         </tr>`;
     });
@@ -338,7 +338,7 @@ function showWorkoutPreview(p, d) {
     const progsData = getStore('gymProgs');
     const exercises = progsData[p] && progsData[p][d];
     if (!Array.isArray(exercises) || exercises.length === 0) {
-        area.innerHTML = `<p style="color:var(--text-secondary); text-align:center; padding:30px 0;">Nessun esercizio in questo giorno.</p>`;
+        area.innerHTML = `<p class="empty-message">Nessun esercizio in questo giorno.</p>`;
         return;
     }
     const maxes = getStore('gymMaxes');
@@ -384,7 +384,7 @@ function showWorkoutPreview(p, d) {
         <div class="preview-ex-row ${ex.linked ? 'preview-linked' : ''}">
             <div class="preview-ex-left">
                 <span class="preview-ex-name">${ex.linked ? '🔗 ' : ''}${ex.name}</span>
-                <span class="preview-ex-meta">${ex.sets}×${ex.reps} · ${ex.rest}s rec${target > 0 ? ' · <b style="color:var(--main)">' + target + 'kg</b>' : ''}</span>
+                <span class="preview-ex-meta">${ex.sets}×${ex.reps} · ${ex.rest}s rec${target > 0 ? ` · <span class="preview-ex-target">${target}kg</span>` : ''}</span>
                 ${comment ? `<span class="preview-ex-comment">💬 ${comment}</span>` : ''}
             </div>
         </div>`;
@@ -538,7 +538,7 @@ function startWorkout(isRestore) {
 
         const safeExName = escAttr(ex.name);
         const safeCommentKey = escAttr(commentKey);
-        const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}" id="card-${idx}" style="${isDone ? 'opacity:0.5; border-color:#555;' : ''}">
+        const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}${isDone ? ' card-done' : ''}" id="card-${idx}">
             <div class="ex-header">
                 <strong>${ex.name.toUpperCase()}</strong>
                 <div class="ex-header-actions">
@@ -546,15 +546,15 @@ function startWorkout(isRestore) {
                     <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
                 </div>
             </div>
-            <div class="ex-header" style="margin-top:5px;">
+            <div class="ex-header ex-header--meta">
                 <span class="ex-info">${ex.sets}×${ex.reps} @ ${ex.perc}% (⏱${ex.rest}s)</span>
                 ${targetDisplay}
             </div>
             <div class="ex-last">Ultima: ${lastDisplay}</div>
             ${suggestion}
-            <div class="row" style="margin-top:10px;">
-                <input type="number" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})" style="flex:2">
-                <input type="number" id="r_${idx}" placeholder="Reps" value="${restoredReps}" oninput="saveDraft(${idx})" style="flex:1; min-width:60px;">
+            <div class="row card-input-row">
+                <input type="number" id="w_${idx}" placeholder="Kg" value="${restoredWeight}" oninput="saveDraft(${idx})" class="flex-2">
+                <input type="number" id="r_${idx}" placeholder="Reps" value="${restoredReps}" oninput="saveDraft(${idx})" class="flex-1 input-min">
                 <button class="btn-ok" onclick="confirmSet('${safeExName}', ${ex.perc}, ${idx}, ${ex.rest}, ${ex.sets})">OK</button>
             </div>
             <button class="${commentClass}" id="comment-btn-${idx}" onclick="openCommentModal('${safeCommentKey}', ${idx})">${commentLabel}</button>
@@ -763,9 +763,9 @@ function renderStats() {
     const oneWeekAgo = new Date(); oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     const weeklyVol = Math.round(logs.reduce((acc, l) => new Date(l.date) > oneWeekAgo ? acc + (l.volume || 0) : acc, 0));
 
-    let html = `<div class="mini-list" style="border-left:5px solid var(--main); padding-left:15px;">
-        <small style="color:#888">VOLUME ULTIMI 7gg</small>
-        <div style="font-size:1.4rem; font-weight:bold; color:var(--accent)">${weeklyVol} kg</div>
+    let html = `<div class="mini-list weekly-vol-box">
+        <small class="weekly-vol-label">VOLUME ULTIMI 7gg</small>
+        <div class="weekly-vol-value">${weeklyVol} kg</div>
     </div>
     <h4>Record:</h4><div class="mini-list">`;
     Object.entries(maxes).forEach(([ex, w]) => html += `<div>${ex.toUpperCase()}: <b>${w}kg</b></div>`);
@@ -773,7 +773,7 @@ function renderStats() {
     logs.slice().reverse().forEach((l, reversedIdx) => {
         const realIdx = logs.length - 1 - reversedIdx;
         const color = l.prog ? getProgColor(l.prog, progsCache) : '#555';
-        const progDot = l.prog ? `<span class="prog-dot" style="background:${color}" title="${l.prog}"></span>` : '';
+        const progDot = l.prog ? `<span class="prog-dot" style="background:${color}" title="${escHtml(l.prog)}"></span>` : '';
         html += `<div class='stat-item' style="border-left-color:${color}">
             <div class="stat-item-header">
                 <div>${progDot}<strong>${l.dateStr}</strong> <span class="stat-day-name">${l.day}</span> ${l.duration ? `<span class="stat-duration">⏱ ${l.duration} min</span>` : ''}</div>
@@ -783,7 +783,7 @@ function renderStats() {
             ${l.note ? `<div class="stat-note">📝 ${l.note}</div>` : ''}
         </div>`;
     });
-    if (logs.length === 0) html += `<p style="color:#666; text-align:center; padding:20px 0;">Nessuna sessione registrata.</p>`;
+    if (logs.length === 0) html += `<p class="empty-message">Nessuna sessione registrata.</p>`;
     container.innerHTML = html;
 }
 
@@ -927,7 +927,7 @@ function renderProgressChart() {
     if (legendEl && seenProgs.size > 0) {
         legendEl.innerHTML = Array.from(seenProgs).map(prog => {
             const c = getProgColor(prog, progsCache);
-            return `<span class="chart-legend-item"><span class="chart-legend-dot" style="background:${c}"></span>${prog}</span>`;
+            return `<span class="chart-legend-item"><span class="chart-legend-dot" style="background:${c}"></span>${escHtml(prog)}</span>`;
         }).join('');
     }
 }

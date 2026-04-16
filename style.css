@@ -985,3 +985,53 @@ body:not(.light-mode) .sub-tab-btn:hover {
     transition: opacity 0.2s;
 }
 .btn-info-ex:hover { opacity: 1; }
+
+/* ===== EDITOR TABLE ===== */
+.editor-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+.editor-table-row { border-bottom: 1px solid var(--border); }
+.editor-table-cell { padding: 10px; }
+.editor-table-actions { text-align: right; white-space: nowrap; }
+.editor-btn-edit {
+    background: none; border: none; color: var(--main);
+    font-size: 1.1rem; cursor: pointer; padding: 4px 6px;
+}
+.editor-btn-remove {
+    background: none; border: none; color: var(--danger);
+    font-size: 1.2rem; cursor: pointer; padding: 4px 6px;
+}
+
+/* ===== CARD ALLENAMENTO ===== */
+.card-done { opacity: 0.5; border-color: #555 !important; }
+.ex-header--meta { margin-top: 5px; }
+.card-input-row { margin-top: 10px; }
+.input-min { min-width: 60px; }
+
+/* ===== EMPTY MESSAGE ===== */
+.empty-message {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* ===== WEEKLY VOLUME BOX ===== */
+.weekly-vol-box {
+    border-left: 5px solid var(--main);
+    padding-left: 15px;
+}
+.weekly-vol-label {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.weekly-vol-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+/* ===== EDITOR TABLE EMPTY ===== */
+.empty-message-sm { color: var(--text-secondary); font-size: 12px; }
+
+/* ===== PREVIEW EX TARGET ===== */
+.preview-ex-target { color: var(--main); font-weight: bold; }
