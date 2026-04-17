@@ -143,6 +143,15 @@ function escAttr(str) {
         .replace(/\\/g, '\\\\')
         .replace(/'/g, "\\'");
 }
+// Escape per contenuto innerHTML (non per attributi)
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
 
 function refreshEditorTable() {
     const selDay = document.getElementById('editDaySelect').value;
@@ -1188,7 +1197,8 @@ async function loadArchive() {
         _archiveData = await res.json();
     } catch (e) {
         console.warn('esercizi.json non disponibile:', e.message);
-        _archiveData = [];
+        _archiveData = null; // null = non riuscito, riprova al prossimo accesso
+        return [];
     }
     return _archiveData;
 }
