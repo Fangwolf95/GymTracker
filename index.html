@@ -27,81 +27,126 @@
 
         <!-- ===== SETUP SECTION ===== -->
         <div id="setup-section" class="mode-section hidden">
-            <div class="card-editor setup-section-divider">
-                <label for="editProgSelect"><small>Gestisci programma esistente:</small></label>
-                <select id="editProgSelect" onchange="syncEditorProg()" class="select-accent">
-                    <option value="">-- Seleziona Programma --</option>
-                </select>
+
+            <div class="sub-tab-menu">
+                <button class="sub-tab-btn active" id="subtab-edit"   onclick="switchSetupTab('edit')">✏️ Modifica</button>
+                <button class="sub-tab-btn"         id="subtab-create" onclick="switchSetupTab('create')">🆕 Crea</button>
+                <button class="sub-tab-btn"         id="subtab-io"     onclick="switchSetupTab('io')">💾 I/O</button>
             </div>
 
-            <div id="new-prog-area" class="card-editor">
-                <h4 class="section-heading section-heading--accent">🆕 Crea Nuovo Programma</h4>
-                <input type="text" id="progName" placeholder="Nome (es. Idro Pump 2)">
-                <input type="number" id="progWeeks" placeholder="Durata (settimane)">
-                <button class="btn-add" onclick="initEditor()">Crea e Apri</button>
+            <!-- TAB: MODIFICA -->
+            <div id="setup-tab-edit">
+                <div class="card-editor">
+                    <label for="editProgSelect" class="field-label">Seleziona scheda:</label>
+                    <select id="editProgSelect" onchange="syncEditorProg()" class="select-accent"></select>
+                </div>
+                <div id="editor-controls" class="hidden">
+                    <div class="card-editor editor-day-box">
+                        <h4 id="editing-title" class="editing-title">—</h4>
+                        <label for="editDaySelect" class="field-label">Giornata:</label>
+                        <div class="row">
+                            <select id="editDaySelect" onchange="refreshEditorTable()" class="flex-1"></select>
+                            <input type="text" id="dayName" placeholder="Nuova giornata..." class="flex-1">
+                        </div>
+                    </div>
+                    <div id="editor-preview" class="editor-preview">
+                        <div id="preview-table"></div>
+                    </div>
+                    <div class="card-editor card-editor--dark mt-20">
+                        <h5 class="section-subheading">➕ Aggiungi Esercizio</h5>
+                        <div class="ex-autocomplete-wrap">
+                            <input type="text" id="exName" placeholder="Nome esercizio..." autocomplete="off" oninput="onExNameInput(this,'exNameSuggestions')">
+                            <div id="exNameSuggestions" class="autocomplete-list hidden"></div>
+                        </div>
+                        <div class="input-grid input-grid--3 mt-10">
+                            <input type="number" id="exSets" placeholder="Serie">
+                            <input type="text"   id="exReps" placeholder="Reps (es. 8-10)">
+                            <input type="number" id="exRest" placeholder="Rec. (sec)">
+                        </div>
+                        <div class="row mt-10">
+                            <input type="number" id="exPerc" placeholder="% 1RM (opz.)" class="flex-1">
+                            <input type="text"   id="exNote" placeholder="Note (opz.)" class="flex-2">
+                        </div>
+                        <div class="row mt-10">
+                            <button class="btn-add flex-1" onclick="addEx(false)">+ Singolo</button>
+                            <button class="btn-special flex-1" onclick="addEx(true)">🔗 Superserie</button>
+                        </div>
+                    </div>
+                    <div class="card-editor card-editor--darker mt-15">
+                        <h5 class="reorder-heading">↕️ Riordina Esercizi</h5>
+                        <p class="reorder-hint">Trascina per cambiare l'ordine</p>
+                        <div id="reorder-list"></div>
+                    </div>
+                </div>
             </div>
 
-            <div id="editor-controls" class="editor-controls hidden">
-                <div class="editor-day-box">
-                    <h4 id="editing-title" class="editing-title">Editando: -</h4>
-                    <label for="editDaySelect"><small>Giorno:</small></label>
+            <!-- TAB: CREA -->
+            <div id="setup-tab-create" class="hidden">
+                <div id="create-step-1" class="card-editor">
+                    <h4 class="section-heading section-heading--accent">🆕 Nuova Scheda</h4>
+                    <label class="field-label" for="createProgName">Nome scheda *</label>
+                    <input type="text" id="createProgName" placeholder="Es. Push Pull Legs, Upper Lower...">
+                    <div class="row mt-10">
+                        <div class="flex-1">
+                            <label class="field-label" for="createProgDays">N° giornate *</label>
+                            <input type="number" id="createProgDays" placeholder="Es. 3" min="1" max="7">
+                        </div>
+                        <div class="flex-1">
+                            <label class="field-label" for="createProgWeeks">Durata (settimane)</label>
+                            <input type="number" id="createProgWeeks" placeholder="Es. 8" min="1">
+                        </div>
+                    </div>
+                    <button class="btn-add mt-10" onclick="startCreateProg()">Continua →</button>
+                </div>
+                <div id="create-step-2" class="hidden">
+                    <div class="create-prog-header">
+                        <h4 id="create-prog-title" class="section-heading--accent create-prog-title"></h4>
+                        <button class="btn-save-workout" onclick="saveCreatedProg()">✅ Salva Scheda</button>
+                    </div>
+                    <div id="create-days-container"></div>
+                    <button class="btn-secondary mt-15" onclick="cancelCreateProg()">← Ricomincia</button>
+                </div>
+            </div>
+
+            <!-- TAB: IMPORT / EXPORT -->
+            <div id="setup-tab-io" class="hidden">
+                <div class="card-editor">
+                    <h4 class="section-heading">📤 Esporta Scheda</h4>
+                    <select id="exportSingleSelect"></select>
+                    <button class="btn-add mt-10" onclick="exportSingleProg()">⬇️ Scarica Scheda</button>
+                </div>
+                <div class="card-editor mt-15">
+                    <h4 class="section-heading">📥 Importa Scheda</h4>
+                    <p class="help-text">Importa una scheda senza sovrascrivere le altre.</p>
+                    <button class="btn-secondary mt-10" onclick="document.getElementById('importSingleFile').click()">⬆️ Carica file scheda</button>
+                    <input type="file" id="importSingleFile" accept=".json" style="display:none;" onchange="importSingleProg(event)">
+                </div>
+                <div class="card-editor card-editor--bulk mt-15">
+                    <h4 class="section-heading--sm">⚡ Bulk Import testuale</h4>
+                    <p class="help-text">Formato: <code># NomeGiorno</code> poi <code>Nome;%;Serie;Reps;Rec;Note</code></p>
+                    <input type="text" id="bulkProgName" placeholder="Nome scheda per il bulk import" class="mt-10">
+                    <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Squat;80;4;6;120;note&#10;*Leg Press;0;3;12;90;superserie"></textarea>
+                    <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
+                </div>
+                <hr>
+                <div class="card-editor card-editor--bordered mt-15">
+                    <h4 class="section-heading">🗄️ Backup Completo</h4>
                     <div class="row">
-                        <select id="editDaySelect" onchange="refreshEditorTable()" class="flex-1"></select>
-                        <input type="text" id="dayName" placeholder="O scrivi nuovo" class="flex-1">
+                        <button class="btn-add flex-1" onclick="exportData()">⬇️ Esporta tutto</button>
+                        <button class="btn-secondary flex-1" onclick="document.getElementById('importFile').click()">⬆️ Importa backup</button>
                     </div>
+                    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+                    <small class="help-text">Esporta/importa tutti i dati: schede, record, diario.</small>
                 </div>
-
-                <div id="editor-preview" class="editor-preview">
-                    <h5 class="section-subheading">Esercizi salvati:</h5>
-                    <div id="preview-table"></div>
+                <div class="card-editor mt-15">
+                    <h4 class="section-heading">🗑️ Elimina Scheda</h4>
+                    <select id="deleteProgSelect"></select>
+                    <button class="btn-secondary btn-danger mt-10" onclick="deleteProg()">Elimina scheda selezionata</button>
                 </div>
-
-                <div class="card-editor card-editor--dark mt-20">
-                    <h5 class="section-subheading">Aggiungi Esercizio:</h5>
-                    <div class="input-grid">
-                        <input type="text" id="exName" placeholder="Esercizio">
-                        <input type="number" id="exPerc" placeholder="%">
-                        <input type="number" id="exSets" placeholder="Set">
-                        <input type="text" id="exReps" placeholder="Reps">
-                    </div>
-                    <div class="row">
-                        <input type="number" id="exRest" placeholder="Recup. (sec)" class="flex-1">
-                        <input type="text" id="exNote" placeholder="Note" class="flex-2">
-                    </div>
-                    <div class="row">
-                        <button class="btn-add" onclick="addEx(false)">+ Singolo</button>
-                        <button class="btn-special" onclick="addEx(true)">🔗 Superserie</button>
-                    </div>
-                </div>
-
-                <!-- Riordino esercizi -->
-                <div class="card-editor card-editor--darker mt-15">
-                    <h5 class="reorder-heading">↕️ Riordina Esercizi</h5>
-                    <p class="reorder-hint">Trascina per cambiare l'ordine</p>
-                    <div id="reorder-list"></div>
-                    <button class="btn-secondary mt-10" onclick="saveReorder()">💾 Salva Ordine</button>
-                </div>
-            </div>
-
-            <div class="card-editor card-editor--bulk mt-40">
-                <h4 class="section-heading--sm">⚡ Bulk Import</h4>
-                <textarea id="bulk-import-area" placeholder="# Giorno A&#10;Squat;80;4;6;120;note&#10;*Leg Press;0;3;12;90;superserie"></textarea>
-                <button class="btn-secondary" onclick="processBulkImport()">Esegui Importazione</button>
-            </div>
-
-            <!-- Export / Import -->
-            <div class="card-editor card-editor--bordered mt-20">
-                <h4 class="section-heading">💾 Backup Dati</h4>
-                <div class="row">
-                    <button class="btn-add flex-1" onclick="exportData()">⬇️ Esporta JSON</button>
-                    <button class="btn-secondary flex-1" onclick="document.getElementById('importFile').click()">⬆️ Importa JSON</button>
-                </div>
-                <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
-                <small class="help-text">Esporta per backup o trasferimento su altro dispositivo.</small>
             </div>
         </div>
 
-        <!-- ===== TRAINING SECTION ===== -->
+                <!-- ===== TRAINING SECTION ===== -->
         <div id="training-section" class="mode-section">
             <div class="row">
                 <select id="selectProg" onchange="updateDaySelect()"></select>
