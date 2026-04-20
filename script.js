@@ -61,9 +61,21 @@ function switchMode(m) {
         const btn = document.getElementById('nav-' + s);
         if (btn) btn.classList.toggle('nav-active', m === s);
     });
-    if (m === 'stats') { renderStats(); populateStatsExSelect(); }
+    if (m === 'stats')   { renderStats(); populateStatsExSelect(); }
     if (m === 'archive') initArchive();
-    refreshDropdowns();
+    if (m === 'setup')   {
+        // Resetta create step-2 se rimasto aperto da navigazione precedente
+        const step2 = document.getElementById('create-step-2');
+        const step1 = document.getElementById('create-step-1');
+        if (step2 && !step2.classList.contains('hidden') && !_createData) {
+            step2.classList.add('hidden');
+            if (step1) step1.classList.remove('hidden');
+        }
+        switchSetupTab('edit');
+    } else {
+        // Aggiorna i dropdown solo quando necessario (non ad ogni cambio tab)
+        refreshDropdowns();
+    }
 }
 
 // ===== DROPDOWNS =====
@@ -192,7 +204,7 @@ function renderReorderList(day) {
         item.className = 'reorder-item';
         item.draggable = true;
         item.dataset.idx = idx;
-        item.innerHTML = `<span class="drag-handle">☰</span> ${ex.linked ? '🔗' : ''} ${ex.name}`;
+        item.innerHTML = `<span class="drag-handle">☰</span> ${ex.linked ? '🔗' : ''} ${escHtml(ex.name)}`;
         item.addEventListener('dragstart', e => { dragSrcIdx = idx; e.dataTransfer.effectAllowed = 'move'; });
         item.addEventListener('dragend', () => { dragSrcIdx = null; });
         item.addEventListener('dragover', e => { e.preventDefault(); item.classList.add('drag-over'); });
@@ -277,7 +289,10 @@ function removeEx(day, idx) {
 }
 
 function clearExInputs() {
-    ['exName', 'exPerc', 'exSets', 'exReps', 'exRest', 'exNote'].forEach(id => document.getElementById(id).value = '');
+    ['exName', 'exPerc', 'exSets', 'exReps', 'exRest', 'exNote'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
 }
 
 // ===== BULK IMPORT =====
@@ -321,7 +336,7 @@ function updateDaySelect(progsData) {
     sel.innerHTML = '<option value="">Giorno...</option>';
     if (!p) return;
     const progs = progsData || getStore('gymProgs');
-    for (let d in progs[p]) if (d !== '_duration') sel.innerHTML += `<option value="${d}">${d}</option>`;
+    for (let d in progs[p]) if (d !== '_duration') sel.innerHTML += `<option value="${escAttr(d)}">${escHtml(d)}</option>`;
 }
 
 // Chiamata quando si cambiano i select: mostra preview o ripristina sessione
@@ -391,9 +406,9 @@ function showWorkoutPreview(p, d) {
         exListHtml += `
         <div class="preview-ex-row ${ex.linked ? 'preview-linked' : ''}">
             <div class="preview-ex-left">
-                <span class="preview-ex-name">${ex.linked ? '🔗 ' : ''}${ex.name}</span>
-                <span class="preview-ex-meta">${ex.sets}×${ex.reps} · ${ex.rest}s rec${target > 0 ? ` · <span class="preview-ex-target">${target}kg</span>` : ''}</span>
-                ${comment ? `<span class="preview-ex-comment">💬 ${comment}</span>` : ''}
+                <span class="preview-ex-name">${ex.linked ? '🔗 ' : ''}${escHtml(ex.name)}</span>
+                <span class="preview-ex-meta">${ex.sets}×${escHtml(ex.reps)} · ${ex.rest}s rec${target > 0 ? ` · <span class="preview-ex-target">${target}kg</span>` : ''}</span>
+                ${comment ? `<span class="preview-ex-comment">💬 ${escHtml(comment)}</span>` : ''}
             </div>
         </div>`;
     });
@@ -402,9 +417,9 @@ function showWorkoutPreview(p, d) {
     let lastNoteHtml = '';
     if (lastSession) {
         const d2 = lastSession.dateStr;
-        const vol = lastSession.volume;
+        const vol = lastSession.volume || 0;
         const dur = lastSession.duration ? ` · ${lastSession.duration} min` : '';
-        const note = lastSession.note ? `<div class="preview-last-note">📝 "${lastSession.note}"</div>` : '';
+        const note = lastSession.note ? `<div class="preview-last-note">📝 "${escHtml(lastSession.note)}"</div>` : '';
         lastNoteHtml = `
         <div class="preview-last-session">
             <div class="preview-last-header">Ultima volta: <b>${d2}</b> · ${vol}kg${dur}</div>
@@ -415,7 +430,7 @@ function showWorkoutPreview(p, d) {
     area.innerHTML = `
     <div class="workout-preview">
         <div class="preview-header">
-            <div class="preview-day-name">${d}</div>
+            <div class="preview-day-name">${escHtml(d)}</div>
             <div class="preview-stats-row">
                 <div class="preview-stat"><span class="preview-stat-val">${totalExercises}</span><span class="preview-stat-label">esercizi</span></div>
                 <div class="preview-stat"><span class="preview-stat-val">${totalSets}</span><span class="preview-stat-label">serie totali</span></div>
@@ -463,6 +478,18 @@ function startWorkout(isRestore) {
     sessionCounters = {};
     currentDeload = deload;
 
+    // Pre-calcola mappa storico in O(n) invece di O(n×e)
+    const logHistory = {};
+    logs.forEach(l => {
+        l.details.split(', ').forEach(entry => {
+            const colonIdx = entry.indexOf(': ');
+            if (colonIdx === -1) return;
+            const exName = entry.slice(0, colonIdx);
+            if (!logHistory[exName]) logHistory[exName] = [];
+            logHistory[exName].push(entry.slice(colonIdx + 2));
+        });
+    });
+
     // Pre-carica i draft una volta sola per tutti gli esercizi
     const sessionDrafts = (getStore('gymDrafts')[`${p}_${d}`]) || {};
 
@@ -479,17 +506,14 @@ function startWorkout(isRestore) {
 
         const target = ex.perc > 0 ? Math.round(((maxes[ex.name.toLowerCase().trim()] || 0) * ex.perc) / 100) : 0;
 
-        // Ultima volta: parsa "80kg × 10 reps" o "80kg"
+        // Ultima volta: usa la mappa pre-calcolata
         let lastDisplay = '--';
         let lastKgRaw = 0;
-        for (let i = logs.length - 1; i >= 0; i--) {
-            const entry = logs[i].details.split(', ').find(s => s.startsWith(ex.name + ':'));
-            if (entry) {
-                lastDisplay = entry.split(': ')[1];
-                const m = lastDisplay.match(/^([\d.]+)kg/);
-                if (m) lastKgRaw = parseFloat(m[1]);
-                break;
-            }
+        const exLog = logHistory[ex.name];
+        if (exLog && exLog.length > 0) {
+            lastDisplay = exLog[exLog.length - 1];
+            const m = lastDisplay.match(/^([\d.]+)kg/);
+            if (m) lastKgRaw = parseFloat(m[1]);
         }
 
         // Deload: -15% sull'ultimo peso usato (o target se non c'è storico)
@@ -511,19 +535,11 @@ function startWorkout(isRestore) {
             restoredWeight = sessionDrafts[idx] || '';
         }
 
-        // Suggerimento progressione (solo in sessioni normali)
+        // Suggerimento progressione (solo in sessioni normali) - usa logHistory pre-calcolato
         let suggestion = '';
-        if (!deload) {
-            const exHistory = [];
-            for (let i = 0; i < logs.length; i++) {
-                const entry = logs[i].details.split(', ').find(s => s.startsWith(ex.name + ':'));
-                if (entry) {
-                    const m = entry.split(': ')[1].match(/^([\d.]+)kg/);
-                    if (m) exHistory.push(parseFloat(m[1]));
-                }
-            }
-            if (exHistory.length >= 2) {
-                const lastKg = exHistory[exHistory.length - 1];
+        if (!deload && exLog && exLog.length >= 2) {
+            const lastKg = parseFloat(exLog[exLog.length - 1].match(/^([\d.]+)kg/)?.[1] || 0);
+            if (lastKg > 0) {
                 const suggested = Math.round((lastKg * 1.025) * 2) / 2;
                 const diff = (suggested - lastKg).toFixed(1);
                 suggestion = `<div class="ex-suggestion">💡 Prova ${suggested}kg questa volta (+${diff}kg)</div>`;
@@ -571,11 +587,18 @@ function startWorkout(isRestore) {
         if (ex.linked && area.lastElementChild) {
             if (!area.lastElementChild.classList.contains('superset-container')) {
                 const prev = area.lastElementChild;
-                const wrap = document.createElement('div'); wrap.className = 'superset-container';
+                const wrap = document.createElement('div');
+                wrap.className = 'superset-container';
                 wrap.innerHTML = `<span class="superset-label">SUPERSERIE 🔗</span>`;
-                prev.parentNode.insertBefore(wrap, prev); wrap.appendChild(prev); wrap.innerHTML += cardHtml;
-            } else area.lastElementChild.innerHTML += cardHtml;
-        } else area.innerHTML += cardHtml;
+                prev.parentNode.insertBefore(wrap, prev);
+                wrap.appendChild(prev);
+                wrap.insertAdjacentHTML('beforeend', cardHtml);
+            } else {
+                area.lastElementChild.insertAdjacentHTML('beforeend', cardHtml);
+            }
+        } else {
+            area.insertAdjacentHTML('beforeend', cardHtml);
+        }
 
         // Se la card è già completata (ripristino sessione), disabilita subito input e bottone
         if (isDone) {
@@ -585,7 +608,7 @@ function startWorkout(isRestore) {
                 const okBtn = document.querySelector(`#card-${idx} .btn-ok`);
                 if (wInput) wInput.disabled = true;
                 if (rInput) rInput.disabled = true;
-                if (okBtn) { okBtn.disabled = true; okBtn.style.opacity = '0.3'; }
+                if (okBtn) { okBtn.disabled = true; okBtn.classList.add('btn-ok--disabled'); }
             }, 0);
         }
     });
@@ -621,22 +644,20 @@ function confirmSet(name, perc, idx, rest, totalSets) {
     document.getElementById(`sets-count-${idx}`).innerText = `Serie: ${sessionCounters[idx]} / ${totalSets}`;
 
     const card = document.getElementById(`card-${idx}`);
-    card.style.borderColor = 'var(--accent)';
+    card.classList.add('card-flash');
+    setTimeout(() => card.classList.remove('card-flash'), 500);
 
     if (sessionCounters[idx] >= totalSets) {
-        card.style.opacity = '0.5';
-        card.style.borderColor = '#555';
-        // Disabilita input e bottone OK
+        card.classList.add('card-done');
+        card.classList.remove('card-flash');
         const wInput = document.getElementById(`w_${idx}`);
         const rInput = document.getElementById(`r_${idx}`);
         const okBtn = card.querySelector('.btn-ok');
         if (wInput) wInput.disabled = true;
         if (rInput) rInput.disabled = true;
-        if (okBtn) { okBtn.disabled = true; okBtn.style.opacity = '0.3'; }
+        if (okBtn) { okBtn.disabled = true; okBtn.classList.add('btn-ok--disabled'); }
         const nextCard = document.getElementById(`card-${idx + 1}`);
         if (nextCard) setTimeout(() => nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }), 600);
-    } else {
-        setTimeout(() => card.style.borderColor = 'var(--main)', 500);
     }
 
     saveSessionState();
@@ -784,11 +805,11 @@ function renderStats() {
         const progDot = l.prog ? `<span class="prog-dot" style="background:${color}" title="${escHtml(l.prog)}"></span>` : '';
         html += `<div class='stat-item' style="border-left-color:${color}">
             <div class="stat-item-header">
-                <div>${progDot}<strong>${l.dateStr}</strong> <span class="stat-day-name">${l.day}</span> ${l.duration ? `<span class="stat-duration">⏱ ${l.duration} min</span>` : ''}</div>
+                <div>${progDot}<strong>${l.dateStr}</strong> <span class="stat-day-name">${escHtml(l.day || '')}</span> ${l.duration ? `<span class="stat-duration">⏱ ${l.duration} min</span>` : ''}</div>
                 <button class="btn-delete-log" onclick="deleteLog(${realIdx})" title="Elimina sessione">🗑</button>
             </div>
-            <small class="stat-details">Vol: ${l.volume}kg${l.prog ? ` · ${l.prog}` : ''} | ${l.details}</small>
-            ${l.note ? `<div class="stat-note">📝 ${l.note}</div>` : ''}
+            <small class="stat-details">Vol: ${l.volume || 0}kg${l.prog ? ` · ${escHtml(l.prog)}` : ''} | ${escHtml(l.details || '')}</small>
+            ${l.note ? `<div class="stat-note">📝 ${escHtml(l.note)}</div>` : ''}
         </div>`;
     });
     if (logs.length === 0) html += `<p class="empty-message">Nessuna sessione registrata.</p>`;
@@ -816,7 +837,7 @@ function populateStatsExSelect() {
     });
     const sel = document.getElementById('statsExSelect');
     sel.innerHTML = '<option value="">-- Seleziona Esercizio --</option>';
-    exSet.forEach(name => sel.innerHTML += `<option value="${name}">${name}</option>`);
+    exSet.forEach(name => sel.innerHTML += `<option value="${escAttr(name)}">${escHtml(name)}</option>`);
 }
 
 function renderProgressChart() {
@@ -940,18 +961,7 @@ function renderProgressChart() {
     }
 }
 
-// ===== EDITOR HELPERS =====
-function initEditor() {
-    const name = document.getElementById('progName').value.trim();
-    if (!name) return alert('Nome!');
-    let progs = getStore('gymProgs');
-    if (!progs[name]) progs[name] = { _duration: parseInt(document.getElementById('progWeeks').value) || 8 };
-    setStore('gymProgs', progs);
-    refreshDropdowns();
-    document.getElementById('editProgSelect').value = name;
-    syncEditorProg();
-}
-
+// ===== ADD EXERCISE (MODIFICA) =====
 function addEx(isLinked) {
     const selDay = document.getElementById('editDaySelect').value;
     const inputDay = document.getElementById('dayName').value.trim();
@@ -1344,7 +1354,8 @@ function switchSetupTab(tab) {
         document.getElementById(`setup-tab-${t}`).classList.toggle('hidden', t !== tab);
         document.getElementById(`subtab-${t}`).classList.toggle('active', t === tab);
     });
-    if (tab === 'io') refreshIOSelects();
+    if (tab === 'io')   refreshIOSelects();
+    if (tab === 'edit') refreshDropdowns();
 }
 
 function refreshIOSelects() {
@@ -1407,6 +1418,11 @@ function deleteProg() {
     const progs = getStore('gymProgs');
     delete progs[name];
     setStore('gymProgs', progs);
+    if (activeProg === name) {
+        activeProg = null;
+        const controls = document.getElementById('editor-controls');
+        if (controls) controls.classList.add('hidden');
+    }
     refreshDropdowns(); refreshIOSelects();
     showToast(`🗑 Scheda "${name}" eliminata`);
 }
@@ -1431,7 +1447,11 @@ function onExNameInput(input, suggestionsId) {
             list.classList.add('hidden');
         });
     });
-    input.onblur = () => setTimeout(() => list.classList.add('hidden'), 150);
+    // Assegna onblur una sola volta tramite flag sul dataset
+    if (!input.dataset.blurBound) {
+        input.dataset.blurBound = '1';
+        input.addEventListener('blur', () => setTimeout(() => list.classList.add('hidden'), 150));
+    }
 }
 
 // ===== CREAZIONE NUOVA SCHEDA =====
@@ -1466,60 +1486,60 @@ function renderCreateDays() {
     if (!container || !_createData) return;
     container.innerHTML = '';
     Object.keys(_createData.days).forEach((dayName, di) => {
-        const safeName = escAttr(dayName);
+        const dayId = `day${di}`; // ID numerico sicuro, nessun problema con caratteri speciali
         const dayEl = document.createElement('div');
         dayEl.className = 'create-day-block';
-        // Primo giorno aperto, gli altri chiusi
         const bodyClass = di === 0 ? '' : 'hidden';
         const arrowChar = di === 0 ? '▼' : '▶';
         dayEl.innerHTML = `
-            <div class="create-day-header" onclick="toggleCreateDay('${safeName}')">
+            <div class="create-day-header" onclick="toggleCreateDay('${dayId}')">
                 <span class="create-day-name">${escHtml(dayName)}</span>
-                <span class="create-day-count" id="create-count-${safeName}">0 esercizi</span>
-                <span class="create-day-arrow" id="create-arrow-${safeName}">${arrowChar}</span>
+                <span class="create-day-count" id="create-count-${dayId}">0 esercizi</span>
+                <span class="create-day-arrow" id="create-arrow-${dayId}">${arrowChar}</span>
             </div>
-            <div class="create-day-body ${bodyClass}" id="create-body-${safeName}">
-                <div class="create-ex-list" id="create-list-${safeName}"></div>
+            <div class="create-day-body ${bodyClass}" id="create-body-${dayId}">
+                <div class="create-ex-list" id="create-list-${dayId}"></div>
                 <div class="card-editor card-editor--dark mt-10">
                     <div class="ex-autocomplete-wrap">
-                        <input type="text" id="cexName-${safeName}" placeholder="Nome esercizio..."
-                            autocomplete="off" oninput="onExNameInput(this,'cexSug-${safeName}')">
-                        <div id="cexSug-${safeName}" class="autocomplete-list hidden"></div>
+                        <input type="text" id="cexName-${dayId}" placeholder="Nome esercizio..."
+                            autocomplete="off" oninput="onExNameInput(this,'cexSug-${dayId}')">
+                        <div id="cexSug-${dayId}" class="autocomplete-list hidden"></div>
                     </div>
                     <div class="input-grid input-grid--3 mt-10">
-                        <input type="number" id="cexSets-${safeName}" placeholder="Serie">
-                        <input type="text"   id="cexReps-${safeName}" placeholder="Reps">
-                        <input type="number" id="cexRest-${safeName}" placeholder="Rec.(s)">
+                        <input type="number" id="cexSets-${dayId}" placeholder="Serie">
+                        <input type="text"   id="cexReps-${dayId}" placeholder="Reps">
+                        <input type="number" id="cexRest-${dayId}" placeholder="Rec.(s)">
                     </div>
                     <div class="row mt-10">
-                        <input type="number" id="cexPerc-${safeName}" placeholder="% 1RM" class="flex-1">
-                        <input type="text"   id="cexNote-${safeName}" placeholder="Note"   class="flex-2">
+                        <input type="number" id="cexPerc-${dayId}" placeholder="% 1RM" class="flex-1">
+                        <input type="text"   id="cexNote-${dayId}" placeholder="Note"   class="flex-2">
                     </div>
                     <div class="row mt-10">
-                        <button class="btn-add flex-1"     onclick="createAddEx('${safeName}',false)">+ Singolo</button>
-                        <button class="btn-special flex-1" onclick="createAddEx('${safeName}',true)">🔗 Superserie</button>
+                        <button class="btn-add flex-1"     onclick="createAddEx(${di},false)">+ Singolo</button>
+                        <button class="btn-special flex-1" onclick="createAddEx(${di},true)">🔗 Superserie</button>
                     </div>
                 </div>
             </div>`;
         container.appendChild(dayEl);
-        renderCreateExList(dayName);
+        renderCreateExList(di);
     });
 }
 
-function toggleCreateDay(dayName) {
-    const body  = document.getElementById(`create-body-${dayName}`);
-    const arrow = document.getElementById(`create-arrow-${dayName}`);
+function toggleCreateDay(dayId) {
+    const body  = document.getElementById(`create-body-${dayId}`);
+    const arrow = document.getElementById(`create-arrow-${dayId}`);
     if (!body) return;
     const open = !body.classList.contains('hidden');
     body.classList.toggle('hidden', open);
     if (arrow) arrow.textContent = open ? '▶' : '▼';
 }
 
-function renderCreateExList(dayName) {
-    const safeName = escAttr(dayName);
-    const list  = document.getElementById(`create-list-${safeName}`);
-    const count = document.getElementById(`create-count-${safeName}`);
+function renderCreateExList(dayIdx) {
+    const dayId = `day${dayIdx}`;
+    const list  = document.getElementById(`create-list-${dayId}`);
+    const count = document.getElementById(`create-count-${dayId}`);
     if (!list || !_createData) return;
+    const dayName   = Object.keys(_createData.days)[dayIdx];
     const exercises = _createData.days[dayName] || [];
     if (count) count.textContent = `${exercises.length} esercizi`;
     if (!exercises.length) { list.innerHTML = '<p class="empty-message-sm">Nessun esercizio.</p>'; return; }
@@ -1530,12 +1550,13 @@ function renderCreateExList(dayName) {
                 <span class="create-ex-name">${escHtml(ex.name)}</span>
                 <span class="create-ex-meta">${ex.sets}×${ex.reps} · ${ex.rest}s${ex.perc>0?` · ${ex.perc}%`:''}${ex.note?' · '+escHtml(ex.note):''}</span>
             </div>
-            <button class="editor-btn-remove" onclick="createRemoveEx('${escAttr(dayName)}',${idx})">✖</button>
+            <button class="editor-btn-remove" onclick="createRemoveEx(${dayIdx},${idx})">✖</button>
         </div>`).join('');
 }
 
-function createAddEx(dayName, isLinked) {
-    const s = n => (document.getElementById(`${n}-${dayName}`) || {}).value || '';
+function createAddEx(dayIdx, isLinked) {
+    const dayId = `day${dayIdx}`;
+    const s = f => (document.getElementById(`${f}-${dayId}`) || {value:''}).value;
     const name = s('cexName').trim();
     const sets = s('cexSets').trim();
     const reps = s('cexReps').trim();
@@ -1544,17 +1565,20 @@ function createAddEx(dayName, isLinked) {
     const note = s('cexNote').trim();
     if (!name) return showToast('Inserisci il nome dell\'esercizio', 'error');
     if (!sets || !reps) return showToast('Inserisci serie e ripetizioni', 'error');
+    const dayName = Object.keys(_createData.days)[dayIdx];
     _createData.days[dayName].push({ name, sets, reps, rest, perc, note, linked: isLinked });
     ['cexName','cexSets','cexReps','cexRest','cexPerc','cexNote'].forEach(f => {
-        const el = document.getElementById(`${f}-${dayName}`); if (el) el.value = '';
+        const el = document.getElementById(`${f}-${dayId}`); if (el) el.value = '';
     });
-    renderCreateExList(dayName);
+    document.getElementById(`cexName-${dayId}`)?.focus();
+    renderCreateExList(dayIdx);
 }
 
-function createRemoveEx(dayName, idx) {
+function createRemoveEx(dayIdx, idx) {
     if (!_createData) return;
+    const dayName = Object.keys(_createData.days)[dayIdx];
     _createData.days[dayName].splice(idx, 1);
-    renderCreateExList(dayName);
+    renderCreateExList(dayIdx);
 }
 
 function saveCreatedProg() {

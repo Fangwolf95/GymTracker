@@ -1131,3 +1131,16 @@ body:not(.light-mode) .sub-tab-btn:hover {
 .create-ex-name   { font-size: 0.88rem; font-weight: 600; color: var(--text); }
 .create-ex-meta   { font-size: 0.75rem; color: var(--text-secondary); }
 .create-linked-badge { font-size: 0.75rem; margin-right: 2px; }
+
+/* ===== CARD FLASH (conferma serie) ===== */
+@keyframes cardFlash {
+    0%   { border-color: var(--accent); }
+    100% { border-color: var(--main); }
+}
+.card-flash { animation: cardFlash 0.5s ease forwards; }
+
+/* ===== BTN-OK DISABILITATO ===== */
+.btn-ok--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
