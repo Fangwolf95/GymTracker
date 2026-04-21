@@ -483,7 +483,7 @@ function startWorkout(isRestore) {
     // Pre-calcola mappa storico in O(n) invece di O(n×e)
     const logHistory = {};
     logs.forEach(l => {
-        l.details.split(', ').forEach(entry => {
+        l.details.split(' | ').forEach(entry => {
             const colonIdx = entry.indexOf(': ');
             if (colonIdx === -1) return;
             const exName = entry.slice(0, colonIdx);
@@ -566,9 +566,9 @@ function startWorkout(isRestore) {
         const safeCommentKey = escAttr(commentKey);
         const cardHtml = `<div class="exercise-card${deload ? ' deload-card' : ''}${isDone ? ' card-done' : ''}" id="card-${idx}">
             <div class="ex-header">
-                <strong>${ex.name.toUpperCase()}</strong>
+                <strong>${escHtml(ex.name.toUpperCase())}</strong>
                 <div class="ex-header-actions">
-                    <button class="btn-info-ex" onclick="openInfoModalByName('${safeExName}')" title="Scheda esercizio" aria-label="Info su ${ex.name}">ℹ️</button>
+                    <button class="btn-info-ex" onclick="openInfoModalByName('${safeExName}')" title="Scheda esercizio" aria-label="Info su ${escAttr(ex.name)}">ℹ️</button>
                     <span id="sets-count-${idx}" class="sets-badge ${isDone ? 'sets-done' : ''}">Serie: ${serieFatte} / ${totalSets}</span>
                 </div>
             </div>
@@ -714,7 +714,7 @@ function confirmFinishWorkout(skip) {
     logs.push({
         date: new Date().toISOString(),
         dateStr: new Date().toLocaleDateString('it-IT'),
-        prog: p, day: d, details: res.join(', '), volume: vol, note: note, duration: durationMin
+        prog: p, day: d, details: res.join(' | '), volume: vol, note: note, duration: durationMin
     });
     setStore('gymSessionLogs', logs);
 
@@ -832,7 +832,7 @@ function populateStatsExSelect() {
     const logs = getStore('gymSessionLogs');
     const exSet = new Set();
     logs.forEach(l => {
-        l.details.split(', ').forEach(entry => {
+        l.details.split(' | ').forEach(entry => {
             const name = entry.split(':')[0];
             if (name) exSet.add(name.trim());
         });
@@ -858,7 +858,7 @@ function renderProgressChart() {
     const progsCache = getStore('gymProgs');
     const points = [];
     logs.forEach(l => {
-        const entry = l.details.split(', ').find(s => s.startsWith(exName + ':'));
+        const entry = l.details.split(' | ').find(s => s.startsWith(exName + ':'));
         if (entry) {
             const kg = parseFloat(entry.split(': ')[1]);
             if (!isNaN(kg) && kg > 0) points.push({ date: l.dateStr, kg, prog: l.prog || null });
@@ -1159,11 +1159,19 @@ function importData(event) {
             });
             showToast('✅ Importazione completata!');
             setTimeout(() => {
+                // Resetta lo stato sessione attiva se presente
+                stopTimer();
+                stopSessionClock();
+                releaseWakeLock();
+                clearSessionState();
+                sessionCounters = {};
+                sessionStartTime = null;
+                currentDeload = false;
                 refreshDropdowns();
                 renderStats();
                 populateStatsExSelect();
                 renderProgressChart();
-                _archiveData = null; // resetta cache archivio
+                _archiveData = null;
                 switchMode('training');
             }, 500);
         } catch (err) { alert('Errore nel file: ' + err.message); }
@@ -1238,6 +1246,10 @@ async function loadArchive() {
 async function initArchive() {
     const container = document.getElementById('archiveGroups');
     if (!container) return;
+
+    // Resetta il timer di filtro eventualmente pendente
+    clearTimeout(_archiveFilterTimer);
+    _archiveFilterTimer = null;
 
     // Mostra loading solo se il container è vuoto (primo accesso)
     if (container.children.length === 0) {
