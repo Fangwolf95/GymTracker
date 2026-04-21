@@ -281,8 +281,10 @@ function closeEditModal() {
 }
 
 function removeEx(day, idx) {
-    if (!confirm('Eliminare?')) return;
-    let progs = getStore('gymProgs');
+    const progs = getStore('gymProgs');
+    const ex = progs[activeProg]?.[day]?.[idx];
+    const exName = ex ? ex.name : 'questo esercizio';
+    if (!confirm(`Eliminare "${exName}"?`)) return;
     progs[activeProg][day].splice(idx, 1);
     setStore('gymProgs', progs);
     refreshEditorTable();
@@ -982,7 +984,15 @@ function addEx(isLinked) {
     });
     setStore('gymProgs', progs);
     clearExInputs();
-    if (!selDay) syncEditorProg(); else refreshEditorTable();
+    if (!selDay) {
+        // Nuovo giorno: ricostruisce i select e preseleziona il giorno appena creato
+        syncEditorProg();
+        const daySel = document.getElementById('editDaySelect');
+        if (daySel) { daySel.value = day; refreshEditorTable(); }
+    } else {
+        refreshEditorTable();
+    }
+    document.getElementById('exName')?.focus();
 }
 
 // ===== TOAST NOTIFICATION =====
@@ -1148,7 +1158,14 @@ function importData(event) {
                 if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k]));
             });
             showToast('✅ Importazione completata!');
-            setTimeout(() => location.reload(), 800);
+            setTimeout(() => {
+                refreshDropdowns();
+                renderStats();
+                populateStatsExSelect();
+                renderProgressChart();
+                _archiveData = null; // resetta cache archivio
+                switchMode('training');
+            }, 500);
         } catch (err) { alert('Errore nel file: ' + err.message); }
     };
     reader.readAsText(file);
@@ -1197,18 +1214,23 @@ function clearAll() {
     }
 }
 // ===== ARCHIVIO ESERCIZI =====
-let _archiveData = null; // cache caricata una volta sola
+let _archiveData = null;    // cache dati
+let _archiveLoading = false; // flag per evitare fetch concorrenti
 
 async function loadArchive() {
     if (_archiveData) return _archiveData;
+    if (_archiveLoading) return []; // fetch già in corso, evita duplicati
+    _archiveLoading = true;
     try {
         const res = await fetch('esercizi.json');
         if (!res.ok) throw new Error('HTTP ' + res.status);
         _archiveData = await res.json();
     } catch (e) {
         console.warn('esercizi.json non disponibile:', e.message);
-        _archiveData = null; // null = non riuscito, riprova al prossimo accesso
+        _archiveData = null;
         return [];
+    } finally {
+        _archiveLoading = false;
     }
     return _archiveData;
 }
@@ -1433,7 +1455,10 @@ function onExNameInput(input, suggestionsId) {
     const list = document.getElementById(suggestionsId);
     if (!list) return;
     if (!q || q.length < 2) { list.classList.add('hidden'); return; }
-    if (!_archiveData) { loadArchive().then(() => onExNameInput(input, suggestionsId)); return; }
+    if (!_archiveData) {
+        if (!_archiveLoading) loadArchive().then(() => onExNameInput(input, suggestionsId));
+        return;
+    }
     const matches = _archiveData.filter(e => e.name.toLowerCase().includes(q)).slice(0, 8);
     if (!matches.length) { list.classList.add('hidden'); return; }
     list.innerHTML = matches.map(e =>
