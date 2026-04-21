@@ -636,6 +636,8 @@ function startWorkout(isRestore) {
 
 function confirmSet(name, perc, idx, rest, totalSets) {
     totalSets = parseInt(totalSets) || 0;
+    perc = parseFloat(perc) || 0;
+    rest = parseInt(rest) || 90;
     // Blocca se le serie sono già completate
     if (sessionCounters[idx] >= totalSets) return;
 
@@ -833,8 +835,10 @@ function populateStatsExSelect() {
     const exSet = new Set();
     logs.forEach(l => {
         l.details.split(' | ').forEach(entry => {
-            const name = entry.split(':')[0];
-            if (name) exSet.add(name.trim());
+            // I dettagli sono nel formato "Nome Esercizio: valore" — usa ': ' come separatore
+            const sepIdx = entry.indexOf(': ');
+            const name = sepIdx !== -1 ? entry.slice(0, sepIdx) : entry;
+            if (name.trim()) exSet.add(name.trim());
         });
     });
     const sel = document.getElementById('statsExSelect');
@@ -858,9 +862,13 @@ function renderProgressChart() {
     const progsCache = getStore('gymProgs');
     const points = [];
     logs.forEach(l => {
-        const entry = l.details.split(' | ').find(s => s.startsWith(exName + ':'));
+        const entry = l.details.split(' | ').find(s => {
+            const sepIdx = s.indexOf(': ');
+            return sepIdx !== -1 && s.slice(0, sepIdx) === exName;
+        });
         if (entry) {
-            const kg = parseFloat(entry.split(': ')[1]);
+            const sepIdx = entry.indexOf(': ');
+            const kg = parseFloat(entry.slice(sepIdx + 2));
             if (!isNaN(kg) && kg > 0) points.push({ date: l.dateStr, kg, prog: l.prog || null });
         }
     });
@@ -887,6 +895,8 @@ function renderProgressChart() {
     const kgs = points.map(p => p.kg);
     const minKg = Math.max(0, Math.floor(Math.min(...kgs) - 5));
     const maxKg = Math.ceil(Math.max(...kgs) + 5);
+    // Evita divisione per zero se tutti i punti hanno lo stesso valore
+    const kgRange = maxKg - minKg || 1;
 
     // Grid
     ctx.strokeStyle = gridColor;
@@ -894,8 +904,7 @@ function renderProgressChart() {
     for (let i = 0; i <= 4; i++) {
         const y = pad.top + (chartH / 4) * i;
         ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
-        const val = maxKg - ((maxKg - minKg) / 4) * i;
-        ctx.fillStyle = textColor;
+        const val = maxKg - ((maxKg - minKg) / 4) * i;        ctx.fillStyle = textColor;
         ctx.font = '11px sans-serif';
         ctx.textAlign = 'right';
         ctx.fillText(val.toFixed(1), pad.left - 5, y + 4);
@@ -921,7 +930,7 @@ function renderProgressChart() {
     ctx.lineJoin = 'round';
     points.forEach((p, i) => {
         const x = pad.left + (i / (points.length - 1 || 1)) * chartW;
-        const y = pad.top + chartH - ((p.kg - minKg) / (maxKg - minKg)) * chartH;
+        const y = pad.top + chartH - ((p.kg - minKg) / kgRange) * chartH;
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     });
     ctx.stroke();
@@ -931,7 +940,7 @@ function renderProgressChart() {
     const seenProgs = new Set();
     points.forEach((p, i) => {
         const x = pad.left + (i / (points.length - 1 || 1)) * chartW;
-        const y = pad.top + chartH - ((p.kg - minKg) / (maxKg - minKg)) * chartH;
+        const y = pad.top + chartH - ((p.kg - minKg) / kgRange) * chartH;
         const color = p.prog ? getProgColor(p.prog, progsCache) : '#555';
         if (p.prog) seenProgs.add(p.prog);
 
@@ -1224,23 +1233,30 @@ function clearAll() {
 // ===== ARCHIVIO ESERCIZI =====
 let _archiveData = null;    // cache dati
 let _archiveLoading = false; // flag per evitare fetch concorrenti
+let _archiveFilterTimer = null; // timer debounce per il filtro archivio
+let _archiveLoadPromise = null; // promise in corso per evitare fetch paralleli
 
 async function loadArchive() {
     if (_archiveData) return _archiveData;
-    if (_archiveLoading) return []; // fetch già in corso, evita duplicati
+    // Se c'è già un fetch in corso, aspetta la stessa promise invece di restituire []
+    if (_archiveLoadPromise) return _archiveLoadPromise;
     _archiveLoading = true;
-    try {
-        const res = await fetch('esercizi.json');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        _archiveData = await res.json();
-    } catch (e) {
-        console.warn('esercizi.json non disponibile:', e.message);
-        _archiveData = null;
-        return [];
-    } finally {
-        _archiveLoading = false;
-    }
-    return _archiveData;
+    _archiveLoadPromise = (async () => {
+        try {
+            const res = await fetch('esercizi.json');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            _archiveData = await res.json();
+        } catch (e) {
+            console.warn('esercizi.json non disponibile:', e.message);
+            _archiveData = null;
+            return [];
+        } finally {
+            _archiveLoading = false;
+            _archiveLoadPromise = null;
+        }
+        return _archiveData;
+    })();
+    return _archiveLoadPromise;
 }
 
 async function initArchive() {
@@ -1303,7 +1319,7 @@ function renderArchive(data, query) {
         groups[group].forEach(ex => {
             // Uso data-name per evitare problemi di quoting nell'onclick inline
             html += `<button class="archive-item" data-exname="${escAttr(ex.name)}">
-                <span class="archive-item-name">${ex.name}</span>
+                <span class="archive-item-name">${escHtml(ex.name)}</span>
                 <span class="archive-item-arrow">›</span>
             </button>`;
         });
